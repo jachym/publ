@@ -1,0 +1,416 @@
+% $Header: /home/vedranm/bitbucket/beamer/solutions/conference-talks/conference-ornate-20min.en.tex,v 90e850259b8b 2007/01/28 20:48:30 tantau $
+
+\documentclass{beamer}
+
+% This file is a solution template for:
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 20min.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  % or ...
+
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\usepackage[czech]{babel}
+% or whatever
+
+\usepackage[utf-8]{inputenc}
+% or whatever
+
+\usepackage{hyperref}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+\title[Open Source] % (optional, use only with long paper titles)
+{Open Source projekty a INSPIRE}
+
+\subtitle {Codělají týmy programátorů Open Source pro INPSIRE?}
+
+\author[J. Čepický] % (optional, use only with lots of authors)
+{Jáchym~Čepický\inst{1}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute % (optional, but mostly needed)
+{
+  \inst{1}%
+  Help Service - Remote Sensing s.r.o. \\
+  Benešov\\
+  \url{http://hsrs.cz}
+}
+  
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[27.5.2013-28.5.2013] % (optional, should be abbreviation of conference name)
+{Geoinformace ve veřejné správě, 2013}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=2.0cm]{hsrs-logo}{imgs/hsrs.png}
+\pgfdeclareimage[height=2.0cm]{osgeo-logo}{imgs/osgeo.png}
+%\pgfdeclareimage[height=2.0cm]{-logo}{university-logo-filename}
+\logo{\pgfuseimage{hsrs-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Obsah}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Obsah}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Structuring a talk is a difficult task and the following structure
+% may not be suitable. Here are some rules that apply for this
+% solution: 
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+% - A conference audience is likely to know very little of what you
+%   are going to talk about. So *simplify*!
+% - In a 20min talk, getting the main ideas across is hard
+%   enough. Leave out details, even if it means being less precise than
+%   you think necessary.
+% - If you omit details that are vital to the proof/implementation,
+%   just say so once. Everybody will be happy with that.
+
+\section{Otevřenost, Open Source}
+
+\begin{frame}{Open Source?}
+  % - A title should summarize the slide in an understandable fashion
+  %   for anyone how does not follow everything on the slide itself.
+
+\begin{block}{Definice podle Open Source iniciativy}
+    Software, jehož licence umožňuje zejména \footnote{http://opensource.org/docs/definition.html}:
+    \begin{itemize} 
+        \item Volné šíření
+        \item Přístup ke zdrojovému kódu
+        \item Vytváření odvozené práce
+        \item \dots
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Otevřenost}
+    
+    \begin{quote}
+        Otevřenost není tisková zpráva nebo případnová studie, ale akce a dialog.
+        celý \em{[Chris Holmes]}\footnote{http://cholmes.wordpress.com/2013/05/14/opening-esri/}
+    \end{quote}
+
+    \begin{itemize}
+        \item Upřednostnit otevřené služby a formáty proprietárními
+            \pause
+        \item Poskytnout dokumentaci k propritárním službám a formátům
+            \pause
+        \item Diskuse na otevřených fórech, naslouchání opozičních názorů
+        \item \dots
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Otevřenost $=$ spolupráce}
+    \begin{itemize}
+        \item Programování (GNU/Linux, GRASS GIS, MapServer, Firefox, Chromium,
+        Android, \dots)
+            \pause
+        \item Informace (Wikipedia)
+            \pause
+        \item Data (Open Data, OpenStreetMap, OpenAerialMap, GrassRootsMapping,
+        \dots)
+    \end{itemize}
+\end{frame}
+
+\logo{\pgfuseimage{osgeo-logo}}
+\section{Open Source Geospatial foundation}
+
+\begin{frame}{OSGeo}
+\begin{block}{Open Source Geospatial Foundation -- \href{http://osgeo.org}{OSGeo}}
+Nezisková organizace, jejíž cíl je podpora společného vývoje otevřeného software
+pro geinformatiku a podpora jeho užívání. 
+
+Poskytuje finanční, organizační a právní podporu široké geoprostorové komunitě.
+Slouží jako nezávislá právnická osoba, na kterou mohou její členové převézt
+výsleky své práce (přispívat do zdrojového kódu, přispět finanční částkou a
+dalšími zdroji) pro obecné blaho.
+
+OSGeo požívá status US 501(c)(3) neziskové organizace.
+\end{block}
+\end{frame}
+
+\begin{frame}{OSGeo Struktura}
+\begin{itemize}
+    \item Board of directors, officers
+        (Peter Batty, Jáchym Čepický, Michael Gerlek, Anne Ghisla, Mark Lucas,
+        {\bf Jeff McKenna}, Daniel Morissette, Cameron Shorter, Frank Warmerdam)
+            \pause
+    \item Základní členové (s volčiským právem, 144)
+            \pause
+    \item Lokální skupiny  (20+)
+            \pause
+    \item Pracovní skupiny (Website, Finance, Incubation, {\em Education, Conference})
+\end{itemize}
+\end{frame}
+
+\begin{frame}{FOSS4G}
+\begin{itemize}
+    \item Board of directors, officers
+        (Peter Batty, Jáchym Čepický, Michael Gerlek, Anne Ghisla, Mark Lucas,
+        {\bf Jeff McKenna}, Daniel Morissette, Cameron Shorter, Frank Warmerdam)
+            \pause
+    \item Základní členové (s volčiským právem, 144)
+            \pause
+    \item Lokální skupiny  (20+)
+            \pause
+    \item Pracovní skupiny (Website, Finance, Incubation, {\em Education, Conference})
+\end{itemize}
+\end{frame}
+
+\section{INSPIRE v OSGeo}
+
+\begin{frame}{INSPIRE v OSGeo}
+    \begin{itemize}
+        \item OSGeo nemá žádnou pracovní skupinu pro INSPIRE
+        \item Analýza provedena na \url{http://wiki.osgeo.org/wiki/INSPIRE} (ne
+        zcela aktuální)
+    \end{itemize}
+\end{frame}
+
+\subsection{Prohlížecí služby}
+\begin{frame}{Prohlížecí služby -- Server}
+    \begin{itemize}
+        \item \href{http://mapserver.org}{MapServer}
+        \item \href{http://geoserver.org}{GeoServer}
+        \item \href{http://deegree.org}{deegree}
+        \item \href{http://mapguide.osgeo.org}{MapGuide}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prohlížecí služby -- Client}
+    \begin{itemize}
+        \item \href{http://openlayers.org}{OpenLayers}
+    \end{itemize}
+\end{frame}
+
+\subsection{Vyhledávací služby}
+\begin{frame}{Vyhledávací služby}
+    \begin{itemize}
+        \item \href{http://geonetwork-opensource.org}{GeoNetwork}
+        \item \href{http://deegree.org}{deegree}
+        \item \href{http://pycsw.org}{pycsw}
+    \end{itemize}
+\end{frame}
+
+\subsection{Stahovací služby}
+\begin{frame}{Stahovací služby}
+    \begin{itemize}
+        \item \href{http://geoserver.org}{GeoServer}
+        \item \href{http://mapserver.org}{MapServer}
+        \item \href{http://deegree.org}{deegree}
+    \end{itemize}
+\end{frame}
+
+
+\subsection{Jak pokračují práce}
+\begin{frame}{MapServer}
+Vztah MapServeru k INSPIRE popisuje nelépe stránka
+\url{http://mapserver.org/ogc/inspire.html}. 
+
+\begin{itemize}
+    \item 6.0.3 (květen 2012)
+        \begin{itemize}
+            \item Pořadí os v souřadnicích u WCS
+            \item Oprava rozlišení pro různé jednotky u WCS
+            \item Oprava WCS GetCapabilities, přidání metadat
+        \end{itemize}
+        \pause
+    \item 6.2.0 (listopad 2012)
+        \begin{itemize}
+            \item Kompletní podpora INSPIRE View Service
+        \end{itemize}
+        \pause
+    \item 6.2.1 (duben 2013)
+        \begin{itemize}
+            \item Opravy v GetCapabilities dokumentu
+        \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{GeoServer}
+GeoSolutions: Analýza GeoServeru z pohledu
+INSPIRE\footnote{\href{http://www.slideshare.net/geosolutions/analysing-geoserver-compatibility-with-inspire-requirements}}.
+Od verze 2.1.0 lze doinstalovat speciální rozšíření INPSIRE, upravující View
+Service metadata a další.
+    \begin{itemize}
+        \item 2.1.4 (červen 2012)
+        \item \dots
+            \pause
+        \item 2.2.2 (říjen 2012) Oprava INSPIRE rozšíření a GetFetureInfo
+        \item \dots
+            \pause
+        \item 2.2.5 (únor 2013) Oprava WMS GetLegendGraphic, oprava velikosti
+        pixelu u WCS
+            \pause
+        \item 2.3.0 (březen 2013) Opravy WCS 2.0.0, 
+            \dots
+            \pause
+    \end{itemize}
+\end{frame}
+
+\subsection{Previous Work}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+
+
+\section{Our Results/Contribution}
+
+\subsection{Main Results}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+
+\subsection{Basic Ideas for Proofs/Implementation}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+\begin{frame}{Make Titles Informative.}
+\end{frame}
+
+
+
+\section*{Summary}
+
+\begin{frame}{Summary}
+
+  % Keep the summary *very short*.
+  \begin{itemize}
+  \item
+    The \alert{first main message} of your talk in one or two lines.
+  \item
+    The \alert{second main message} of your talk in one or two lines.
+  \item
+    Perhaps a \alert{third message}, but not more than that.
+  \end{itemize}
+  
+  % The following outlook is optional.
+  \vskip0pt plus.5fill
+  \begin{itemize}
+  \item
+    Outlook
+    \begin{itemize}
+    \item
+      Something you haven't solved.
+    \item
+      Something else you haven't solved.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+
+% All of the following is optional and typically not needed. 
+\appendix
+\section<presentation>*{\appendixname}
+\subsection<presentation>*{For Further Reading}
+
+\begin{frame}[allowframebreaks]
+  \frametitle<presentation>{For Further Reading}
+    
+  \begin{thebibliography}{10}
+    
+  \beamertemplatebookbibitems
+  % Start with overview books.
+
+  \bibitem{Author1990}
+    A.~Author.
+    \newblock {\em Handbook of Everything}.
+    \newblock Some Press, 1990.
+ 
+    
+  \beamertemplatearticlebibitems
+  % Followed by interesting articles. Keep the list short. 
+
+  \bibitem{Someone2000}
+    S.~Someone.
+    \newblock On this and that.
+    \newblock {\em Journal of This and That}, 2(1):50--100,
+    2000.
+  \end{thebibliography}
+\end{frame}
+
+\end{document}
+
+
