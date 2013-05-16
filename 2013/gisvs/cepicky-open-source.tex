@@ -25,7 +25,8 @@
 
 \mode<presentation>
 {
-  \usetheme{Warsaw}
+  \usetheme{boxes}
+  \usecolortheme{seagull}
   % or ...
 
   \setbeamercovered{transparent}
@@ -37,10 +38,11 @@
 \usepackage[czech]{babel}
 % or whatever
 
-\usepackage[utf-8]{inputenc}
+\usepackage[utf8]{inputenc}
 % or whatever
 
 \usepackage{hyperref}
+\hypersetup{colorlinks=true}
 
 \usepackage{times}
 \usepackage[T1]{fontenc}
@@ -51,10 +53,10 @@
 \title[Open Source] % (optional, use only with long paper titles)
 {Open Source projekty a INSPIRE}
 
-\subtitle {Codělají týmy programátorů Open Source pro INPSIRE?}
+\subtitle {Co dělají týmy programátorů Open Source pro INSPIRE?}
 
 \author[J. Čepický] % (optional, use only with lots of authors)
-{Jáchym~Čepický\inst{1}
+{Jáchym~Čepický\inst{1}}
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
@@ -64,7 +66,8 @@
   \inst{1}%
   Help Service - Remote Sensing s.r.o. \\
   Benešov\\
-  \url{http://hsrs.cz}
+  \url{http://hsrs.cz}\\
+  \
 }
   
 % - Use the \inst command only if there are several affiliations.
@@ -80,10 +83,19 @@
 % is a graphic format that can be processed by latex or pdflatex,
 % resp., then you can add a logo as follows:
 
-\pgfdeclareimage[height=2.0cm]{hsrs-logo}{imgs/hsrs.png}
-\pgfdeclareimage[height=2.0cm]{osgeo-logo}{imgs/osgeo.png}
+\pgfdeclareimage[height=1.cm]{conference-logo}{imgs/conference-logo.png}
+\pgfdeclareimage[height=.5cm]{hsrs-logo}{imgs/hsrs.png}
+\pgfdeclareimage[height=1.0cm]{osgeo-logo}{imgs/osgeo.png}
+\pgfdeclareimage[height=.5cm]{geoserver-logo}{imgs/geoserver-logo.png}
+\pgfdeclareimage[height=.5cm]{pycsw-logo}{imgs/pycsw-logo.png}
+\pgfdeclareimage[height=.5cm]{geon-logo}{imgs/geon-logo.png}
+\pgfdeclareimage[height=.5cm]{qgis-logo}{imgs/qgis-logo.png}
+\pgfdeclareimage[height=.5cm]{ol-logo}{imgs/ol-logo.png}
+\pgfdeclareimage[height=.5cm]{mapserver-logo}{imgs/mapserver-logo.png}
+\pgfdeclareimage[height=.5cm]{deegree-logo}{imgs/deegree-logo.png}
+\pgfdeclareimage[height=.5cm]{inspire-logo}{imgs/inspire-logo.png}
 %\pgfdeclareimage[height=2.0cm]{-logo}{university-logo-filename}
-\logo{\pgfuseimage{hsrs-logo}}
+\logo{\pgfuseimage{conference-logo}}
 
 
 
@@ -91,6 +103,7 @@
 % the beginning of each subsection:
 \AtBeginSubsection[]
 {
+\logo{\pgfuseimage{conference-logo}}
   \begin{frame}<beamer>{Obsah}
     \tableofcontents[currentsection,currentsubsection]
   \end{frame}
@@ -153,17 +166,38 @@
     
     \begin{quote}
         Otevřenost není tisková zpráva nebo případnová studie, ale akce a dialog.
-        celý \em{[Chris Holmes]}\footnote{http://cholmes.wordpress.com/2013/05/14/opening-esri/}
+        {\em[Chris Holmes]}\footnote{http://cholmes.wordpress.com/2013/05/14/opening-esri/}
     \end{quote}
 
-    \begin{itemize}
-        \item Upřednostnit otevřené služby a formáty proprietárními
-            \pause
-        \item Poskytnout dokumentaci k propritárním službám a formátům
-            \pause
-        \item Diskuse na otevřených fórech, naslouchání opozičních názorů
-        \item \dots
-    \end{itemize}
+    \only<1> {
+        \begin{center}
+            \includegraphics[width=\textheight]{imgs/ils/openess.jpg}
+        \end{center}
+    }
+    \pause
+    \only<2->{
+        \begin{itemize}
+            \item Upřednostnit otevřené služby a formáty proprietárními
+                \pause
+            \item Poskytnout dokumentaci k propritárním službám a formátům
+                \pause
+            \item Diskuse na otevřených fórech, naslouchání opozičních názorů
+            \item \dots
+        \end{itemize}
+    }% /only
+\end{frame}
+
+\begin{frame}{Otevřenost = svoboda pohybu}
+        \begin{center}
+            \includegraphics[width=\textheight]{imgs/ils/open-door.jpg}
+        \end{center}
+        
+\end{frame}
+
+\begin{frame}{Otevřenost $=$ spolupráce}
+        \begin{center}
+            \includegraphics[width=\textheight]{imgs/ils/escher.jpg}
+        \end{center}
 \end{frame}
 
 \begin{frame}{Otevřenost $=$ spolupráce}
@@ -196,11 +230,24 @@ OSGeo požívá status US 501(c)(3) neziskové organizace.
 \end{frame}
 
 \begin{frame}{OSGeo Struktura}
+    Představenstvo OSGeo
+    \begin{center}
+    \only<1>{\includegraphics[height=3.5cm]{imgs/ils/board.jpg}}
+    \only<2>{\includegraphics[height=3.5cm]{imgs/ils/osgeo-board.jpg}}
+    \only<3->{\includegraphics[height=3.5cm]{imgs/ils/osgeo-irc.png}}
+    \end{center}
+
+    \uncover<4>{
+        \begin{itemize}
+            \item Peter Batty, Jáchym Čepický, Michael Gerlek, Anne Ghisla, Mark Lucas,
+            {\bf Jeff McKenna}, Daniel Morissette, Cameron Shorter, Frank Warmerdam
+        \end{itemize}
+}
+\end{frame}
+\begin{frame}{OSGeo Struktura}
 \begin{itemize}
-    \item Board of directors, officers
-        (Peter Batty, Jáchym Čepický, Michael Gerlek, Anne Ghisla, Mark Lucas,
-        {\bf Jeff McKenna}, Daniel Morissette, Cameron Shorter, Frank Warmerdam)
-            \pause
+    \item Peter Batty, Jáchym Čepický, Michael Gerlek, Anne Ghisla, Mark Lucas,
+        {\bf Jeff McKenna}, Daniel Morissette, Cameron Shorter, Frank Warmerdam
     \item Základní členové (s volčiským právem, 144)
             \pause
     \item Lokální skupiny  (20+)
@@ -209,31 +256,21 @@ OSGeo požívá status US 501(c)(3) neziskové organizace.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{FOSS4G}
-\begin{itemize}
-    \item Board of directors, officers
-        (Peter Batty, Jáchym Čepický, Michael Gerlek, Anne Ghisla, Mark Lucas,
-        {\bf Jeff McKenna}, Daniel Morissette, Cameron Shorter, Frank Warmerdam)
-            \pause
-    \item Základní členové (s volčiským právem, 144)
-            \pause
-    \item Lokální skupiny  (20+)
-            \pause
-    \item Pracovní skupiny (Website, Finance, Incubation, {\em Education, Conference})
-\end{itemize}
-\end{frame}
-
+\logo{\pgfuseimage{inspire-logo}}
 \section{INSPIRE v OSGeo}
 
 \begin{frame}{INSPIRE v OSGeo}
     \begin{itemize}
-        \item OSGeo nemá žádnou pracovní skupinu pro INSPIRE
-        \item Analýza provedena na \url{http://wiki.osgeo.org/wiki/INSPIRE} (ne
-        zcela aktuální)
+        \item Nově se formuje
+            \href{http://wiki.osgeo.org/wiki/SDI_committee}{pracovní skupina pro
+            SDI} (se zaměřením na INSPIRE)
+        \item Analýza současného stavu provedena na
+            \url{http://wiki.osgeo.org/wiki/INSPIRE} {\em } 
     \end{itemize}
 \end{frame}
 
 \subsection{Prohlížecí služby}
+\logo{\pgfuseimage{osgeo-logo}}
 \begin{frame}{Prohlížecí služby -- Server}
     \begin{itemize}
         \item \href{http://mapserver.org}{MapServer}
@@ -241,44 +278,57 @@ OSGeo požívá status US 501(c)(3) neziskové organizace.
         \item \href{http://deegree.org}{deegree}
         \item \href{http://mapguide.osgeo.org}{MapGuide}
     \end{itemize}
+    \only<2->{\begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright} }
 \end{frame}
 
 \begin{frame}{Prohlížecí služby -- Client}
     \begin{itemize}
         \item \href{http://openlayers.org}{OpenLayers}
+        \item \href{http://qgis.org}{QGIS}
     \end{itemize}
+    \only<2->{\begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright}}
 \end{frame}
 
 \subsection{Vyhledávací služby}
+\logo{\pgfuseimage{osgeo-logo}}
 \begin{frame}{Vyhledávací služby}
     \begin{itemize}
         \item \href{http://geonetwork-opensource.org}{GeoNetwork}
         \item \href{http://deegree.org}{deegree}
         \item \href{http://pycsw.org}{pycsw}
     \end{itemize}
+    \only<2->{\begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright}}
 \end{frame}
 
 \subsection{Stahovací služby}
+\logo{\pgfuseimage{osgeo-logo}}
 \begin{frame}{Stahovací služby}
     \begin{itemize}
         \item \href{http://geoserver.org}{GeoServer}
         \item \href{http://mapserver.org}{MapServer}
         \item \href{http://deegree.org}{deegree}
     \end{itemize}
+    \only<2->{\begin{flushright}\includegraphics[width=2cm]{imgs/ils/done.jpg}\end{flushright}}
 \end{frame}
 
 
 \subsection{Jak pokračují práce}
+\begin{frame}{Pokračující práce}
+    \begin{center} 
+        \includegraphics[width=\textwidth]{imgs/ils/engine.jpg}
+    \end{center}
+\end{frame}
+
+\logo{\pgfuseimage{mapserver-logo}}
+
 \begin{frame}{MapServer}
 Vztah MapServeru k INSPIRE popisuje nelépe stránka
 \url{http://mapserver.org/ogc/inspire.html}. 
 
 \begin{itemize}
-    \item 6.0.3 (květen 2012)
+    \item 6.2.1 (duben 2013)
         \begin{itemize}
-            \item Pořadí os v souřadnicích u WCS
-            \item Oprava rozlišení pro různé jednotky u WCS
-            \item Oprava WCS GetCapabilities, přidání metadat
+            \item Opravy v GetCapabilities dokumentu
         \end{itemize}
         \pause
     \item 6.2.0 (listopad 2012)
@@ -286,129 +336,147 @@ Vztah MapServeru k INSPIRE popisuje nelépe stránka
             \item Kompletní podpora INSPIRE View Service
         \end{itemize}
         \pause
-    \item 6.2.1 (duben 2013)
+    \item 6.0.3 (květen 2012)
         \begin{itemize}
-            \item Opravy v GetCapabilities dokumentu
+            \item Pořadí os v souřadnicích u WCS
+            \item Oprava rozlišení pro různé jednotky u WCS
+            \item Oprava WCS GetCapabilities, přidání metadat
         \end{itemize}
 \end{itemize}
 \end{frame}
 
+\logo{\pgfuseimage{geoserver-logo}}
 \begin{frame}{GeoServer}
-GeoSolutions: Analýza GeoServeru z pohledu
-INSPIRE\footnote{\href{http://www.slideshare.net/geosolutions/analysing-geoserver-compatibility-with-inspire-requirements}}.
+    GeoSolutions: Analýza GeoServeru z pohledu
+    INSPIRE\footnote{{Analysing GeoServer compatibility with INSPIRE requirements}}.
 Od verze 2.1.0 lze doinstalovat speciální rozšíření INPSIRE, upravující View
 Service metadata a další.
     \begin{itemize}
         \item 2.1.4 (červen 2012)
-        \item \dots
             \pause
         \item 2.2.2 (říjen 2012) Oprava INSPIRE rozšíření a GetFetureInfo
-        \item \dots
             \pause
         \item 2.2.5 (únor 2013) Oprava WMS GetLegendGraphic, oprava velikosti
         pixelu u WCS
             \pause
-        \item 2.3.0 (březen 2013) Opravy WCS 2.0.0, 
-            \dots
-            \pause
+        \item 2.3.0 (březen 2013) Opravy WCS 2.0.0, \dots
     \end{itemize}
 \end{frame}
 
-\subsection{Previous Work}
-
-\begin{frame}{Make Titles Informative.}
+\begin{frame}{GeoServer}
+\begin{itemize}
+    \item View Services
+        \begin{itemize}
+            \item Podpora pro WMS 1.3, upravená metadata GetCapabilies, 
+            \item Podpora pro multi-jazyčné popisy
+            \item Podpora požadovaných souř. systémů a formátů
+            \item Podpora pro SLD
+        \end{itemize}
+    \pause
+    \item Download service
+        \begin{itemize}
+        \item GML 3.2.1
+            \item \dots
+        \end{itemize}
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Make Titles Informative.}
+\logo{\pgfuseimage{deegree-logo}}
+\begin{frame}{deegree}
+\href{http://deegree.org}{Deegree} je vyvíjen v Německu a okamžitě nasazován u měst (Bonn) a ve státní
+správě. Deegree byl vybrán pro INSPIRE geoportál.
+
+Více informací o deegree a INSPIRE na
+\url{http://wiki.deegree.org/deegreeWiki/InspireNode}
+
+3.2.0-3.2.3 (březen - duben 2013) - Opravy INSPIRE download service a View service
+\end{frame}
+
+\logo{\pgfuseimage{geon-logo}}
+\begin{frame}{GeoNetwork}
+Mezi verzemi 2.6 a 2.8 jsou dva roky práce.
+    \begin{itemize}
+        \item Přidání vlastní parametrů do CSW
+        \item Verzování metadatového záznamu
+        \item Rozhranní pro GeoServer (přímé nahrávání dat)
+        \item \dots (více než 500 změn)
+    \end{itemize}
+\end{frame}
+
+\logo{\pgfuseimage{pycsw-logo}}
+\begin{frame}{PyCSW}
+    \href{http://pycsw.org}{PyCSW} je nový projekt (2011), zatím není součástí OSGeo. 
+    \begin{itemize}
+        \item Katalogový server/klient
+        \item Bez grafického rozhraní
+        \item Referenční implementace OSGeo
+    \end{itemize}
+\end{frame}
+
+\logo{\pgfuseimage{qgis-logo}}
+\begin{frame}{QGIS}
+    Desktopová prohlížečka dat, obsahuje WMS, WFS klienty, možnost editace dat.
+    Zásuvné moduly pro INSPIRE:
+    \begin{itemize}
+        \item Atom klient (INSPIRE Download service 3.0)
+        \item WFS 2.0 klient
+        \item qgCSW - CSW metadatový klient
+        \item \dots
+    \end{itemize}
+\end{frame}
+
+\logo{\pgfuseimage{ol-logo}}
+\begin{frame}{OpenLayers}
+    \href{http://openlayers.org}{OpenLayers} Webový mapový framework, používaný
+    často jako základ pro nadstavby (\href{http://hslayers.org}{HSLayers},
+    \href{http://geoext.org}{GeoExt}, InterGraph Geoportál, \dots)
+
+    \begin{itemize}
+        \item Použitelný jako klient prohlížecí, stahovací (i transformační) služby
+        \item Ovládání zcela podle požadavků INSPIRE
+    \end{itemize}
+
+    Často je jim vytýkána velikost. Žádný další JavaScriptový framework není ale
+    tak komplexní.
 \end{frame}
 
 
+\logo{\pgfuseimage{hsrs-logo}}
+\section*{Závěr}
 
-\section{Our Results/Contribution}
-
-\subsection{Main Results}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-
-\subsection{Basic Ideas for Proofs/Implementation}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-\begin{frame}{Make Titles Informative.}
-\end{frame}
-
-
-
-\section*{Summary}
-
-\begin{frame}{Summary}
+\begin{frame}{Závěr}
 
   % Keep the summary *very short*.
   \begin{itemize}
   \item
-    The \alert{first main message} of your talk in one or two lines.
+    Projekty OSGeo intenzivně pracují na jejich používání v rámci SDI
   \item
-    The \alert{second main message} of your talk in one or two lines.
-  \item
-    Perhaps a \alert{third message}, but not more than that.
-  \end{itemize}
+    Z pohledu OSGeo je INSPIRE jednou z klíčových iniciativ, všechny projekty se
+    snaží o úpravy směrem k INSPIRE
+  \item Open Source není jediná správná cesta. Je to jiná správná cesta --
+      Open Source může být i {\em profesionální} i {\em komerční}, vždy ale
+      \alert{otevřený}.
+
+   \only<2>{
+\begin{center} 
+    \includegraphics[height=4.5cm]{imgs/ils/oneway.png}
+\end{center}
+}
+
+
   
-  % The following outlook is optional.
-  \vskip0pt plus.5fill
-  \begin{itemize}
-  \item
-    Outlook
-    \begin{itemize}
-    \item
-      Something you haven't solved.
-    \item
-      Something else you haven't solved.
-    \end{itemize}
-  \end{itemize}
+\end{itemize}
+  
 \end{frame}
 
 
-
-% All of the following is optional and typically not needed. 
-\appendix
-\section<presentation>*{\appendixname}
-\subsection<presentation>*{For Further Reading}
-
-\begin{frame}[allowframebreaks]
-  \frametitle<presentation>{For Further Reading}
-    
-  \begin{thebibliography}{10}
-    
-  \beamertemplatebookbibitems
-  % Start with overview books.
-
-  \bibitem{Author1990}
-    A.~Author.
-    \newblock {\em Handbook of Everything}.
-    \newblock Some Press, 1990.
- 
-    
-  \beamertemplatearticlebibitems
-  % Followed by interesting articles. Keep the list short. 
-
-  \bibitem{Someone2000}
-    S.~Someone.
-    \newblock On this and that.
-    \newblock {\em Journal of This and That}, 2(1):50--100,
-    2000.
-  \end{thebibliography}
+\begin{frame}
+    \begin{center}
+        Jáchym Čepický \\
+        jachym@hsrs.cz \\
+        \url{http://bnhelp.cz/} \\
+        \url{http://osgeo.org}
+    \end{center}
 \end{frame}
 
 \end{document}
