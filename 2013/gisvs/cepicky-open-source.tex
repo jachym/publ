@@ -223,7 +223,7 @@ pro geinformatiku a podpora jeho užívání.
 Poskytuje finanční, organizační a právní podporu široké geoprostorové komunitě.
 Slouží jako nezávislá právnická osoba, na kterou mohou její členové převézt
 výsleky své práce (přispívat do zdrojového kódu, přispět finanční částkou a
-dalšími zdroji) pro obecné blaho.
+dalšími zdroji) pro obecné blaho. {\em Certifikace projektů}
 
 OSGeo požívá status US 501(c)(3) neziskové organizace.
 \end{block}
@@ -278,7 +278,7 @@ OSGeo požívá status US 501(c)(3) neziskové organizace.
         \item \href{http://deegree.org}{deegree}
         \item \href{http://mapguide.osgeo.org}{MapGuide}
     \end{itemize}
-    \only<2->{\begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright} }
+    \begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright} 
 \end{frame}
 
 \begin{frame}{Prohlížecí služby -- Client}
@@ -286,7 +286,7 @@ OSGeo požívá status US 501(c)(3) neziskové organizace.
         \item \href{http://openlayers.org}{OpenLayers}
         \item \href{http://qgis.org}{QGIS}
     \end{itemize}
-    \only<2->{\begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright}}
+    \begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright}
 \end{frame}
 
 \subsection{Vyhledávací služby}
@@ -297,7 +297,7 @@ OSGeo požívá status US 501(c)(3) neziskové organizace.
         \item \href{http://deegree.org}{deegree}
         \item \href{http://pycsw.org}{pycsw}
     \end{itemize}
-    \only<2->{\begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright}}
+    \begin{flushright} \includegraphics[width=2cm]{imgs/ils/done.jpg} \end{flushright}
 \end{frame}
 
 \subsection{Stahovací služby}
@@ -308,7 +308,7 @@ OSGeo požívá status US 501(c)(3) neziskové organizace.
         \item \href{http://mapserver.org}{MapServer}
         \item \href{http://deegree.org}{deegree}
     \end{itemize}
-    \only<2->{\begin{flushright}\includegraphics[width=2cm]{imgs/ils/done.jpg}\end{flushright}}
+    \begin{flushright}\includegraphics[width=2cm]{imgs/ils/done.jpg}\end{flushright}
 \end{frame}
 
 
@@ -326,9 +326,11 @@ Vztah MapServeru k INSPIRE popisuje nelépe stránka
 \url{http://mapserver.org/ogc/inspire.html}. 
 
 \begin{itemize}
-    \item 6.2.1 (duben 2013)
+    \item 6.0.3 (květen 2012)
         \begin{itemize}
-            \item Opravy v GetCapabilities dokumentu
+            \item Pořadí os v souřadnicích u WCS
+            \item Oprava rozlišení pro různé jednotky u WCS
+            \item Oprava WCS GetCapabilities, přidání metadat
         \end{itemize}
         \pause
     \item 6.2.0 (listopad 2012)
@@ -336,11 +338,9 @@ Vztah MapServeru k INSPIRE popisuje nelépe stránka
             \item Kompletní podpora INSPIRE View Service
         \end{itemize}
         \pause
-    \item 6.0.3 (květen 2012)
+    \item 6.2.1 (duben 2013)
         \begin{itemize}
-            \item Pořadí os v souřadnicích u WCS
-            \item Oprava rozlišení pro různé jednotky u WCS
-            \item Oprava WCS GetCapabilities, přidání metadat
+            \item Opravy v GetCapabilities dokumentu
         \end{itemize}
 \end{itemize}
 \end{frame}
@@ -360,26 +360,29 @@ Service metadata a další.
         pixelu u WCS
             \pause
         \item 2.3.0 (březen 2013) Opravy WCS 2.0.0, \dots
+            \pause
+        \item 2.3.2 (květen 2013) Komunitní INSPIRE modul se stal oficiálním
+            rozšířením
     \end{itemize}
 \end{frame}
 
-\begin{frame}{GeoServer}
-\begin{itemize}
-    \item View Services
-        \begin{itemize}
-            \item Podpora pro WMS 1.3, upravená metadata GetCapabilies, 
-            \item Podpora pro multi-jazyčné popisy
-            \item Podpora požadovaných souř. systémů a formátů
-            \item Podpora pro SLD
-        \end{itemize}
-    \pause
-    \item Download service
-        \begin{itemize}
-        \item GML 3.2.1
-            \item \dots
-        \end{itemize}
-\end{itemize}
-\end{frame}
+%\begin{frame}{GeoServer}
+%\begin{itemize}
+%    \item View Services
+%    \begin{itemize}
+%        \item Podpora pro WMS 1.3, upravená metadata GetCapabilies, 
+%        \item Podpora pro multi-jazyčné popisy
+%        \item Podpora požadovaných souř. systémů a formátů
+%        \item Podpora pro SLD
+%    \end{itemize}
+%    \pause
+%    \item Download service
+%    \begin{itemize}
+%        \item GML 3.2.1
+%        \item \dots
+%    \end{itemize}
+%\end{itemize}
+%\end{frame}
 
 \logo{\pgfuseimage{deegree-logo}}
 \begin{frame}{deegree}
@@ -409,7 +412,7 @@ Mezi verzemi 2.6 a 2.8 jsou dva roky práce.
     \begin{itemize}
         \item Katalogový server/klient
         \item Bez grafického rozhraní
-        \item Referenční implementace OSGeo
+        % \item Referenční implementace OSGeo
     \end{itemize}
 \end{frame}
 
@@ -440,6 +443,27 @@ Mezi verzemi 2.6 a 2.8 jsou dva roky práce.
     tak komplexní.
 \end{frame}
 
+\logo{\pgfuseimage{conference-logo}}
+\section{Open source aktivity v ČR}
+\begin{frame}{OS v ČR}
+    \begin{itemize}
+        \item \href{http://www.cagi.cz/os25-open-source-a-open-data}{Odborná skupina CAGI} \\
+            Jáchym Čepický (Help Service - Remote Sensing), Aleš Čepek (FSV, ČVUT),\\
+            Otakar Čerba (FAV, ZČU), Přemysl Vohnout (CCSS),\\
+            Rostislav Nétek (PřF, ÚPOL), Ladislav Čapek (Geosense)
+        \pause
+
+        \item Občanské sdružení OSGeo-czech \href{mailto:freegeocz@fsv.cvut.cz}{freegeocz@fsv.cvut.cz}
+            \pause
+        \item Konference Geoinformatics \url{http://geoinformatics.fsv.cvut.cz/}
+            11-12 červenec 2013, GRASS GIS Community Sprint in Prague, Czech
+            Republic 12-18 červenec, 2013
+            \pause
+        \item OpenStreetMap conference \href{mailto:talk-cz@openstreetmap.org}{talk-cz@openstreetmap.org}
+    \end{itemize}
+\end{frame}
+
+
 
 \logo{\pgfuseimage{hsrs-logo}}
 \section*{Závěr}
@@ -457,13 +481,9 @@ Mezi verzemi 2.6 a 2.8 jsou dva roky práce.
       Open Source může být i {\em profesionální} i {\em komerční}, vždy ale
       \alert{otevřený}.
 
-   \only<2>{
 \begin{center} 
     \includegraphics[height=4.5cm]{imgs/ils/oneway.png}
 \end{center}
-}
-
-
   
 \end{itemize}
   
