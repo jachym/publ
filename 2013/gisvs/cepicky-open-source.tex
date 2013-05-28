@@ -1,6 +1,7 @@
 % $Header: /home/vedranm/bitbucket/beamer/solutions/conference-talks/conference-ornate-20min.en.tex,v 90e850259b8b 2007/01/28 20:48:30 tantau $
 
-\documentclass{beamer}
+\documentclass[xcolor=dvipsnames]{beamer} 
+
 
 % This file is a solution template for:
 
@@ -25,15 +26,19 @@
 
 \mode<presentation>
 {
-  \usetheme{boxes}
-  \usecolortheme{seagull}
+  %\usetheme{boxes}
+  %\usecolortheme{seagull}
   % or ...
 
   \setbeamercovered{transparent}
   % or whatever (possibly just delete it)
+
+    \usecolortheme[named=OliveGreen]{structure} 
+    \usetheme[height=7mm]{Rochester} 
+    \setbeamertemplate{items}[ball] 
+    \setbeamertemplate{blocks}[rounded][shadow=true]
 }
 
-\setbeamertemplate{blocks}[rounded][shadow=true]
 
 \usepackage[czech]{babel}
 % or whatever
@@ -42,7 +47,8 @@
 % or whatever
 
 \usepackage{hyperref}
-\hypersetup{colorlinks=true}
+%\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=OliveGreen,urlcolor=OliveGreen}
 
 \usepackage{times}
 \usepackage[T1]{fontenc}
@@ -456,9 +462,15 @@ Mezi verzemi 2.6 a 2.8 jsou dva roky práce.
         \item Občanské sdružení OSGeo-czech \href{mailto:freegeocz@fsv.cvut.cz}{freegeocz@fsv.cvut.cz}
             \pause
         \item Konference Geoinformatics \url{http://geoinformatics.fsv.cvut.cz/}
-            11-12 červenec 2013, GRASS GIS Community Sprint in Prague, Czech
-            Republic 12-18 červenec, 2013
+            11-12 červenec 2013, 
+            
+            GRASS GIS Community Sprint in Prague, Czech Republic 12-18
+            červenec, 2013. Vývoj (GRASS, QGIS, RUIAN, \dots)
             \pause
+
+            FOSS4G-CEE 2012, Praha, 2013 - FOSS4G Nothingham, FOSS4G-CEE Bukurešť
+
+            \pause 
         \item OpenStreetMap conference \href{mailto:talk-cz@openstreetmap.org}{talk-cz@openstreetmap.org}
     \end{itemize}
 \end{frame}
