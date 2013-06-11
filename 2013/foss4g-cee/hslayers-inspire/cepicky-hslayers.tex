@@ -1,0 +1,277 @@
+% $Header: /home/vedranm/bitbucket/beamer/solutions/conference-talks/conference-ornate-20min.en.tex,v 90e850259b8b 2007/01/28 20:48:30 tantau $
+
+\documentclass[xcolor=dvipsnames]{beamer} 
+
+
+% This file is a solution template for:
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 20min.
+% - Style is ornate.
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+
+\mode<presentation>
+{
+  %\usetheme{boxes}
+  %\usecolortheme{seagull}
+  % or ...
+
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+
+    \usecolortheme[named=OliveGreen]{structure} 
+    \usetheme[height=7mm]{Rochester} 
+    \setbeamertemplate{items}[ball] 
+    \setbeamertemplate{blocks}[rounded][shadow=true]
+}
+
+
+\usepackage[czech]{babel}
+% or whatever
+
+\usepackage[utf8]{inputenc}
+% or whatever
+
+\usepackage{hyperref}
+%\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=OliveGreen,urlcolor=OliveGreen}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+\title[Open Source] % (optional, use only with long paper titles)
+{Open Source vs. INSPIRE}
+
+\subtitle {What is open source doing for INSPIRE?}
+
+\author[J. Čepický] % (optional, use only with lots of authors)
+{Jáchym~Čepický\inst{1}, Štěpán~Kafka\inst{1}, Přemysl~Vohnout\inst{2}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute % (optional, but mostly needed)
+{
+  \inst{1}%
+  Help Service - Remote Sensing s.r.o. \\
+  Benešov\\
+  \url{http://hsrs.cz}\\
+
+  \inst{2}%
+  Czech Center for Science and Society\\
+  Prague\\
+  \url{http://ccss.cz}\\
+}
+  
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[] % (optional, should be abbreviation of conference name)
+{FOSS4G-CEE 2013, Bucuresti}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=1.cm]{conference-logo}{imgs/conference-logo.png}
+\pgfdeclareimage[height=.5cm]{hsrs-logo}{imgs/hsrs.png}
+\pgfdeclareimage[height=1.0cm]{osgeo-logo}{imgs/osgeo.png}
+\pgfdeclareimage[height=.5cm]{hslayers-logo}{imgs/hslayers.png}
+%\pgfdeclareimage[height=2.0cm]{-logo}{university-logo-filename}
+\logo{\pgfuseimage{conference-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+\logo{\pgfuseimage{conference-logo}}
+  \begin{frame}<beamer>{Content}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{TOC}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+\section{INSPIRE}
+
+\begin{frame}{SDI}
+Spatial data infrastructure\footnote{\url{http://en.wikipedia.org/wiki/Spatial_data_infrastructure}}
+\begin{itemize} 
+    \item software client - to display, query, and analyse spatial data (this could be a browser or a Desktop GIS),
+    \item a catalogue service - for the discovery, browsing, and querying of metadata or spatial services, spatial datasets and other resources,
+    \item a spatial data service - allowing the delivery of the data via the Internet, processing services - such as datum and projection transformations,
+    \item a (spatial) data repository - to store data, e.g. a Spatial database, GIS software (client or desktop) - to create and update spatial data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{INSPIRE}
+Infrastructure for Spatial Information in the European Community
+\begin{itemize} 
+    \item 2007
+    \item General SDI framework for European purposes
+    \item Implementing rules 
+        \begin{itemize}
+            \item Metadata
+            \item Network services,
+            \item Data and Service Sharing
+            \item Monitoring and Reporting
+        \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{block}{INSPIRE Geoportal}
+Inspire geo-portal means an Internet site, or equivalent,
+providing access to the services referred to in Article 11(1);
+\end{block}
+\begin{itemize}
+    \item Discovery
+    \item \alert{View}
+    \item Download
+    \item Transform
+    \item Invoke
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{block}{INSPIRE View service}
+view services making it possible, as a minimum, to
+\end{block}
+\begin{itemize}
+    \item display
+    \item navigate
+    \item zoom in/out
+    \item pan
+    \item overlay viewable spatial datasets
+    \item display legend
+    \item display relevant content of metadata
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{HSLayers}
+\begin{frame}
+\begin{block}{HSLayers}
+HSLayers is yet another JavaScript Mapping framework. You can use it for building rich mapping portals, as well as use it’s parts for improving your simple OpenLayers-based map.
+\end{block}
+\end{frame}
+
+\begin{frame}{HSLayers structure}
+\begin{itemize}
+    \item Components based on OpenLayers
+    \item Components based on ExtJS
+    \item Patches for OpenLayers
+\end{itemize}
+\end{frame}
+
+\begin{frame}{OpenLayers components}
+\scriptsize
+\begin{columns}
+\column{.45\textwidth}
+\begin{itemize}
+    \item HSLayers.Map (HSLayers.Metadata, HSLayers.User, \dots)
+    \item HSLayers.Popup
+    \item HSLayers.Control.Attribution
+    \item HSL.Control.BoxLayerSwitcher
+    \item HSLayers.Control.Editing
+    \item HSLayers.Control.Measure
+    \item HSLayers.Control.PanZoomBar
+    \item HSLayers.Control.Query
+\end{itemize} 
+\column{.45\textwidth}
+\begin{itemize}
+    \item HSLayers.Control.ScaleSwitcher
+    \item HSLayers.Control.State
+    \item HSLayers.Layer.OWS, WMS, WFS, WCS
+    \item HSLayers.Layer.TreeLayer
+    \item HSLayers.Layer.MultiLayer
+    \item HSLayers.Format.PrintContext
+    \item HSLayers.Format.State
+    \item HSLayers.Format.KML
+    \item HSLayers.Format.WMC
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{ExtJS Components}
+\begin{itemize}
+    \item HSLayers.LayerSwitcher
+    \item Context manager
+    \item Printig client
+    \item Permalink window
+    \item MapPortal -- integrating all together
+    \item \dots
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Server components}
+\begin{itemize}
+    \item Ajax proxy (also POST and other request types)
+    \item StatusManager -- PHP script for storing sessions and permalinks
+    \item Printing module
+    \hrule
+    \item Proxy4ows -- transform WFS and WCS services into WMS (and warp WMS, if
+    needed)
+    \item Editing
+\end{itemize}
+\end{frame}
+
+\section*{Conclusion}
+\begin{frame}
+\begin{block}{Geoportals}
+Map portals do not work 
+\end{block}
+Brian Timoney, \url{http://mapbrief.com}
+\end{frame}
+
+
+\begin{frame}
+    \begin{center}
+        Jáchym Čepický \\
+        jachym@hsrs.cz \\
+        \url{http://bnhelp.cz/} \\
+        \url{http://hslayers.org}
+    \end{center}
+\end{frame}
+
+\end{document}
+
+
