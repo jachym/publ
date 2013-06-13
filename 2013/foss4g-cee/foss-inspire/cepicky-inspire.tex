@@ -2,6 +2,8 @@
 
 \documentclass[xcolor=dvipsnames]{beamer} 
 
+\usepackage{ulem}
+
 
 % This file is a solution template for:
 
@@ -80,7 +82,7 @@
 % - Keep it simple, no one is interested in your street address.
 
 \date[] % (optional, should be abbreviation of conference name)
-{FOSS4G-CEE 2013, București}
+{FOSS4G-CEE 2013, Bucure\c{s}ti}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
@@ -332,8 +334,8 @@ contribute code.
 \logo{\pgfuseimage{mapserver-logo}}
 
 \begin{frame}{MapServer}
-INSPIRE-related documentation
-\url{http://mapserver.org/ogc/inspire.html}. 
+    INSPIRE-related documentation
+    \url{http://mapserver.org/ogc/inspire.html}. 
 
 \begin{itemize}
     \item 6.0.3 (May 2012)
@@ -341,7 +343,7 @@ INSPIRE-related documentation
             \item WCS axis order and other fixes
             \item Fixed resolution when UoM changes in WCS 2.0
             \item Fixed OWS GetCapabilities to report only requests/operations that are enabled.
-            \item \dost
+            \item \dots
         \end{itemize}
         \pause
     \item 6.2.0 (November 2012)
@@ -422,13 +424,15 @@ Two years of work between 2.6 a 2.8.
     \begin{itemize}
         \item Catalogue server/client
         \item No UI
+        \item New release 2013-6, fix ISO metadata parser for dealing with non
+            existing elementsa, \dots
         % \item Referenční implementace OSGeo
     \end{itemize}
 \end{frame}
 
 \logo{\pgfuseimage{qgis-logo}}
 \begin{frame}{QGIS}
-    Desktop (geo)data viewer -- sorry -- full featured GIS. Contains WMS, WFS
+    Desktop \sout{(geo)data viewer} full featured GIS. Contains WMS, WFS
     clients, data editing.
     INSPIRE modules:
     \begin{itemize}
@@ -454,10 +458,39 @@ Two years of work between 2.6 a 2.8.
 
 \logo{\pgfuseimage{conference-logo}}
 \section{Open source and INSPIRE}
-\begin{frame}{INSPIRE nad open source -- open source and INSPIRE}
+\begin{frame}{INSPIRE and open source}
+    \LARGE{TODO}
+\end{frame}
+
+\begin{frame}{OSGeo and INSPIRE}
+
+    %\begin{block}{Brian Timoney}
+    %    Map Portals Don’t Work
+    %\end{block}
+    %\pause
+
+    %\begin{block}{Chris Helm}
+    %    Map Portals do work, we are just doing it wrong.
+    %\end{block}
+    %\pause
+
+    INSPIRE Conference 2013
     \begin{itemize}
-        \item TODO
+        \item Paper not accepted
+        \item OSGeo workshop nearly merged with another workshop
+        \item \sout{Very few people, who indicated they will help with paper and
+            workshop preparation are actually going to the conference.}
+            \url{http://wiki.osgeo.org/wiki/INSPIRE_conference_2013}
+        \item OSGeo people are talking about INSPIRE, but INSPIRE is not talking
+            about open source
     \end{itemize}
+    \pause
+
+    \begin{block}{Cameron Shorter}
+        The biggest good of OSGeo is the community
+    \end{block}
+
+
 \end{frame}
 
 
@@ -470,11 +503,12 @@ Two years of work between 2.6 a 2.8.
   % Keep the summary *very short*.
   \begin{itemize}
   \item
-    Projekty OSGeo intenzivně pracují na jejich používání v rámci SDI
     OSGeo projects are doing their best, so they can be used inside any SDI
+    \pause
   \item
     From the viewpoint of OSGeo, INSPIRE is one of key initiatives. All projects
     are implementing chagnes, required by INSPIRE.
+    \pause
   \item 
       Open source is not the only right way. It is just another right way --
       Open source software can even be {\em proffesional} and {\em commercial},
@@ -491,9 +525,9 @@ Two years of work between 2.6 a 2.8.
 
 \begin{frame}
     \begin{center}
-        Jáchym Čepický \\
+        Jáchym Čepický\footnote{\url{http://les-ejk.cz}} \\
         jachym@hsrs.cz \\
-        \url{http://bnhelp.cz/} \\
+        \url{http://hsrs.cz/} \\
         \url{http://osgeo.org}
     \end{center}
 \end{frame}
