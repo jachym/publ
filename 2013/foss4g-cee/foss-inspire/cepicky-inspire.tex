@@ -59,12 +59,13 @@
 
 
 \title[Open Source] % (optional, use only with long paper titles)
-{Open Source vs. INSPIRE}
+{Open Source vs. INSPIRE\\INSPIRE vs. Open Source}
 
-\subtitle {What is open source doing for INSPIRE?}
+\subtitle {What is open source doing for INSPIRE?\\What is INSPIRE doing for
+open source?}
 
 \author[J. Čepický] % (optional, use only with lots of authors)
-{Jáchym~Čepický\inst{1}}
+{Jáchym~Čepický\inst{1}\inst{2}}
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
@@ -75,7 +76,10 @@
   Help Service - Remote Sensing s.r.o. \\
   Benešov\\
   \url{http://hsrs.cz}\\
-  \
+
+  \inst{2}%
+  OSGeo
+  \url{http://osgeo.org}\\
 }
   
 % - Use the \inst command only if there are several affiliations.
@@ -112,7 +116,7 @@
 \AtBeginSubsection[]
 {
 \logo{\pgfuseimage{conference-logo}}
-  \begin{frame}<beamer>{Obsah}
+  \begin{frame}<beamer>{TOC}
     \tableofcontents[currentsection,currentsubsection]
   \end{frame}
 }
@@ -372,7 +376,7 @@ Since 2.1.0 INSPIRE plugin
             \pause
         \item 2.3.0 (Marz 2013) Fixies of WCS 2.0.0, \dots
             \pause
-        \item 2.3.2 (květen 2013) INSPIRE community plugin became official
+        \item 2.3.2 (May 2013) INSPIRE community plugin became official
             GeoServer extension
     \end{itemize}
 \end{frame}
@@ -422,17 +426,19 @@ Two years of work between 2.6 a 2.8.
     \href{http://pycsw.org}{PyCSW} relatively new project (2011), OSGeo
     incubation. 
     \begin{itemize}
-        \item Catalogue server/client
+        \item OGC compliant CSW and Reference Implementation since 1.4.0
+        \item Implements the INSPIRE Discovery Service Technical Guidance v 3.0
+since version 1.0.0
         \item No UI
         \item New release 2013-6, fix ISO metadata parser for dealing with non
-            existing elementsa, \dots
+            existing elements, \dots
         % \item Referenční implementace OSGeo
     \end{itemize}
 \end{frame}
 
 \logo{\pgfuseimage{qgis-logo}}
 \begin{frame}{QGIS}
-    Desktop \sout{(geo)data viewer} full featured GIS. Contains WMS, WFS
+\sout{Desktop} \sout{(geo)data viewer} \sout{full featured} GIS Platform . Contains WMS, WFS
     clients, data editing.
     INSPIRE modules:
     \begin{itemize}
@@ -462,6 +468,28 @@ Two years of work between 2.6 a 2.8.
     \LARGE{TODO}
 \end{frame}
 
+\begin{frame}{INSPIRE and open source}
+    \begin{itemize}
+        \item INSPIRE is about data sharing, but not about data opening
+            \pause
+        \item INSPIRE is community, OSGeo is community -- building bridges
+            \pause
+        \item  Paul Smith, Robin Smith and Peter Baumann, \dots: Welcome
+            to OSGeo community
+            \pause
+        \item  INSPIRE {\bf is} considered as opportunity to OSGeo projects
+            \pause
+        \item Common keywords: \#interoperability, \#openness, \#collaboration,
+            \#community, \dots
+            \pause
+        \item Current standards, interoperability, development (WMTS, EPSG:3857,
+            KLM, \dots), but {\em Walking on the water and writing software
+            against standard is easy, when both are frozen}
+            \pause
+        \item \url{http://tinyurl.com/are3na1}
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{OSGeo and INSPIRE}
 
     %\begin{block}{Brian Timoney}
@@ -474,15 +502,18 @@ Two years of work between 2.6 a 2.8.
     %\end{block}
     %\pause
 
-    INSPIRE Conference 2013
+    Report about OSGeo appearance INSPIRE Conference 2013:
     \begin{itemize}
         \item Paper not accepted
+        \pause
         \item OSGeo workshop nearly merged with another workshop
+        \pause
         \item \sout{Very few people, who indicated they will help with paper and
             workshop preparation are actually going to the conference.}
             \url{http://wiki.osgeo.org/wiki/INSPIRE_conference_2013}
-        \item OSGeo people are talking about INSPIRE, but INSPIRE is not talking
-            about open source
+        \pause
+        \item \sout{OSGeo people are talking about INSPIRE, but INSPIRE is not talking
+            about open source}
     \end{itemize}
     \pause
 
@@ -492,6 +523,7 @@ Two years of work between 2.6 a 2.8.
 
 
 \end{frame}
+
 
 
 
@@ -507,11 +539,11 @@ Two years of work between 2.6 a 2.8.
     \pause
   \item
     From the viewpoint of OSGeo, INSPIRE is one of key initiatives. All projects
-    are implementing chagnes, required by INSPIRE.
+    are implementing changes, required by INSPIRE.
     \pause
   \item 
       Open source is not the only right way. It is just another right way --
-      Open source software can even be {\em proffesional} and {\em commercial},
+      Open source software can even be {\em professional} and {\em commercial},
       but it will always remain \alert{open}.
 
 \begin{center} 
