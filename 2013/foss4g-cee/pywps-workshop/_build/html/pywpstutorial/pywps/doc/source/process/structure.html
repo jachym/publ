@@ -1,0 +1,131 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Process structure &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="process-structure">
+<h1>Process structure<a class="headerlink" href="#process-structure" title="Permalink to this headline">¶</a></h1>
+<p>In the file, containing the process, there must be one class, with the name
+<tt class="xref py py-class docutils literal"><span class="pre">Process</span></tt>, which is instance of <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.WPSProcess</span></tt> class.
+Each process must contain at least two methods:
+<tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.__init__()</span></tt> and <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.execute()</span></tt> .</p>
+<div class="section" id="process-initialization-init-method">
+<h2>Process initialization: __init__ method<a class="headerlink" href="#process-initialization-init-method" title="Permalink to this headline">¶</a></h2>
+<p>This method is constructor for the actual process. It has to invoke <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.__init__()</span></tt> method of the superior <cite>WPSProcess</cite> class with process configuration options, described in <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.WPSProcess</span></tt> more detaily.</p>
+<p>The process can than define several
+<tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.Input</span></tt> and
+<tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.Output</span></tt> . Several methods can be used
+for this, namely <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addLiteralInput()</span></tt>, <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addComplexInput()</span></tt>, <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addBBoxInput()</span></tt> for inputs and  <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addLiteralOutput()</span></tt>, <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addComplexOutput()</span></tt>, <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addBBoxOutput()</span></tt> for outputs.</p>
+</div>
+<div class="section" id="process-execution-execute-method">
+<h2>Process execution: execute method<a class="headerlink" href="#process-execution-execute-method" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.execute()</span></tt> method, which is originally
+empty, is the one, which is called by PyWPS, when it comes to process
+execution. The actual calculation is to be done here. When the process
+returns any text, it is handled as error message. Processes is successfully
+calculated, when this method returns None.</p>
+</div>
+<div class="section" id="example-of-pywps-process">
+<h2>Example of PyWPS process<a class="headerlink" href="#example-of-pywps-process" title="Permalink to this headline">¶</a></h2>
+<p>After adding <cite>&#8220;returner&#8221;</cite> string to <cite>__all__</cite> array, in the
+<tt class="file docutils literal"><span class="pre">__init__.py</span></tt>  file in the PyWPS Processes directory, we can try
+GetCapabilities, DescribeProcess and Execute requests.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Process structure</a><ul>
+<li><a class="reference internal" href="#process-initialization-init-method">Process initialization: __init__ method</a></li>
+<li><a class="reference internal" href="#process-execution-execute-method">Process execution: execute method</a></li>
+<li><a class="reference internal" href="#example-of-pywps-process">Example of PyWPS process</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/process/structure.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

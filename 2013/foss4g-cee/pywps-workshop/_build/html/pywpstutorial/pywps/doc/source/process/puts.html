@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Process Inputs and Outputs &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="process-inputs-and-outputs">
+<h1>Process Inputs and Outputs<a class="headerlink" href="#process-inputs-and-outputs" title="Permalink to this headline">¶</a></h1>
+<p>Process inputs and outputs are of three types:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>ComplexValue</dt>
+<dd>Usually used for raster or vector data</dd>
+<dt>LiteralValue</dt>
+<dd>Used for simple text strings</dd>
+<dt>BoundingBoxValue</dt>
+<dd>Two coordinate pairs of lower-left and upper-right corners in
+defined coordinate sytem.</dd>
+</dl>
+</div></blockquote>
+<p>Inputs and outputs should usually be defined in the <cite>__init__</cite> method of
+the process.</p>
+<div class="section" id="complexvalue-input-and-output">
+<h2>ComplexValue input and Output<a class="headerlink" href="#complexvalue-input-and-output" title="Permalink to this headline">¶</a></h2>
+<p>ComplexValue inputs and outputs are used in WPS, to send larger sets of data (usually raster or vector data) into the process or from the process back to the user. The method <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addComplexInput()</span></tt> returns instance of <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexInput</span></tt> for inputs. For outputs, they are called <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addComplexOutput()</span></tt>, which gives <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexOutput</span></tt> back.</p>
+<p>The <tt class="xref py py-attr docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexInput.value</span></tt> and <tt class="xref py py-attr docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexOutput.value</span></tt> attributes,
+do contain <em>file name</em> of the raster or vector file.</p>
+<p>For inputs, consider using
+<tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexInput.getValue()</span></tt> method, for getting
+the value of the input, which can be returned as file object to you, or as
+file name.</p>
+<p>For outputs, you should definitely use
+<tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexOutput.setValue()</span></tt> for setting the
+results file name. The method accepts file objects as well as file name.</p>
+<p>Sometimes, users are sending the data <em>as reference</em> to some URL (e.g. OGC
+WFS or WCS service). PyWPS downloads the data for you and stores them to
+local file. If the client requires reference to the output data, PyWPS will
+create this for you. PyWPS is able to setup <a class="reference external" href="http://mapserver.org">MapServer</a> instance for you, and return OGC WFS or WCS URLs back to the client. For more on this topic, see <em class="xref std std-ref">using-mapserver</em>.</p>
+<p>Even you can (and should) define support data mimetypes
+(<tt class="xref py py-attr docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexInput.formats</span></tt>), mimetype only is
+checked. PyWPS does not care about valid schemas or anything else. Your
+Process should  do this.</p>
+<div class="section" id="vector-data-values">
+<h3>Vector data values<a class="headerlink" href="#vector-data-values" title="Permalink to this headline">¶</a></h3>
+<p>Vectors are usually handled as <a class="reference external" href="http://www.opengeospatial.org/standards/gml">GML</a> files. You can send any other file format as well, such as <a class="reference external" href="http://geojson.org/">GeoJSON</a>, <a class="reference external" href="http://opengeospatial.org/standards/kml">KML</a> or any other. Only condition is: the file should be in text form (so it can fit into XML correctly), if you want to append it as part of the input XML request and everything should be stored in <em>one</em> file.</p>
+<p>Vectors are the default
+<tt class="xref py py-attr docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexInput.format</span></tt> of ComplexValue in- or output &#8211; <cite>text/xml</cite>  (GML) is expected.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Some users do want to send <a class="reference external" href="http://en.wikipedia.org/wiki/Shapefile">ESRI Shapfiles</a>. This is in general not to be adviced: The file is binary format, which is hard to be used with XML, and it consists out of at least three files shp, shx and dbf.</p>
+<p class="last">If you still want to handle shapefiles, you have either to zip
+everything in one file or define three separate complex inputs.</p>
+</div>
+<p>Example of simple input vector data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">inputVector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addComplexOutput</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Input file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Example of more complex input vector data:</p>
+<div class="highlight-python"><pre>self.gmlOrSimilarIn = self.addComplexInput(identifier="input",
+                        title="Input file",
+                        abstract="Input vector file, usually in GML format",
+                        formats = [
+                                    # gml
+                                    {mimeType: 'text/xml',
+                                    encoding:'utf-8',
+                                    schema:'http://schemas.opengis.net/gml/3.2.1/gml.xsd'},
+                                    # json
+                                    {mimeType: 'text/plain',
+                                    encoding: 'iso-8859-2',
+                                    schema: None
+                                    },
+
+                                    # kml
+                                    {mimeType: 'text/xml',
+                                    encoding: 'windows-1250',
+                                    schema: 'http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd'}
+                                    ],
+                        # we need at least TWO input files, maximal 5
+                        minOccurs: 2,
+                        maxOccurs: 5,
+                        metadata: {'foo':'bar','spam':'eggs'}
+                    )</pre>
+</div>
+</div>
+<div class="section" id="raster-data-values">
+<h3>Raster data values<a class="headerlink" href="#raster-data-values" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, you need to work with raster data. You have to set proper
+<tt class="xref py py-attr docutils literal"><span class="pre">pywps.Process.InAndOutputs.ComplexInput.formats</span></tt> attribute of
+supported raster file format. Since they are usually in <em>binary</em> form, you
+would have to send the data always <em>as reference</em>. Fortunately, this is not
+the case. PyWPS can handle the input data, encoded in <a class="reference external" href="http://en.wikipedia.org/wiki/Base64">Base64 format</a> and once, PyWPS needs to send
+raster data out as part of Execute response XML, they are encoded with
+Base64 as well.</p>
+<p>Example of simple output raster data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">dataIn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addComplexOutput</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s">&quot;raster&quot;</span><span class="p">,</span>
+                    <span class="n">title</span><span class="o">=</span><span class="s">&quot;Raster out&quot;</span><span class="p">,</span>
+                    <span class="n">formats</span><span class="o">=</span><span class="p">[{</span><span class="s">&quot;mimeType&quot;</span><span class="p">:</span><span class="s">&quot;image/tiff&quot;</span><span class="p">}])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="literalvalue-input-and-output">
+<h2>LiteralValue input and Output<a class="headerlink" href="#literalvalue-input-and-output" title="Permalink to this headline">¶</a></h2>
+<p>With literal input, you can obtain or send any type of character string. You will
+obtain instance of <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.LiteralInput</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.LiteralOutput</span></tt> class.</p>
+<p>Literal value Inputs can be more complex. You can define list of allowed
+values, type of the literal input, spacing and so on.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Spacing is not supported, so you can not currently define the
+step in allowed values row.</p>
+</div>
+<div class="section" id="type">
+<h3>Type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
+<p>For type settings, you can either use <tt class="xref py py-mod docutils literal"><span class="pre">types</span></tt> module, or the
+<tt class="xref py py-func docutils literal"><span class="pre">type()</span></tt> function of python. Default type is <cite>type(0)</cite> &#8211; Integer.
+PyWPS will check for you, if the input value type matches allowed type.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need the String type of literal input, PyWPS will always
+remove everything behind &#8220;#&#8221;, &#8221;;&#8221;, &#8221;!&#8221;, &#8220;&amp;&#8221; and similar characters.
+Try to avoid usage of LiteralValue input directly as input for e.g.
+SQL database or command line programs. You could cause serious system
+compromise.</p>
+</div>
+</div>
+<div class="section" id="allowed-values">
+<h3>Allowed Values<a class="headerlink" href="#allowed-values" title="Permalink to this headline">¶</a></h3>
+<p>PyWPS let&#8217;s you define list of allowed input values. That can be string or
+integer or float types. Default values are defined in the list. Ranges are
+defined as two-items filed in form of <cite>(minimum,maximum)</cite>. For example, we
+would like to allow values 1,2,3, 5 to 7, and &#8216;spam&#8217;, the
+<tt class="xref py py-attr docutils literal"><span class="pre">pywps.Process.InAndOutputs.LiteralInput.values</span></tt> would look
+like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span><span class="s">&#39;spam&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Default is &#8220;*&#8221;, which means <em>all values</em>.</p>
+<p>Simple example of LiteralValue output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">widthOut</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addLiteralOutput</span><span class="p">(</span><span class="n">identifier</span> <span class="o">=</span> <span class="s">&quot;width&quot;</span><span class="p">,</span>
+                     <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Width&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Complex example of LiteralValue input:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">litIn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addLiteralInput</span><span class="p">(</span><span class="n">identifier</span> <span class="o">=</span> <span class="s">&quot;eggs&quot;</span><span class="p">,</span>
+                <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Eggs&quot;</span><span class="p">,</span>
+                <span class="n">abstract</span> <span class="o">=</span> <span class="s">&quot;Eggs with spam and sausages&quot;</span><span class="p">,</span>
+                <span class="n">minOccurs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">maxOccurs</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">uoms</span> <span class="o">=</span> <span class="s">&quot;m&quot;</span><span class="p">,</span>
+                <span class="n">dataType</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span>
+                <span class="n">default</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">10.1</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="boundingboxvalue-input-and-output">
+<h2>BoundingBoxValue input and Output<a class="headerlink" href="#boundingboxvalue-input-and-output" title="Permalink to this headline">¶</a></h2>
+<p>BoundingBox are two pairs of coordinates, defined in some coordinate
+system, of two or three dimensions. In PyWPS, they are defined in
+<tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.BoundingBoxInput</span></tt>,
+<tt class="xref py py-class docutils literal"><span class="pre">pywps.Process.InAndOutputs.BoundingBoxOutput</span></tt>. For getting them,
+use <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addBBoxInput()</span></tt>
+and <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.addBBoxOutput()</span></tt> respectively.</p>
+<p>The value is list of four coordinates in <cite>(minx, miny, maxx, maxy)</cite> format.</p>
+<p>Example of BoundingBoxValue input:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">bbox</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addBBoxOutput</span><span class="p">(</span><span class="n">identifier</span> <span class="o">=</span> <span class="s">&quot;bbox&quot;</span><span class="p">,</span>
+                          <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;BBox&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Process Inputs and Outputs</a><ul>
+<li><a class="reference internal" href="#complexvalue-input-and-output">ComplexValue input and Output</a><ul>
+<li><a class="reference internal" href="#vector-data-values">Vector data values</a></li>
+<li><a class="reference internal" href="#raster-data-values">Raster data values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#literalvalue-input-and-output">LiteralValue input and Output</a><ul>
+<li><a class="reference internal" href="#type">Type</a></li>
+<li><a class="reference internal" href="#allowed-values">Allowed Values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#boundingboxvalue-input-and-output">BoundingBoxValue input and Output</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/process/puts.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PyWPS and Java &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pywps-and-java">
+<h1>PyWPS and Java<a class="headerlink" href="#pywps-and-java" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Very important source for this section was <a class="reference external" href="http://seanmcgrath.blogspot.com/JythonWebAppTutorialPart1.html">Jython Webapp
+Tutorial</a> by
+Sean McGrath.  And
+<a class="reference external" href="http://wiki.python.org/jython/JythonFaq/DistributingJythonScripts">Distributing Jython Scripts</a> page.</p>
+</div>
+<p>Since 3.2x version, PyWPS is able to run in Java environment, using Python interpreter in Java -
+<a class="reference external" href="http://jython.org">Jython</a> .</p>
+<p>With Jython it is possible to access Java classes from Python code, as well
+as acces Python classes from Java code. So, it is no big problem to setup
+PyWPS, so it runs as Java servlet under Apache <a class="reference external" href="http://tomcat.apache.org">Tomcat</a> server and so, being able to access all the
+mighty Java tools for geodata processing.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">One big note must be remarked on this place: Current version of
+Jython (2.5.1) does NOT support <cite>os.fork()</cite> <a class="footnote-reference" href="#f1" id="id1">[1]</a> calls, which is the way,
+PyWPS is able to perform request assynchronously (which is the case, if
+you are requesting <cite>status=true</cite>). So currently, it is NOT possible to
+use assynchronous calls on PyWPS Execute request, if running within
+Jython. There are techniques, which do enable overcome this issue, but
+currently, they are not implemented in PyWPS yet.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We are using Tomcate 6.x. If you test PyWPS on 7.x, please let us
+know.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You should work with distribution of Java from Sun (now Oracle).
+Other JVMs are not tested (and usually, their usage is problematic).
+You can test, which interpreter you are using by running:</p>
+<div class="last highlight-python"><pre>java -version
+
+java version "1.6.0_20"
+Java(TM) SE Runtime Environment (build 1.6.0_20-b02)
+Java HotSpot(TM) 64-Bit Server VM (build 16.3-b01, mixed mode)</pre>
+</div>
+</div>
+<p>Before running PyWPS as Java servlet, several steps have to be performed.</p>
+<ol class="arabic simple">
+<li>Install Apache Tomcat server <a class="footnote-reference" href="#f2" id="id2">[2]</a></li>
+<li>Configure Apache Tomcat</li>
+<li>Prepare the Jython-lib package</li>
+<li>Write the PyWPS-Servlet wrapper (similar to CGI wrapper)</li>
+<li>Run the server</li>
+</ol>
+<p>It is assumed, you have downloaded and installed the Tomcat server in your
+system.</p>
+<div class="section" id="configure-tomcat">
+<h2>Configure Tomcat<a class="headerlink" href="#configure-tomcat" title="Permalink to this headline">¶</a></h2>
+<p>Create <cite>wps</cite> directory within the <cite>webapps</cite> directory of Tomcat.:</p>
+<div class="highlight-python"><pre>cd apache-tomcat-6.0.29/wps
+mkdir wps</pre>
+</div>
+<p>Create also the configuration directory within new <cite>wps</cite> directory and
+location for used Java lib:</p>
+<div class="highlight-python"><pre>mkdir wps/WEB-INF
+mkdir wps/lib</pre>
+</div>
+<p>Configuration in Tomcat happens in <tt class="file docutils literal"><span class="pre">web.xml</span></tt> file, located in the
+<cite>WEB-INF</cite> directory. There is example of such configuration file, which you
+can simply copy from PyWPS source</p>
+<div class="highlight-python"><pre>cp $PYWPS_SOURCE/webservices/tomcat/web.xml wps/WEB-INF/</pre>
+</div>
+<p>As second, copy the content of <cite>pywps</cite> module to <cite>wps</cite> directory:</p>
+<div class="highlight-python"><pre>cp -r $PYWPS_SOURCE/pywps wps/</pre>
+</div>
+<p>(You should now have directories like <cite>wps/pywps/default.py,
+wps/pywps/Exceptions.py, wps/pywps/Parser.py</cite> and others.)</p>
+</div>
+<div class="section" id="prepare-the-jython-lib-package">
+<h2>Prepare the jython-lib package<a class="headerlink" href="#prepare-the-jython-lib-package" title="Permalink to this headline">¶</a></h2>
+<p>Download and install Jython. Once, you download it, you have to run the
+install script:</p>
+<div class="highlight-python"><pre>java -jar jython_installer-2.5.1.jar</pre>
+</div>
+<p>Once it is installed, you have to crate Java archive, with all necessary
+Python modules and copy it to <cite>wps</cite> directory of Tomcat server:</p>
+<div class="highlight-python"><pre>cd $JYTHON_HOME
+cp jython.jar jythonlib.jar
+zip -r jythonlib.jar Lib
+cp jythonlib.jar $CATALINA_HOME/webapps/wps/lib/</pre>
+</div>
+<p>Now you should be able to configure PyWPS wrapper script</p>
+</div>
+<div class="section" id="prepare-the-pywps-servlet-wrapper">
+<h2>Prepare the PyWPS-Servlet wrapper<a class="headerlink" href="#prepare-the-pywps-servlet-wrapper" title="Permalink to this headline">¶</a></h2>
+<p>Take the <tt class="file docutils literal"><span class="pre">webservices/tomcat/PywpsServlet.py</span></tt> file and store it to
+<cite>webapps/wps/</cite> directory.:</p>
+<div class="highlight-python"><pre>cp $PYWPS_SOURCE/webservices/tomcat/PywpsServlet.py wps/`</pre>
+</div>
+<p>Let&#8217;s edit it</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;PyWPS Jython (Java) servlet implementation</span>
+
+<span class="sd">.. moduleauthor: Jachym Cepicky </span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">java.io</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">javax.servlet.http</span> <span class="kn">import</span> <span class="n">HttpServlet</span> 
+
+<span class="kn">import</span> <span class="nn">pywps</span>
+<span class="kn">from</span> <span class="nn">pywps.Exceptions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="k">class</span> <span class="nc">PywpsServlet</span><span class="p">(</span><span class="n">HttpServlet</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">doGet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">):</span>
+
+        <span class="n">inputQuery</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getQueryString</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">inputQuery</span><span class="p">:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">NoApplicableCode</span><span class="p">(</span><span class="s">&quot;Missing request value&quot;</span><span class="p">)</span>
+            <span class="n">pywps</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">response</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doPywps</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">inputQuery</span><span class="p">,</span> <span class="n">pywps</span><span class="o">.</span><span class="n">METHOD_GET</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">doPost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">):</span>
+
+        <span class="n">inputQuery</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getQueryString</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doPywps</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">inputQuery</span><span class="p">,</span> <span class="n">pywps</span><span class="o">.</span><span class="n">METHOD_POST</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">doPywps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">inputQuery</span><span class="p">,</span><span class="n">method</span><span class="p">):</span>
+
+        <span class="c"># create the WPS object</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">wps</span> <span class="o">=</span> <span class="n">pywps</span><span class="o">.</span><span class="n">Pywps</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">wps</span><span class="o">.</span><span class="n">parseRequest</span><span class="p">(</span><span class="n">inputQuery</span><span class="p">):</span>
+                <span class="n">pywps</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+                <span class="n">wpsresponse</span> <span class="o">=</span> <span class="n">wps</span><span class="o">.</span><span class="n">performRequest</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">getProcesses</span><span class="p">()])</span>
+                <span class="k">if</span> <span class="n">wpsresponse</span><span class="p">:</span>
+                    <span class="n">pywps</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">response</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">response</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">wps</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">isSoap</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">WPSException</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+            <span class="n">pywps</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">response</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getProcesses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create temporary Process with literal input and output&quot;&quot;&quot;</span>
+
+        <span class="kn">from</span>  <span class="nn">pywps.Process</span> <span class="kn">import</span> <span class="n">WPSProcess</span>
+
+        <span class="n">process</span> <span class="o">=</span> <span class="n">WPSProcess</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s">&quot;servletProcess&quot;</span><span class="p">,</span>
+                            <span class="n">title</span><span class="o">=</span><span class="s">&quot;Java Servlet process&quot;</span><span class="p">)</span>
+        <span class="n">process</span><span class="o">.</span><span class="n">addLiteralInput</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s">&quot;input&quot;</span><span class="p">,</span>
+                            <span class="n">title</span><span class="o">=</span><span class="s">&quot;Literal input&quot;</span><span class="p">)</span>
+        <span class="n">process</span><span class="o">.</span><span class="n">addLiteralOutput</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s">&quot;output&quot;</span><span class="p">,</span>
+                            <span class="n">title</span><span class="o">=</span><span class="s">&quot;Literal output&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">execute</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s">&quot;output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s">&quot;input&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">getValue</span><span class="p">())</span>
+
+        <span class="n">process</span><span class="o">.</span><span class="n">execute</span> <span class="o">=</span> <span class="n">execute</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">process</span>
+</pre></div>
+</div>
+<p>Note the <cite>getProcesses()</cite> method, which creating one process on-the-fly.</p>
+<p class="centered">
+<strong>That is the way, how you can create custom Java-based processes
+and make them accessable via PyWPS.</strong></p><p>You can also set some environment variables, as you are probably used to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;PYWPS_PROCESSES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;/path/to/processes&quot;</span>
+</pre></div>
+</div>
+<p>the complete script looks like follows</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">java.io</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">javax.servlet.http</span> <span class="kn">import</span> <span class="n">HttpServlet</span>
+
+<span class="kn">import</span> <span class="nn">pywps</span>
+<span class="kn">from</span> <span class="nn">pywps.Exceptions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">class</span> <span class="nc">PywpsServlet</span><span class="p">(</span><span class="n">HttpServlet</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">doGet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">):</span>
+
+        <span class="n">inputQuery</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getQueryString</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">inputQuery</span><span class="p">:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">NoApplicableCode</span><span class="p">(</span><span class="s">&quot;Missing request value&quot;</span><span class="p">)</span>
+            <span class="n">pywps</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">response</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doPywps</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">inputQuery</span><span class="p">,</span> <span class="n">pywps</span><span class="o">.</span><span class="n">METHOD_GET</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">doPost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">):</span>
+
+        <span class="n">inputQuery</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getQueryString</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doPywps</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">inputQuery</span><span class="p">,</span> <span class="n">pywps</span><span class="o">.</span><span class="n">METHOD_POST</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">doPywps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">inputQuery</span><span class="p">,</span><span class="n">method</span><span class="p">):</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;PYWPS_PROCESSES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;/usr/local/src/pywps/trunk/tests/processes/&quot;</span>
+        <span class="c"># create the WPS object</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">wps</span> <span class="o">=</span> <span class="n">pywps</span><span class="o">.</span><span class="n">Pywps</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">wps</span><span class="o">.</span><span class="n">parseRequest</span><span class="p">(</span><span class="n">inputQuery</span><span class="p">):</span>
+                <span class="n">pywps</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+                <span class="n">wpsresponse</span> <span class="o">=</span> <span class="n">wps</span><span class="o">.</span><span class="n">performRequest</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">wpsresponse</span><span class="p">:</span>
+                    <span class="n">pywps</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">response</span><span class="p">(</span><span class="n">wps</span><span class="o">.</span><span class="n">response</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">wps</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">isSoap</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">WPSException</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+            <span class="n">pywps</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">response</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-the-server">
+<h2>Run the server<a class="headerlink" href="#run-the-server" title="Permalink to this headline">¶</a></h2>
+<p>... and see, what happens.:</p>
+<div class="highlight-python"><pre>bin/startup.sh
+
+    Using CATALINA_BASE:   /tmp/apache-tomcat-6.0.29
+    Using CATALINA_HOME:   /tmp/apache-tomcat-6.0.29
+    Using CATALINA_TMPDIR: /tmp/apache-tomcat-6.0.29/temp
+    Using JRE_HOME:        /usr/lib/jvm/java-6-sun/
+    Using CLASSPATH:       /tmp/apache-tomcat-6.0.29/bin/bootstrap.jar</pre>
+</div>
+<p>Test the PyWPS, to to url <a class="reference external" href="http://localhost:8080/wps/PywpsServlet?service=wps&amp;request=getcapabilities">http://localhost:8080/wps/PywpsServlet?service=wps&amp;request=getcapabilities</a></p>
+<p>And let us execute something as well: <a class="reference external" href="http://localhost:8080/wps/PywpsServlet.py?service=wps&amp;request=execute&amp;version=1.0.0&amp;identifier=dummyprocess">http://localhost:8080/wps/PywpsServlet.py?service=wps&amp;request=execute&amp;version=1.0.0&amp;identifier=dummyprocess</a></p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>This chapter describes the basics, how to setup Apache Tomcat server
+together with PyWPS. Advanced users will probably skip the configuration
+part and go directly to PyWPS part.</p>
+<p>It shows, how easy it is to connect two worlds: Python and Java. It makes
+it easy to access Java-based analytical tools being exposed to the outside
+world via OGC WPS.</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://wiki.python.org/jython/JythonFaq/ProgrammingJython#TheJython.27sosmoduleismissingsomefunctions.2Cwhy.3F">http://wiki.python.org/jython/JythonFaq/ProgrammingJython#TheJython.27sosmoduleismissingsomefunctions.2Cwhy.3F</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Ubuntu users: better use the version from Apache side, rather then
+package from ubuntu repository.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PyWPS and Java</a><ul>
+<li><a class="reference internal" href="#configure-tomcat">Configure Tomcat</a></li>
+<li><a class="reference internal" href="#prepare-the-jython-lib-package">Prepare the jython-lib package</a></li>
+<li><a class="reference internal" href="#prepare-the-pywps-servlet-wrapper">Prepare the PyWPS-Servlet wrapper</a></li>
+<li><a class="reference internal" href="#run-the-server">Run the server</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/special/java.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

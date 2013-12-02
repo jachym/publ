@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PyWPS and GRASS GIS &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pywps-and-grass-gis">
+<h1>PyWPS and GRASS GIS<a class="headerlink" href="#pywps-and-grass-gis" title="Permalink to this headline">¶</a></h1>
+<p>PyWPS was originaly written with the support for <a class="reference external" href="http://grass.osgeo.org">GRASS GIS</a>. The processes can be executed within temporary
+created GRASS Location or within existing GRASS Location, within temporary
+created Mapset. If you are not familiar with this therms, consider to start
+with GRASS first and understand this concept.</p>
+<div class="section" id="configuring-pywps">
+<h2>Configuring PyWPS<a class="headerlink" href="#configuring-pywps" title="Permalink to this headline">¶</a></h2>
+<p>First you have to configure PyWPS configuration file, as described in
+<a class="reference internal" href="../configuration/index.html#configuration"><em>Configuration</em></a>.</p>
+</div>
+<div class="section" id="allowing-process-to-be-executed-in-grass-environment">
+<h2>Allowing Process to be executed in GRASS environment<a class="headerlink" href="#allowing-process-to-be-executed-in-grass-environment" title="Permalink to this headline">¶</a></h2>
+<p>When you are initializing new process (see <em class="xref std std-ref">process-initialization</em>),
+you can add <tt class="xref py py-attr docutils literal"><span class="pre">pywps.Process.WPSProcess.grassLocation</span></tt> attribute to it.</p>
+<p>The attribute can have following values:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>None</dt>
+<dd><p class="first">GRASS Location is not created, GRASS environment is not started
+(default):</p>
+<div class="last highlight-python"><pre>WPSProcess.__init__(self, identifier = "foo)</pre>
+</div>
+</dd>
+<dt>True</dt>
+<dd><p class="first">Temporary GRASS Location is created in XY coordinate system.
+.. note:: In the future, GRASS Location will probably have</p>
+<blockquote class="last">
+<div><p>coordinate system token from the input raster or vector file.:</p>
+<dl class="docutils">
+<dt>WPSProcess.__init__(self, identifier = &#8220;foo&#8221;,</dt>
+<dd>...,
+grassLocation = True)</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt>String</dt>
+<dd><p class="first">Name of the GRASS Location within configured grassdbase. If the
+name starts with &#8220;/&#8221;, full path to the location is taken, without
+any other configuration.:</p>
+<div class="highlight-python"><pre>WPSProcess.__init__(self, identifier = "foo",
+    ...
+    grassLocation = "spearfish60")</pre>
+</div>
+<p>or:</p>
+<div class="last highlight-python"><pre>WPSProcess.__init__(self,
+    identifier = "foo",
+    ...
+    grassLocation = "/foo/bar/grassdata/spearfish60")</pre>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="running-grass-modules-from-pywps">
+<h2>Running GRASS modules from PyWPS<a class="headerlink" href="#running-grass-modules-from-pywps" title="Permalink to this headline">¶</a></h2>
+<p>You have two possibilities: either to run GRASS modules as you would do in
+shell script (running the modules directly) or access GRASS-python
+interface.</p>
+<div class="section" id="running-grass-command-line-modules">
+<h3>Running GRASS command line modules<a class="headerlink" href="#running-grass-command-line-modules" title="Permalink to this headline">¶</a></h3>
+<p>Once <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.execute()</span></tt> method is executed, you
+can use  <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.cmd()</span></tt> for calling GRASS
+modules.</p>
+</div>
+<div class="section" id="using-grass-python-interface">
+<h3>Using GRASS-Python interface<a class="headerlink" href="#using-grass-python-interface" title="Permalink to this headline">¶</a></h3>
+<p>Since GRASS 6.4, Python interface is developed. There are both - <a class="reference external" href="http://www.swig.org/">swig</a>
+interface and GRASS Modules-Python iterface. There are both described in
+<a class="reference external" href="http://grass.osgeo.org/wiki/GRASS_and_Python">GRASS Wiki</a> . There are
+<tt class="xref py py-meth docutils literal"><span class="pre">grass.run_command()</span></tt>, <tt class="xref py py-meth docutils literal"><span class="pre">grass.mapcalc()</span></tt> and other useful methods.
+For the swig interface, have a look in the GRASS-Wiki - it is perfectly
+documented.</p>
+<div class="section" id="grass-python-interface-example">
+<h4>GRASS-Python interface example<a class="headerlink" href="#grass-python-interface-example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">grass.script</span> <span class="kn">import</span> <span class="n">core</span> <span class="k">as</span> <span class="n">grass</span>
+<span class="kn">from</span> <span class="nn">pywps.Process</span> <span class="kn">import</span> <span class="n">WPSProcess</span>
+
+<span class="n">process</span> <span class="o">=</span>  <span class="n">WPSProcess</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s">&quot;grassprocess&quot;</span><span class="p">,</span>
+                    <span class="n">title</span><span class="o">=</span><span class="s">&quot;GRASS Process&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">execute</span><span class="p">():</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">grass</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s">&quot;d.his&quot;</span><span class="p">,</span> <span class="n">h_map</span> <span class="o">=</span> <span class="s">&quot;drap_map&quot;</span><span class="p">,</span>
+                                     <span class="n">i_map</span> <span class="o">=</span> <span class="s">&quot;relief_map&quot;</span><span class="p">,</span>
+                                     <span class="n">brighten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">execute</span> <span class="o">=</span> <span class="n">execute</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PyWPS and GRASS GIS</a><ul>
+<li><a class="reference internal" href="#configuring-pywps">Configuring PyWPS</a></li>
+<li><a class="reference internal" href="#allowing-process-to-be-executed-in-grass-environment">Allowing Process to be executed in GRASS environment</a></li>
+<li><a class="reference internal" href="#running-grass-modules-from-pywps">Running GRASS modules from PyWPS</a><ul>
+<li><a class="reference internal" href="#running-grass-command-line-modules">Running GRASS command line modules</a></li>
+<li><a class="reference internal" href="#using-grass-python-interface">Using GRASS-Python interface</a><ul>
+<li><a class="reference internal" href="#grass-python-interface-example">GRASS-Python interface example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/special/grass.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

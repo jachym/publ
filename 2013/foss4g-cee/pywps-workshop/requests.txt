@@ -1,0 +1,11 @@
+OGR buffer
+service=wps&version=1.0.0&request=execute&identifier=buffer&datainputs=size=10;data=http://apps.esdi-humboldt.cz/classification/traning_areas/training_areas_en.gml
+
+GRASS buffer
+service=wps&version=1.0.0&request=execute&identifier=gbuffer&datainputs=size=10;data=http://apps.esdi-humboldt.cz/classification/traning_areas/training_areas_en.gml
+
+GRASS-PYTHON buffer
+service=wps&version=1.0.0&request=execute&identifier=pgbuffer&datainputs=size=10;data=http://apps.esdi-humboldt.cz/classification/traning_areas/training_areas_en.gml
+
+GRASS-PYTHON buffer asReference (MapServer demo)
+http://localhost/cgi-bin/wpstutorial?service=wps&version=1.0.0&request=execute&identifier=pgbuffer&datainputs=size=50;data=http://apps.esdi-humboldt.cz/classification/traning_areas/training_areas_en.gml&responsedocument=buffer=@asreference=true

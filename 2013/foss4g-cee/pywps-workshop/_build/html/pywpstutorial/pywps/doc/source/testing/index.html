@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing PyWPS &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-pywps">
+<h1>Testing PyWPS<a class="headerlink" href="#testing-pywps" title="Permalink to this headline">¶</a></h1>
+<p>Testing PyWPS can be done in the command line &#8211; it is the easier way, how
+to get both &#8211; standard error and standard output &#8211; at once. Testing in
+the web server environment can be done later.</p>
+<p>Before we start to test, be aware, that we are assuming following
+presumptions:</p>
+<blockquote>
+<div><p>1 - PyWPS is installed properly, see <em class="xref std std-ref">installation</em>
+2 - Configuration file is stored in <tt class="file docutils literal"><span class="pre">/usr/local/wps/pywps.cfg</span></tt>,</p>
+<blockquote>
+<div>see <a class="reference internal" href="../configuration/index.html#configuration"><em>Configuration</em></a></div></blockquote>
+<dl class="docutils">
+<dt>3 - At least one process is stored in the</dt>
+<dd><tt class="file docutils literal"><span class="pre">/usr/local/wps/processes</span></tt> directory.</dd>
+<dt>4 - There is <tt class="file docutils literal"><span class="pre">/usr/local/wps/processes/__init__.py</span></tt> file, with at</dt>
+<dd><p class="first">least:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;yourProcess&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="last">text in it. For testing purposes, we do assume, that <cite>yourProcess</cite>
+is <cite>ultimatequestionprocess</cite>. For further reading about how to setup
+custom processes, see <em class="xref std std-ref">custom-processes</em>.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>For testing, we are using HTTP GET KVP encoding of OGC WPS request
+parameters. If you are not able to follow the meaning of some parameter,
+you should have a look at <a class="reference external" href="http://opengeospatial.org/standards/wps">OGC WPS 1.0.0</a> standard.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Be aware, that this document describes PyWPS, which is <em>server</em>
+implementation of OGC WPS. There is some graphical user interface to
+the server (WPS Clients), but for testing purposes, they are not
+suitable. That is the reason, why following section will use command
+line tools and direct XLM outputs.</p>
+</div>
+<div class="section" id="testing-pywps-installation">
+<h2>Testing PyWPS installation<a class="headerlink" href="#testing-pywps-installation" title="Permalink to this headline">¶</a></h2>
+<p>Find the location of <tt class="file docutils literal"><span class="pre">cgiwps.py</span></tt> and run it without any further
+configuration.:</p>
+<div class="highlight-python"><pre>$ ./cgiwps.py</pre>
+</div>
+<p>And you should get result like this (which is a mixture of standard output
+and standard error):</p>
+<div class="highlight-python"><pre>Content-type: text/xml
+
+PyWPS NoApplicableCode: Locator: None; Value: No query string found.
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ExceptionReport version="1.0.0" xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+        &lt;Exception exceptionCode="NoApplicableCode"&gt;
+                &lt;ExceptionText&gt;
+                        No query string found.
+                &lt;/ExceptionText&gt;
+        &lt;/Exception&gt;
+&lt;/ExceptionReport&gt;</pre>
+</div>
+</div>
+<div class="section" id="testing-pywps-configuration">
+<h2>Testing PyWPS configuration<a class="headerlink" href="#testing-pywps-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Now we have to export two environment variables: location of the
+configuration file and location of processes directory:</p>
+<div class="highlight-python"><pre>$ export PYWPS_CFG=/usr/local/wps/pywps.cfg
+$ export PYWPS_PROCESSES=/usr/local/wps/processes</pre>
+</div>
+<p>Afterwards, you can run PyWPS CGI script. We will use  HTTP GET requests,
+because they are easy to follow and faster to construct.</p>
+<div class="section" id="getcapabilities">
+<h3>GetCapabilities<a class="headerlink" href="#getcapabilities" title="Permalink to this headline">¶</a></h3>
+<p>In the command line:</p>
+<div class="highlight-python"><pre>$ ./cgiwps.py "service=wps&amp;request=getcapabilities"</pre>
+</div>
+<p>You should obtain Capabilities response:</p>
+<div class="highlight-python"><pre>Content-Type: text/xml
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;wps:Capabilities service="WPS" version="1.0.0" xml:lang="eng" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsGetCapabilities_response.xsd" updateSequence="1"&gt;
+        &lt;ows:ServiceIdentification&gt;
+        [...]</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Have a more detailed look at the <cite>&lt;wps:ProcessOfferings&gt;...&lt;/wps:ProcessOfferings&gt; part of the output XML. There should be at least `Process</cite></p>
+</div>
+</div>
+<div class="section" id="describeprocess">
+<h3>DescribeProcess<a class="headerlink" href="#describeprocess" title="Permalink to this headline">¶</a></h3>
+<p>In the command line:</p>
+<div class="highlight-python"><pre>$ ./cgiwps.py "service=wps&amp;version=1.0.0&amp;request=describeprocess&amp;identifier=Process"</pre>
+</div>
+<p>You should obtain ProcessDescriptions response:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;wps:ProcessDescriptions xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsDescribeProcess_response.xsd" service="WPS" version="1.0.0" xml:lang="eng"&gt;
+    &lt;ProcessDescription wps:processVersion="0.2" storeSupported="True" statusSupported="True"&gt;
+        &lt;ows:Identifier&gt;ultimatequestionprocess&lt;/ows:Identifier&gt;
+        &lt;ows:Title&gt;The numerical answer to Life, Universe and Everything&lt;/ows:Title&gt;
+        [...]</pre>
+</div>
+</div>
+<div class="section" id="execute">
+<h3>Execute<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h3>
+<p>In the command line:</p>
+<div class="highlight-python"><pre>$ ./cgiwps.py "service=wps&amp;version=1.0.0&amp;request=execute&amp;identifier=ultimatequestionprocess"</pre>
+</div>
+<p>And after some while (it really takes so long, just wait):</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;wps:ExecuteResponse xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsGetCapabilities_response.xsd" service="WPS" version="1.0.0" xml:lang="eng" serviceInstance="http://78.156.32.132/cgi-bin/wps?service=WPS&amp;amp;request=GetCapabilities&amp;amp;version=1.0.0" statusLocation="http://78.156.32.132/tmp/pywps/pywps-126450573849.xml"&gt;
+    &lt;wps:Process wps:processVersion="2.0"&gt;
+        &lt;ows:Identifier&gt;ultimatequestionprocess&lt;/ows:Identifier&gt;
+        &lt;ows:Title&gt;Answer to Life, the Universe and Everything&lt;/ows:Title&gt;
+        &lt;ows:Abstract&gt;Numerical solution that is the answer to Life, Universe and Everything. The process is an improvement to Deep Tought computer (therefore version 2.0) since it no longer takes 7.5 milion years, but only a few seconds to give a response, with an update of status every 10 seconds.&lt;/ows:Abstract&gt;
+    &lt;/wps:Process&gt;
+    &lt;wps:Status creationTime="Tue Jan 26 12:37:18 2010"&gt;
+        &lt;wps:ProcessSucceeded&gt;PyWPS Process ultimatequestionprocess successfully calculated&lt;/wps:ProcessSucceeded&gt;
+    &lt;/wps:Status&gt;
+    &lt;wps:ProcessOutputs&gt;
+        &lt;wps:Output&gt;
+            &lt;ows:Identifier&gt;answer&lt;/ows:Identifier&gt;
+            &lt;ows:Title&gt;The numerical answer to Life, Universe and Everything&lt;/ows:Title&gt;
+            &lt;wps:Data&gt;
+                &lt;wps:LiteralData dataType="integer"&gt;42&lt;/wps:LiteralData&gt;
+            &lt;/wps:Data&gt;
+        &lt;/wps:Output&gt;
+    &lt;/wps:ProcessOutputs&gt;
+&lt;/wps:ExecuteResponse&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="issues">
+<h2>Issues<a class="headerlink" href="#issues" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">List of known problems follows. If you have seen something
+different, please let us know via mailing list.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Every error you get, should have standard error and standard
+output part, but they are mixed together. We describe here the most
+important part, the general error description.</p>
+</div>
+<dl class="docutils">
+<dt><em>Could not store file in compiled form: [Errno 13] Permission denied: &#8216;pywps/Templates/1_0_0/GetCapabilities.tmplc&#8217;</em></dt>
+<dd>PyWPS tries to store precompiled templates to Templates directory and
+does not have rights for it (or the user, under which PyWPS is running,
+does not have the rights, e.g. www-data). Change permissions of the
+directory, so that other users can write in it as well.</dd>
+</dl>
+<p><em>Process executed. Failed to build final response for output [los]: [Errno 13] Permission denied: &#8216;/var/tmp/pywps/los-6165.tif&#8217;</em>
+<em>Process executed. Failed to build final response for output [los]: [Errno 2] No such file or directory: &#8216;/var/tmp/pywpsx/los-6217.tif&#8217;</em></p>
+<blockquote>
+<div>PyWPS probably successfully calculated the process, but when it tried
+to store result file to output directory, it failed. Try to set
+read-write access to directory with output files or create the output
+directory.</div></blockquote>
+<p><em>[Errno 2] No such file or directory: &#8216;/tmp/&#8217;</em>
+<em>[Errno 13] Permission denied: &#8216;/tmp/&#8217;</em></p>
+<blockquote>
+<div>PyWPS did not find some directory or file, configured in the
+configuration file, or th permissions are not set.</div></blockquote>
+<dl class="docutils">
+<dt><em>No process in ProcessOfferings listed</em></dt>
+<dd><p class="first">The <span class="target" id="index-0"></span><tt class="xref std std-envvar docutils literal"><span class="pre">PYWPS_PROCESSES</span></tt> is not set properly or there is no:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;ultimatequestionprocess&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="last">in the <tt class="file docutils literal"><span class="pre">__init__.py</span></tt> in the <span class="target" id="index-1"></span><tt class="xref std std-envvar docutils literal"><span class="pre">PYWPS_PROCESSES</span></tt> directory.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing PyWPS</a><ul>
+<li><a class="reference internal" href="#testing-pywps-installation">Testing PyWPS installation</a></li>
+<li><a class="reference internal" href="#testing-pywps-configuration">Testing PyWPS configuration</a><ul>
+<li><a class="reference internal" href="#getcapabilities">GetCapabilities</a></li>
+<li><a class="reference internal" href="#describeprocess">DescribeProcess</a></li>
+<li><a class="reference internal" href="#execute">Execute</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#issues">Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/testing/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

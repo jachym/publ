@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuration">
+<span id="id1"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Before you start to tune your PyWPS installation, you should get your copy of
+OpenGIS(R) Web Processing Service document (OGC  05-007r7) version
+1.0.0 <a class="reference external" href="http://www.opengeospatial.org/standards/wps">http://www.opengeospatial.org/standards/wps</a> or later.</p>
+</div>
+<div class="section" id="setuping-the-pywps-instance">
+<h2>Setuping the PyWPS instance<a class="headerlink" href="#setuping-the-pywps-instance" title="Permalink to this headline">¶</a></h2>
+<p>PyWPS can be installed once on your server, but it be configured for many
+WPS servers (instances). Each WPS server needs set of processes (stored in
+one directory) and configuration file.
+Processes are stored together as python programs in one directory. To setup
+this, you have to:</p>
+<dl class="docutils">
+<dt>1 - create processes directory &#8211; directory, where you store all</dt>
+<dd><p class="first">processes for particular PyWPS instance:</p>
+<div class="last highlight-python"><pre>$ mkdir -p /usr/local/wps/processes</pre>
+</div>
+</dd>
+<dt>2 - copy template of the configuration file to some location, and</dt>
+<dd><p class="first">configure you PyWPS installation (see below):</p>
+<div class="last highlight-python"><pre>$ cp pywps-VERSION/pywps/default.cfg /usr/local/wps/pywps.cfg
+$ $EDITOR /usr/locap/wps/pywps.cfg</pre>
+</div>
+</dd>
+<dt>3 - create any process(es) in the processes directory. You can start with</dt>
+<dd><p class="first">the example processes, stored in <cite>pywps-VERSION/examples/processes</cite>
+directory. See <em class="xref std std-ref">how-to-write-custom-process</em> for how to write
+custom processes.:</p>
+<div class="last highlight-python"><pre>$ cp pywps-VERSION/examples/ultimatequestionprocess.py /usr/local/wps/processes/</pre>
+</div>
+</dd>
+<dt>6 - Every process, you have in the processes directory, needs to be</dt>
+<dd><p class="first">registered in the <cite>__init__.py</cite> file. The file has to contain at
+least:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;ultimatequestionprocess&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="last">Where __all___ represents list of processes (file names) within the
+processes directory.</p>
+</dd>
+</dl>
+<div class="section" id="accepted-environment-variables">
+<h3>Accepted environment variables<a class="headerlink" href="#accepted-environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>Following environemnt variables are accepted by PyWPS instance:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>PYWPS_CFG</dt>
+<dd>Configuration file location</dd>
+<dt>PYWPS_PROCESSES</dt>
+<dd>Directory, where the processes are stored</dd>
+<dt>PYWPS_TEMPLATES</dt>
+<dd>Templates directory (structure should be similar to
+file:<cite>pywps/Templates</cite>)</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="setuping-the-web-server">
+<h3>Setuping the Web Server<a class="headerlink" href="#setuping-the-web-server" title="Permalink to this headline">¶</a></h3>
+<p>PyWPS can run as <a class="reference external" href="http://www.w3.org/CGI/">CGI</a> application or in
+<a class="reference external" href="http://www.modpython.org/">mod_python</a> mode. CGI is easier to setup,
+where mod_python is less demanding on server resources, since after first
+run, PyWPS and Python itself are loaded into memory.</p>
+<div class="section" id="pywps-as-cgi">
+<h4>PyWPS as CGI<a class="headerlink" href="#pywps-as-cgi" title="Permalink to this headline">¶</a></h4>
+<p>It is simplier method, without any additional server configuration.</p>
+<p>To configure PyWPS via CGI, copy the PyWPS cgi wrapper script to
+your cgi-bin directory and edit the variables, which are set there:</p>
+<div class="highlight-python"><pre>$ cp pywps/resources/pywps.cgi /usr/lib/cgi-bin
+$ $EDITOR /usr/lib/cgi-bin/pywps.cgi</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Windows users, you have to script some similar script as .bat
+file or in python. This example is written as SHELL script.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This script is to be used with combination of Apache only. If you
+want to run <cite>wps.py</cite> from command line, use not this script, but the
+program itself.</p>
+</div>
+<p>The file can look like this:</p>
+<div class="highlight-python"><pre>#!/bin/sh
+
+# Author: Jachym Cepicky
+# Purpose: CGI script for wrapping PyWPS script
+# Licence: GNU/GPL
+# Usage: Put this script to your web server cgi-bin directory, e.g.
+# /usr/lib/cgi-bin/ and make it executable (chmod 755 pywps.cgi)
+
+# NOTE: tested on linux/apache
+
+export PYWPS_CFG=/usr/local/wps/pywps.cfg
+export PYWPS_PROCESSES=/usr/local/wps/processes/
+
+/usr/local/pywps-VERSION/cgiwps.py</pre>
+</div>
+<p>You can also configure this environment variables using standard Apache
+server configuration file (see <em class="xref std std-ref">mod_python</em>) for example.</p>
+</div>
+<div class="section" id="pywps-in-mod-python">
+<span id="id2"></span><h4>PyWPS in mod_python<a class="headerlink" href="#pywps-in-mod-python" title="Permalink to this headline">¶</a></h4>
+<p>It is in general better, to run PyWPS in mod_python, because all necessary
+libraries are pre-loaded into memory and so the response times should be
+faster in some cases.</p>
+<blockquote>
+<div>1 - Install necessary packages, on debian, it is <cite>libapache2-mod-python</cite>
+2 - Congfigure Apache HTTPD server (see <a class="reference external" href="http://www.modpython.org/live/mod_python-2.7.8/doc-html/inst-apacheconfig.html">Mod Python documentation</a>).</div></blockquote>
+<dl class="docutils">
+<dt>1 - Create python directory, it should be outside htdocs directory,</dt>
+<dd><p class="first">however, (yes, you can) create in in htdocs directory:</p>
+<div class="last highlight-python"><pre>$ mkdir /var/www/wps/</pre>
+</div>
+</dd>
+</dl>
+<p>2 - Add this to your site configuration file:</p>
+<div class="highlight-python"><pre>&lt;Directory /var/www/wps&gt;
+    SetEnv PYWPS_PROCESSES /usr/local/wps/processes
+    SetEnv PYWPS_CFG /usr/local/wps/pywps.cfg
+    SetHandler python-program
+    PythonHandler pywps
+    PythonDebug On
+    PythonPath "sys.path+['/usr/local/pywps-VERSION/']"
+    PythonAutoReload On
+&lt;/Directory&gt;</pre>
+</div>
+<p>or you can copy <tt class="file docutils literal"><span class="pre">resources/.htaccess</span></tt> file to <cite>/var/www/wps</cite> &#8211;
+depends, what you prefer or the system administrator allows you to do.</p>
+<p>3 - Copy <tt class="file docutils literal"><span class="pre">resources/pywps.py</span></tt> to <tt class="file docutils literal"><span class="pre">/var/www/wps</span></tt></p>
+</div>
+</div>
+</div>
+<div class="section" id="pywps-configuration-files">
+<h2>PyWPS configuration files<a class="headerlink" href="#pywps-configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>Configuration file for PyWPS can be located on several places. There are
+global and local PyWPS configuration files. The locals do rewrite values
+stored in global files.</p>
+<div class="section" id="global-pywps-configuration-files">
+<h3>Global PyWPS configuration files<a class="headerlink" href="#global-pywps-configuration-files" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>File <tt class="file docutils literal"><span class="pre">/etc/pywps.cfg</span></tt> (on Linux/Unix)</li>
+<li>File <tt class="file docutils literal"><span class="pre">/usr/local/pywps-VERSION/etc/pywps.cfg</span></tt>, which means the
+file <tt class="file docutils literal"><span class="pre">pywps.cfg</span></tt> in directory <tt class="file docutils literal"><span class="pre">etc</span></tt>, located in PyWPS
+install location.</li>
+</ol>
+<p>And one special file:</p>
+<blockquote>
+<div><p>File <tt class="file docutils literal"><span class="pre">/usr/local/pywps-VERSION/pywps/default.cfg</span></tt>, which means the
+file <tt class="file docutils literal"><span class="pre">default.cfg</span></tt> in directory <tt class="file docutils literal"><span class="pre">pywps</span></tt>, located in PyWPS
+install location. This is the default configuration file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Never rewrite or remove this file. Use it onlyas template for
+your custom configuration files.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="local-pywps-configuration-file">
+<h3>Local PyWPS configuration file<a class="headerlink" href="#local-pywps-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>The configuration file is used for the particular PyWPS instance only. It
+is the file, stored in <span class="target" id="index-0"></span><tt class="xref std std-envvar docutils literal"><span class="pre">PYWPS_CFG</span></tt> environment variable. This can
+be set either via web server configuration or with help of any warper
+script (see <tt class="file docutils literal"><span class="pre">resources/pywps.cgi</span></tt> for example).</p>
+<p>Make a copy of <tt class="file docutils literal"><span class="pre">pywps/default.cfg</span></tt> to
+<tt class="file docutils literal"><span class="pre">/usr/local/wps/pywps.cfg</span></tt> and customize the file with help of
+following documentation.</p>
+</div>
+</div>
+<div class="section" id="configuration-of-pywps-instance">
+<h2>Configuration of PyWPS instance<a class="headerlink" href="#configuration-of-pywps-instance" title="Permalink to this headline">¶</a></h2>
+<p>Several sections are in the configuration file.  The sections are then
+containing <cite>key value</cite> pairs of configuration options. See example at the
+end of this section. If you would not fill some of tis options, they will
+be taken from default configuration file.</p>
+<div class="section" id="wps">
+<h3>WPS<a class="headerlink" href="#wps" title="Permalink to this headline">¶</a></h3>
+<p>[wps] section contains general WPS instance settings, which are:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>encoding</dt>
+<dd>Language encoding (utf-8, iso-8859-2, windows-1250, dots)</dd>
+<dt>title</dt>
+<dd>Server title</dd>
+<dt>version</dt>
+<dd>WPS version (1.0.0)</dd>
+<dt>abstract</dt>
+<dd>Server abstract</dd>
+<dt>fees</dt>
+<dd>Possible fees</dd>
+<dt>constraints</dt>
+<dd>Possible constraints</dd>
+<dt>serveraddress</dt>
+<dd>WPS script address: <a class="reference external" href="http://foo/bar/pywps.py">http://foo/bar/pywps.py</a> or <a class="reference external" href="http://foo/bar/cgi-bin/pywps.cgi">http://foo/bar/cgi-bin/pywps.cgi</a></dd>
+<dt>keywords</dt>
+<dd>Comma-separated list of keywords realted to this server instance</dd>
+<dt>lang</dt>
+<dd>Comma-separated list of supported server languages. Default is
+&#8216;eng&#8217;.</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="provider">
+<h3>Provider<a class="headerlink" href="#provider" title="Permalink to this headline">¶</a></h3>
+<p>provider section contains informations about you, your institution and so on</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>providerName</dt>
+<dd>Name of your company</dd>
+<dt>individualName</dt>
+<dd>Your name</dd>
+<dt>positionName</dt>
+<dd>At which position you are working</dd>
+<dt>role</dt>
+<dd>What your role is</dd>
+<dt>deliveryPoint</dt>
+<dd>Street</dd>
+<dt>city</dt>
+<dd>City</dd>
+</dl>
+<p>postalCode</p>
+<p>country</p>
+<dl class="docutils">
+<dt>electronicMailAddress</dt>
+<dd>E-mail address</dd>
+<dt>providerSite</dt>
+<dd>Web site or your institution</dd>
+</dl>
+<p>phoneVoice</p>
+<p>phoneFacsimile</p>
+<p>administrativeArea</p>
+<dl class="docutils">
+<dt>hoursofservice</dt>
+<dd>When you are at work</dd>
+<dt>contactinstructions</dt>
+<dd>For example secret password, to pass through door-man to you.</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="server">
+<h3>Server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h3>
+<p>server contains server settings, constrains, safety configuration and so on.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>maxoperations</dt>
+<dd>Maximal number of parallel running processes. If set to 0, then there is no limit.</dd>
+<dt>maxinputparamlength</dt>
+<dd>Maximal length of string input parameter (number of characters).</dd>
+<dt>maxfilesize</dt>
+<dd>Maximal input file size (raster or vector). The size can be determined as follows: 1GB, 5MB, 3kB, 1000b.</dd>
+<dt>tempPath</dt>
+<dd>Directory for temporary files, I use <tt class="file docutils literal"><span class="pre">/tmp/pywps</span></tt>. PyWPS will
+create temporary directories in this dir, and after the calculation
+is performed, they <em>should</em> be deleted again.</dd>
+<dt>outputPath</dt>
+<dd>Path. where output files are stored, from the server point of view.
+This should point to <cite>outputUrl</cite> parameter (described below). For
+example <a class="reference external" href="http://foo/bar/wpsputputs">http://foo/bar/wpsputputs</a></dd>
+<dt>outputUrl</dt>
+<dd>Url where the outputs are stored, from the client point of view. On
+Debian, it would be for example <tt class="file docutils literal"><span class="pre">/var/www/wpsoutputs</span></tt></dd>
+<dt>debug</dt>
+<dd><p class="first">true/false - makes the logs for verbose</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This option is not used so wildly, as it should maybe be.</p>
+</div>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Deprecated since 3.2. Use logLevel instead</p>
+</div>
+</dd>
+<dt>processesPath</dt>
+<dd><p class="first">path to your processes. Default is pywps/processes.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can set also <span class="target" id="index-1"></span><tt class="xref std std-envvar docutils literal"><span class="pre">PYWPS_PROCESSES</span></tt> environment
+variable with same result, as described earlier on this page.</p>
+</div>
+</dd>
+<dt>logFile</dt>
+<dd>(since 3.0.1) File, where all logs from PyWPS are going to. If not
+set, default error.log from Web Server configuration is used.
+Sometimes, this can cause problem for the asynchronous calls.</dd>
+<dt>logLevel</dt>
+<dd>(since 3.2) one of DEBUG, INFO, WARNING, ERROR and CRITICAL,
+default is INFO</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="grass">
+<h3>GRASS<a class="headerlink" href="#grass" title="Permalink to this headline">¶</a></h3>
+<p>GRASS GIS settings, if you want ot use it</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>path</dt>
+<dd><span class="target" id="index-2"></span><tt class="xref std std-envvar docutils literal"><span class="pre">PATH</span></tt> environment variable, e.g. <tt class="file docutils literal"><span class="pre">/usr/lib/grass/bin:/usr/lib/grass/scripts</span></tt></dd>
+<dt>addonPath</dt>
+<dd><span class="target" id="index-3"></span><tt class="xref std std-envvar docutils literal"><span class="pre">GRASS_ADDONS</span></tt> environment variable</dd>
+<dt>version</dt>
+<dd>GRASS version</dd>
+<dt>gui</dt>
+<dd>Should be &#8220;text&#8221;</dd>
+<dt>gisbase</dt>
+<dd>Path to GRASS <span class="target" id="index-4"></span><tt class="xref std std-envvar docutils literal"><span class="pre">GIS_BASE</span></tt> directory (<tt class="file docutils literal"><span class="pre">/usr/lib/grass</span></tt>)</dd>
+<dt>ldLibraryPath</dt>
+<dd>Path of GRASS Libs (<tt class="file docutils literal"><span class="pre">/usr/lib/grass/lib</span></tt>)</dd>
+<dt>gisdbase</dt>
+<dd>Full path to GRASS database directory, where <em>Locations</em> are stored (<tt class="file docutils literal"><span class="pre">/home/foo/grassdata</span></tt>)</dd>
+</dl>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="configuration-file-example">
+<h2>Configuration file example<a class="headerlink" href="#configuration-file-example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>[wps]
+encoding=utf-8
+title=PyWPS Server
+version=1.0.0
+abstract=See http://pywps.wald.intevation.org and http://www.opengeospatial.org/standards/wps
+fees=None
+constraints=none
+serveraddress=http://localhost/cgi-bin/wps
+keywords=GRASS,GIS,WPS
+lang=eng
+
+[provider]
+providerName=Your Company Name
+individualName=Your Name
+positionName=Your Position
+role=Your role
+deliveryPoint=Street
+city=City
+postalCode=000 00
+country=eu
+electronicMailAddress=login@server.org
+providerSite=http://foo.bar
+phoneVoice=False
+phoneFacsimile=False
+administrativeArea=False
+
+[server]
+maxoperations=3
+maxinputparamlength=1024
+maxfilesize=3mb
+tempPath=/tmp
+processesPath=
+outputUrl=http://localhost/wps/wpsoutputs
+outputPath=/var/www/wps/wpsoutputs
+debug=true
+logFile=/var/log/pywps.log
+
+[grass]
+path=/usr/lib/grass/bin/:/usr/lib/grass/scripts/
+addonPath=
+version=6.2.1
+gui=text
+gisbase=/usr/lib/grass/
+ldLibraryPath=/usr/lib/grass/lib
+gisdbase=/home/foo/datagrass</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#setuping-the-pywps-instance">Setuping the PyWPS instance</a><ul>
+<li><a class="reference internal" href="#accepted-environment-variables">Accepted environment variables</a></li>
+<li><a class="reference internal" href="#setuping-the-web-server">Setuping the Web Server</a><ul>
+<li><a class="reference internal" href="#pywps-as-cgi">PyWPS as CGI</a></li>
+<li><a class="reference internal" href="#pywps-in-mod-python">PyWPS in mod_python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pywps-configuration-files">PyWPS configuration files</a><ul>
+<li><a class="reference internal" href="#global-pywps-configuration-files">Global PyWPS configuration files</a></li>
+<li><a class="reference internal" href="#local-pywps-configuration-file">Local PyWPS configuration file</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-of-pywps-instance">Configuration of PyWPS instance</a><ul>
+<li><a class="reference internal" href="#wps">WPS</a></li>
+<li><a class="reference internal" href="#provider">Provider</a></li>
+<li><a class="reference internal" href="#server">Server</a></li>
+<li><a class="reference internal" href="#grass">GRASS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-file-example">Configuration file example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/configuration/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

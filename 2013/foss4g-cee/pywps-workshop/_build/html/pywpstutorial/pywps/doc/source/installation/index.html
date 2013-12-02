@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation of PyWPS &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation-of-pywps">
+<h1>Installation of PyWPS<a class="headerlink" href="#installation-of-pywps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequirements">
+<h2>Prerequirements<a class="headerlink" href="#prerequirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>python  &#8211; currently 2.5, 2.6 are supported, 2.4 is deprecated</li>
+<li>python-xml</li>
+</ul>
+</div>
+<div class="section" id="recommended-packages">
+<h2>Recommended packages<a class="headerlink" href="#recommended-packages" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Web Server</dt>
+<dd>(e.g. Apache) - <a class="reference external" href="http://httpd.apache.org">http://httpd.apache.org</a> -  You
+will need an web server, to be able to execute processes from remote
+computers. PyWPS was tested with Apache 1.1 and 2.x versions.</dd>
+<dt>GIS GRASS</dt>
+<dd><a class="reference external" href="http://grass.itc.it">http://grass.itc.it</a> - Geographical Resources
+Analysis Support System (GRASS) is Open Source GIS, which provides more
+then 350 modules for raster and vector (2D, 3D) data analysis. PyWPS is
+written with native support for GRASS and it&#8217;s functions. GRASS has
+also Python bindings, so you can run the modules directly.</dd>
+<dt>PROJ.4</dt>
+<dd><a class="reference external" href="http://proj.maptools.org">http://proj.maptools.org</a> - Cartographic
+Projections library used in various Open Source projects, such as
+GRASS, UMN MapServer, QGIS and others. It can be used e.g. for data
+transformation. Proj4 is especially needed, if you want to integrate
+MapServer as well, in that case, you need <cite>python-pyproj</cite> package.</dd>
+<dt>GDAL/OGR</dt>
+<dd><a class="reference external" href="http://gdal.org">http://gdal.org</a> - translator library for
+raster geospatial data formats, is used in various projects for
+importing, exporting and transformation between various raster and vector
+data formats. GDAL and OGR are also needed, if you want to integrate
+MapServer as well. In that case, you need <cite>python-gdal</cite> package.</dd>
+<dt>MapServer</dt>
+<dd><a class="reference external" href="http://mapserver.org">http://mapserver.org</a> - If you want to access ComplexValue outputs using
+OGC OWS (WMS, WFS, WCS) services, you have to install MapServer as
+well. PyWPS will generate MapFile for you automaticaly. Look after
+<cite>python-mapscript</cite> package.</dd>
+<dt>R  - <a class="reference external" href="http://www.r-project.org">http://www.r-project.org</a> - is a language and environment</dt>
+<dd>for statistical computing and graphics.</dd>
+</dl>
+</div>
+<div class="section" id="installation-the-quick-n-dirty-way">
+<h2>Installation the quick &#8216;n&#8217; dirty way<a class="headerlink" href="#installation-the-quick-n-dirty-way" title="Permalink to this headline">¶</a></h2>
+<p>For installing PyWPS to your server simply unpack the archive to some
+directory. You can also use current repository version.:</p>
+<p>1 - cd to target directory:</p>
+<div class="highlight-python"><pre>$ cd /usr/local/</pre>
+</div>
+<p>2 -  unpack pywps:</p>
+<div class="highlight-python"><pre>$ tar xvzf /tmp/pywps-VERSION.tar.gz</pre>
+</div>
+<div class="section" id="post-installation-steps">
+<h3>Post-installation steps<a class="headerlink" href="#post-installation-steps" title="Permalink to this headline">¶</a></h3>
+<p>You have to change the write access of pywps/Templates/<em>WPS_VERSION</em>/ directory,
+so the web server can compile the templates:</p>
+<div class="highlight-python"><pre>chmod 777 /usr/local/pywps-VERSION/pywps/Templates/1_0_0</pre>
+</div>
+</div>
+</div>
+<div class="section" id="installation-the-clean-way">
+<h2>Installation the &#8216;clean&#8217; way<a class="headerlink" href="#installation-the-clean-way" title="Permalink to this headline">¶</a></h2>
+<p>Unpack the package</p>
+<div class="highlight-python"><pre>$ tar -xzf pywps-VERSION.tar.gz</pre>
+</div>
+<p>and run</p>
+<div class="highlight-python"><pre>$ python setup.py install</pre>
+</div>
+</div>
+<div class="section" id="installation-using-prebuild-distribution-packages">
+<h2>Installation using prebuild distribution packages<a class="headerlink" href="#installation-using-prebuild-distribution-packages" title="Permalink to this headline">¶</a></h2>
+<p>PyWPS provides packages for DEB and RPM-based Linux Distributions. You can
+obtain them in the download section of <a class="reference external" href="http://pywps.wald.intevation.org">PyWPS Homepage</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The packages are not maintained properly and until we don&#8217;t find
+packagers, we recommend to use any other approach, described earlier in
+this section.</p>
+</div>
+</div>
+<div class="section" id="testing-the-installation">
+<h2>Testing the installation<a class="headerlink" href="#testing-the-installation" title="Permalink to this headline">¶</a></h2>
+<p>If PyWPS has been successfully installed, you can test this with running it
+without any input or further configuration.</p>
+<p>First you need to find the <cite>cgiwps.py</cite> script, which is in the root of pywps
+installation directory (if you used the <em class="xref std std-ref">Quick and dirty way</em>), or it
+should be located in <tt class="file docutils literal"><span class="pre">/usr/bin</span></tt> directory, if you used the clean way
+of installation.</p>
+<p>Anyway, you have to run it in command line:</p>
+<div class="highlight-python"><pre>$ ./cgiwps.py</pre>
+</div>
+<p>And you should get result like this (which is a mixture of standard output
+and standard error):</p>
+<div class="highlight-xml"><div class="highlight"><pre>PyWPS NoApplicableCode: Locator: None; Value: No query string found.
+Content-type: text/xml
+
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;ExceptionReport</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/ows&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Exception</span> <span class="na">exceptionCode=</span><span class="s">&quot;NoApplicableCode&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;ExceptionText&gt;</span>
+                        No query string found.
+                <span class="nt">&lt;/ExceptionText&gt;</span>
+        <span class="nt">&lt;/Exception&gt;</span>
+<span class="nt">&lt;/ExceptionReport&gt;</span>
+</pre></div>
+</div>
+<p>In this case, you have installed PyWPS correctly and you are ready to
+proceed to configuration.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation of PyWPS</a><ul>
+<li><a class="reference internal" href="#prerequirements">Prerequirements</a></li>
+<li><a class="reference internal" href="#recommended-packages">Recommended packages</a></li>
+<li><a class="reference internal" href="#installation-the-quick-n-dirty-way">Installation the quick &#8216;n&#8217; dirty way</a><ul>
+<li><a class="reference internal" href="#post-installation-steps">Post-installation steps</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation-the-clean-way">Installation the &#8216;clean&#8217; way</a></li>
+<li><a class="reference internal" href="#installation-using-prebuild-distribution-packages">Installation using prebuild distribution packages</a></li>
+<li><a class="reference internal" href="#testing-the-installation">Testing the installation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/installation/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

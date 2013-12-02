@@ -1,0 +1,131 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Execution of the process &mdash; PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation" href="../../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="execution-of-the-process">
+<h1>Execution of the process<a class="headerlink" href="#execution-of-the-process" title="Permalink to this headline">¶</a></h1>
+<p>Each process has to define <tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.execute()</span></tt> method,
+which makes the calculation and sets the output values. This method is
+called, when Execute request comes to PyWPS.</p>
+<p>In principle, you can do what ever you need within this method. It is
+advised, to use python bindings to popular GIS packages, like <a class="reference external" href="http://grass.osgeo.org">GRASS GIS</a>, <a class="reference external" href="http://gdal.org">GDAL/OGR</a>, <a class="reference external" href="http://proj.remotesensing.org">PROJ4</a>, or any other
+<a class="reference external" href="http://pypi.python.org/pypi?:action=browse&amp;show=all&amp;c=391">Python-GIS package</a>.</p>
+<p>In the <em class="xref std std-ref">special</em> chapter, we should give you quick intro to some of
+this packages. Some examples are also distributed along with PyWPS source.</p>
+<p>If you need to run some shell programs, you should use
+<tt class="xref py py-meth docutils literal"><span class="pre">pywps.Process.WPSProcess.cmd()</span></tt> method for such purpose.</p>
+<p>Example of simple execute method. Method will transform raster file from
+one coordinate system to another, using Python bindings to GDAL.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span>
+<span class="kn">from</span> <span class="nn">osgeo.gdalconst</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert input raster file to PNG using GDAL&quot;&quot;&quot;</span>
+
+    <span class="c"># create gdal input dataset</span>
+    <span class="n">indataset</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputRaster</span><span class="o">.</span><span class="n">getValue</span><span class="p">())</span>
+
+    <span class="c"># get output driver for PNG format</span>
+    <span class="n">pngDriver</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">GetDriverByName</span><span class="p">(</span><span class="s">&quot;png&quot;</span><span class="p">)</span>
+
+    <span class="c"># define output gdal dataset</span>
+    <span class="n">outfile</span> <span class="o">=</span> <span class="s">&quot;output.png&quot;</span>
+    <span class="n">outdataset</span> <span class="o">=</span> <span class="n">pngDriver</span><span class="o">.</span><span class="n">CreateCopy</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">indataset</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">outputRaster</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">outputRaster</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;mimeType&#39;</span><span class="p">:</span><span class="s">&quot;image/png&quot;</span><span class="p">}</span>
+
+    <span class="k">return</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../../../index.html">
+              <img class="logo" src="../../../../../_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/pywpstutorial/pywps/doc/source/process/execute.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../../../index.html">PyWPS Tutorial FOSS4G-CEE 2012 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jachym Cepicky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

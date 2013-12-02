@@ -1,0 +1,77 @@
+
+PyWPS is a Python implementation of OGC's WPS 1.0.0 protocol on the server
+side. PyWPS development started in 2006 and was first presented in FOSS4G
+2006 at Lausanne. Originally it was written with direct support for GRASS
+GIS modules, however it is not limited to GRASS only, any sort of GIS
+functionality written in Python will be served as a WPS. PyWPS distribution
+does not include any processes by default. The user has to program his or
+her custom ones and add them to PyWPS instance. 
+
+The tutorial will start by
+focusing on 
+
+* installation and configuration of PyWPS on the server
+
+* how to construct custom WPS processes with help of 
+    
+    * GRASS GIS
+    * GDAL/OGR
+    * R and 
+    * Shapely
+    
+* to deploy custom process into a PyWPS instance
+
+* First part will conclude with examples covering basic logging while the
+process is running and debugging of non working processes
+
+* Second part, will be web oriented
+presenting PyWPS's Java Script based WPS client (using OpenLayers web
+mapping library)
+
+* that is able to parse Capabilities and ProcessDescription
+documents from WPS server, 
+
+* generating an HTML form for input data.
+
+* After submitting the form with all inputs set, Execute operation on given data is
+
+then requested and the final response will be displayed on the map
+
+* To conclude the tutorial, special features of PyWPS will be demonstrated, like
+
+* running PyWPS in Java environment, using Jython as Python interpreter and
+Apache Tomcat as server
+
+* PyWPS together with UMN MapServer - how to make
+data outputs from PyWPS to be accessed using standard OGC OWS services from
+the client, so that the resulting maps can be (for example) downloaded with
+OGC WCS to local disc or displayed in mapping application with OGC WMS
+directly, service orchestration will be demonstrated and explained using
+
+* PyWPS's WSDL process interface using Taverna workbench
+
+* Finally a special focus will be given to the new WPS-GRASS bridge interface that allows easy
+porting of GRASS processes into PyWPS
+
+* and integration into QGIS WPS plugin.
+
+
+Java
+====
+
+cd ~/usr/tomcat/apache-tomcat-6.0.29/webapps
+mkdir wpstutorial
+cd wpstutorial
+
+# continue as described in doc/build/html/special/java.html
+
+ln -s /home/jachym/usr/src/pywps/trunk/pywps
+
+JYTHON_HOME is ~/usr/lib/jython/jython2.5.1
+
+Do *NOT* use the first example of PywpsServlet.py, but the *SECOND* one
+
+os.environ["PYWPS_PROCESSES"] = "/home/jachym/usr/src/pywpstutorial/processes/"
+
+http://localhost:8080/tmpwps/PywpsServlet.py?service=wps&request=getcapabilities
+
