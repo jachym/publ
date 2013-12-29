@@ -1,4 +1,14 @@
+\documentclass[xcolor=dvipsnames]{beamer} 
 \usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{xcolor,colortbl}
+
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+\definecolor{Gray}{gray}{0.85}
+\definecolor{LightGreen}{rgb}{1,0.88,1}
+
+\newcolumntype{a}{>{\columncolor{Gray}} X }
+\newcolumntype{b}{>{\columncolor{white}} X }
 
 
 % This file is a solution template for:
@@ -59,9 +69,11 @@
 % is a graphic format that can be processed by latex or pdflatex,
 % resp., then you can add a logo as follows:
 
-%\pgfdeclareimage[height=1.cm]{conference-logo}{images/220px-Wikimedia_Czech_Republic-logo.svg.png}
-%\pgfdeclareimage[height=1.cm]{osm-logo}{images/osm_logo-79d71f6a51b0e6a724a570834c07d828.png}
-%\logo{\pgfuseimage{conference-logo}}
+\pgfdeclareimage[height=1.cm]{conference-logo}{images/IGif2004f.jpg}
+\pgfdeclareimage[height=1.cm]{ol-logo}{images/openlayers.png}
+\pgfdeclareimage[height=1.cm]{ol3-logo}{images/ol3.png}
+\pgfdeclareimage[height=1.cm]{leaflet-logo}{images/leaflet.png}
+\logo{\pgfuseimage{conference-logo}}
 
 
 
@@ -83,17 +95,9 @@
 %\beamerdefaultoverlayspecification{<+->}
 
 
-\subtitle {Wiki-pohled na Geodata}
+\title{Open Source Web Mapping Frameworks}
 
-
-
-\begin{document}
-
-
-\title[OpenStreetMap] % (optional, use only with long paper titles)
-{OpenStreetMap}
-
-\mode*
+\subtitle {Time for going vector?}
 
 \author[J. Čepický] % (optional, use only with lots of authors)
 {Jáchym~Čepický\inst{1}}
@@ -111,21 +115,18 @@
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 
-\date[] % (optional, should be abbreviation of conference name)
-{Wikikonference 2013, Praha}
+\date[GIS Ostrava 2014] % (optional, should be abbreviation of conference name)
+{GIS Ostrava 2014}
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
 %   yourself) who are reading the slides online
 
-\maketitle
-\institutename
-Geosense s.r.o, Kudrnatka 17, 182 82 Praha 8
 
-\begin{abstract}
 
-\noindent ASDF ASADSF AS ASS
+\begin{document}
 
-\end{abstract}
+%\begin{abstract}
+%\end{abstract}
 
 \begin{frame}
   \titlepage
@@ -154,279 +155,185 @@ Geosense s.r.o, Kudrnatka 17, 182 82 Praha 8
 % - If you omit details that are vital to the proof/implementation,
 %   just say so once. Everybody will be happy with that.
 
-
-%\begin{frame}{Jáchym Čepický}
-%  % - A title should summarize the slide in an understandable fashion
-%  %   for anyone how does not follow everything on the slide itself.
-%  Jáchym Čepický
-%
-%  \begin{columns}
-%  \column{0.7\textwidth}
-%    \begin{itemize} 
-%        \item Lesník
-%        \item OpenSource GIS vývojář a uživatel - GRASS, OpenLayers, PyWPS, \dots
-%        \item Člen představenstva Open Source Geospatial Foundation (\href{http://osgeo.org}{OSGeo.org})
-%        \item \href{http://bnhelp.cz}{Help Service - Remote Sensing}
-%              \href{http://ccss.cz}{Czech Center for Science and Society}
-%              \href{http://geosense.cz}{Geosense}
-%        \item \href{http://twitter.com/jachymc}{@jachymc}
-%            \href{http://les-ejk.cz}{http://les-ejk.cz}
-%            \href{http://www.openstreetmap.org/user/jachymc}{http://www.openstreetmap.org/user/jachymc}
-%    \end{itemize}
-%    \column{0.3\textwidth}
-%    \includegraphics[width=0.75\textwidth]{images/profil2.jpg}
-%    \end{columns}
-%\end{frame}
-%
-%\begin{frame}{Jáchym Čepický}
-%    \begin{block}{}
-%        Ani jeden článek na cs.wikipedia.org
-%    \end{block}
-%\end{frame}
-%
-%\logo{\pgfuseimage{osm-logo}}
-%\section{Co je OpenStreetMap}
-%
-%\begin{frame}{OpenStreetMap}
-%    \begin{block}{OpenStreetMap}
-%    je projekt zaměřený na vytváření svobodných geografických dat. U většiny
-%    ostatních volně dostupných map je ale užívání technicky a právně omezeno.
-%    Proto vznikl tento projekt, aby umožnil lidem volně nakládat s geografickými
-%    daty, používat je neobvyklými způsoby a v neposlední řadě, aby byla data
-%    dostupná v aktualizované a platné podobě bez dalších nákladů a omezení.
-%    \end{block}
-%    \href{https://en.wikipedia.org/wiki/OpenStreetMap}{https://en.wikipedia.org/wiki/OpenStreetMap}\\
-%    \href{https://cs.wikipedia.org/wiki/Openstreetmap}{https://cs.wikipedia.org/wiki/Openstreetmap}
-%\end{frame}
-%
-%\begin{frame}{OpenStreetMap}
-%    \begin{center}
-%        {\em WIKIZACE} Geodat
-%        \includegraphics[width=\textheight]{images/mapping.jpg}
-%    \end{center}
-%\end{frame}
-%
-%\begin{frame}{Historie}
-%       \begin{itemize}
-%            \item 2004 - Steven Coast zaregistroval doménu
-%            \item 2005 - MediaWiki, 1000 uživatelů
-%            \item 2006 - JOSM 1.0, Map Features, OSM Foundation, Mapnik, povolení používat Yahoo! satelitní mapy
-%            \item 2007 - První State of the Map, 5mil silnic a cest, 10~000 uživatelů, improty z velkých datasetů (AND, Tiger)
-%            \item 2010 - Povolení používat Bing letecké snímky
-%            \item 2012 - Změna lince na ODdl
-%            \item 2013 - 1~000~000 registrovaných uživatelů
-%       \end{itemize}
-%\end{frame}
-%
-%\begin{frame}{OpenStreetMap}
-%WIKIZACE Geodat?
-%    \uncover<1>{
-%        \begin{itemize}
-%            \item \emph{Sbírejte data}, nahrajte data z vaší GPS
-%            \item \emph{Editujte} mapu, přidávejte atributy k existujícím objektům
-%            \item \emph{Sledujte změny} na mapě
-%        \end{itemize}
-%}
-%\end{frame}
-%
-%\begin{frame}{Wikizace Geodat}
-%    Sbírejte data
-%    \begin{center}
-%        \only<1>{ \includegraphics[width=\textheight]{images/OpenStreetMap_on_a_Garmin_in_Haiti.jpg} }
-%        \only<2>{ \includegraphics[width=\textheight]{images/800px-Mappers-learning-to-gps.jpg} }
-%        \only<3>{ \includegraphics[width=\textheight]{images/osm-06-survey.png} }
-%        \only<4>{ \includegraphics[width=\textheight]{images/tracs.png} }
-%        \only<5>{ \includegraphics[width=\textheight]{images/picture-0.png} }
-%    \end{center}
-%\end{frame}
-%
-%\begin{frame}{Wikizace Geodat}
-%    Sledujte změny
-%    \only<1>{
-%    \begin{center}
-%        \includegraphics[width=\textheight]{images/point-history.png}
-%    \end{center}
-%}
-%\only<2>{
-%    \begin{center}
-%        \includegraphics[width=\textheight]{images/year-of-mapping.png}\\
-%        \href{http://vimeo.com/56374742}{2012 Year of edits} (video)
-%    \end{center}
-%}
-%\end{frame}
-%
-%\begin{frame}{Wikizace Geodat}
-%    Používejte data
-%    \begin{center}
-%        \only<1>{
-%            \includegraphics[width=\textwidth]{images/geofabrik.png}\\
-%            \href{http://download.geofabrik.de}{download.geofabrik.de}\\
-%            ČR: 340 MB, SK: 125 MB
-%        }
-%        \only<2>{
-%        \begin{flushleft}
-%             \$ osm2pgsql file.osm
-%        \end{flushleft}
-%        }
-%        \only<3>{
-%            \includegraphics[width=\textwidth]{images/garmin.png}\\
-%            \href{http://garmin.openstreetmap.cz/}{http://garmin.openstreetmap.cz/}
-%        }
-%        \only<4>{
-%            \includegraphics[width=\textwidth]{images/android.png}\\
-%            \href{http://wiki.openstreetmap.org/wiki/Android}{http://wiki.openstreetmap.org/wiki/Android}
-%        }
-%        \only<5>{
-%            \includegraphics[width=\textwidth]{images/mapbox.png}\\
-%            \href{http://mapbox.com}{http://mapbox.com}
-%        }
-%        \only<6>{
-%            \includegraphics[width=\textwidth]{images/osm.png}\\
-%            \href{http://openstreetmap.org}{http://openstreetmap.org}
-%        }
-%        \only<7>{
-%            \includegraphics[width=\textwidth]{images/prahou.png}\\
-%            \href{http://prahounakole.cz}{http://prahounakole.cz}
-%        }
-%    \end{center}
-%\end{frame}
-%
-%\section{To je všechno?}
-%\begin{frame}
-%\only<1>{
-%    \begin{itemize}
-%        \item Co se s tím dá ještě dělat?
-%        \item Co můžu dělat pro OSM, aby bylo lepší?
-%    \end{itemize}
-%}
-%\only<2>{
-%        \includegraphics[width=\textwidth]{images/padouch.jpg}\\
-%        Padouch nebo hrdina, my jsme jedna rodina!\\
-%        Náš podnik potřebuje talenty všeho druhu.
-%}
-%\end{frame}
-%
-%\begin{frame}
-%Je toho víc!
-%\begin{itemize}
-%    \item Data mining
-%    \item Coding
-%    \item Donate
-%\end{itemize}
-%\end{frame}
-%
-%\begin{frame}{Data mining}
-%\only<1>{
-%\begin{center}
-%    \includegraphics[width=\textwidth]{images/minig.jpg}\\
-%    \href{http://www.miningartifacts.org/Kansas-Mines.html}{http://www.miningartifacts.org/Kansas-Mines.html}
-%\end{center}
-%}
-%\only<2>{
-%    \begin{itemize}
-%           \item Katastrální mapy
-%           \item Importy z veřejných datových zdrojů
-%           \item RUIAN (registr územní identifikace, adres a nemovitostí)
-%           \item Automatické získávání dat z webových služeb
-%           \item \dots
-%    \end{itemize}
-%}
-%\end{frame}
-%
-%\begin{frame}{Coding}
-%\only<1>{
-%    \begin{center}
-%        \includegraphics[width=\textwidth]{images/coding.jpg}\\
-%        \href{http://blog.tifwe.org/do-market-economies-exploit-or-liberate/}{http://blog.tifwe.org/do-market-economies-exploit-or-liberate/}
-%    \end{center}
-%}
-%\only<2>{
-%
-%    \begin{itemize}
-%        \item Práce na editorech (JOSM), jejich zásuvných modulech
-%        \item Automatické importní skripty
-%        \item Automatické opravy
-%        \item Vývoj jádra OSM
-%    \end{itemize}
-%}
-%\end{frame}
-%
-%\begin{frame}{Donation}
-%\only<1>{
-%    \begin{center}
-%        \includegraphics[width=\textwidth]{images/donate.jpg}\\
-%    \end{center}
-%}
-%\only<2>{
-%    \begin{itemize}
-%        \item Help Service - Remote Sensing: import silnic 1 a 2 tříd
-%        \item Ústav pro hospodářskou úpravu lesů: WMS Lesů, zpřístupnění leteckých snímků, \dots 
-%        \item Microsoft Bing! Maps, Yahoo Maps, \dots
-%    \end{itemize}
-%}
-%\end{frame}
-%
-%\section{Organizace}
-%\begin{frame}{OSM Foundation}
-%    \begin{itemize}
-%        \item Nezisková organizace registrovaná ve Spojeném království
-%        \item Má na starosti servery
-%        \item Fund-raising
-%        \item Výroční konference State of the map
-%    \end{itemize}
-%\end{frame}
-%
-%\begin{frame}{Licence}
-%    \begin{itemize}
-%        \item Použití dat je zdarma
-%        \item Musí se zobrazit upozornění, že data jsou z OSM
-%        \item Veřejně dostupná odvozená díla nechť jsou zpřístupněna pomocí stejné licence
-%    \end{itemize}
-%    \emph{Share-alike}
-%\end{frame}
-%
-%\begin{frame}{User groups}
-%    \#cooperation, \#social, \#fun
-%\end{frame}
-%
-%\begin{frame}{HOT}
-%\begin{block}{Humanitarian OpenStreetMap Team}
-%[H.O.T.] is a new initiative to apply the principles
-%of open source and open data sharing towards humanitarian response and economic
-%development.
-%\end{block}
-%\end{frame}
-%
-%\begin{frame}{HOT}
-%\begin{center}
-%        \includegraphics[width=\textwidth]{images/hot.png}\\
-%        \href{http://vimeo.com/9182869}{OpenStreetMap - Project Haiti} (video)
-%\end{center}
-%\end{frame}
-%
-%\section{Česká republika}
-%\begin{frame}
-%    \begin{itemize}
-%        \item Aktivní komunita
-%        \item Exporty pro GPS Garmin
-%        \item Locus
-%        \item UHUL, KČT, OpenData movement, ...
-%    \end{itemize}
-%\end{frame}
-%
-%\section{Wikipedia vs. OSM}
-%\begin{frame}Wikipedia vs. OSM}
-%    \
-%\end{frame}
-
-\section*{Závěr}
+\section{Open Source Web Mapping Frameworks}
 \begin{frame}
-    Happy mapping!\\
+\begin{itemize}
+    \item OpenLayers \url{http://openlayers.org}
+    \item Leaflet \url{http://leafletjs.org}
+    \item OpenLayers 3 \url{http://ol3js.org}
+\end{itemize}
+\begin{center}
+    \includegraphics[width=2cm]{images/leaflet.png}
+    \includegraphics[width=2cm]{images/openlayers.png}
+    \includegraphics[width=2cm]{images/ol3.png}
+\end{center}
+\end{frame}
+
+\logo{\pgfuseimage{ol-logo}}
+\begin{frame}{OpenLayers}
+\begin{itemize}
+    \item since 2005, Metacarta
+    \item since 2007, OSGeo project
+    \item 7~021 commits made by 103 contributors 
+    \item 126~179 lines of code
+    \item BSD license
+\end{itemize}
+\end{frame}
+
+\logo{\pgfuseimage{leaflet-logo}}
+\begin{frame}{Leaflet}
+\begin{itemize}
+    \item since 2010, Vladimir Agafonkin
+    \item 3~041 commits made by 164 contributors 
+    \item 6~466 lines of code
+    \item BSD license
+\end{itemize}
+\end{frame}
+
+\logo{\pgfuseimage{ol3-logo}}
+\begin{frame}{OpenLayers 3}
+\begin{itemize}
+    \item since 2012
+    \item number of commits: hard to eastimate (originaly based on OL2)
+    \item 101~594 lines of code
+    \item BSD license
+\end{itemize}
+\end{frame}
+
+\section{Comparing OS Mapping libraries}
+\logo{\pgfuseimage{conference-logo}}
+\begin{frame}
+\begin{center}
+    \begin{tabular}{| l || l | l | l |}
+        \hline
+        \rowcolor{Gray}     & OpenLayer 2  & Leaflet & OpenLayers 3 \\
+        \hline 
+        \hline 
+        Size\footnote{Size may vary, depending on features used. Those are sizes
+        used for purpose of this presentation. The numbers are just ilustrative,
+    no heavy optimalization was done.} & 1000 kB & 91 kB & 291 kB \\
+        \hline
+        Backend & none & none & closure library\\
+        \hline
+        Build system & custom & custom & closure \\
+        \hline
+    \end{tabular}
+\end{center}
+\end{frame}
+
+
+\section{Results}
+
+\begin{frame}{Testing environment}
+\begin{itemize}[<+->]
+    \item Hardware: 8GB RAM, 4-Core Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz
+    \item Browser: Chromium 31.0.1650.63
+    \item Operating system: Ubuntu 13.10, 64bit
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tasks}
+\begin{enumerate}[<+->]
+    \item Render features\footnote{Just rendering. Data loading and parsing is
+        done before mesurement was started}
+    \item Pan\footnote{No zoom provided. About 50\% of screen bounding box was
+        shift}
+    \item Two tryes n$\times$1000 features and n$\times$10~000 features
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Data}
+OpenStreetMap data, Czech republic, 14.373, 49.147, 14.822, 49.440
+\begin{columns}
+    \begin{column}{5cm}
+        \begin{enumerate}[<+->]
+            \item Points $\cong$ 5~000, $\cong$ 35~000
+            \item Lines $\cong$ 1~700, $\cong$ 10~000
+            \item Polygons $\cong$  8~000, $\cong$ 50~000
+            \item Transformed into SRS of the map
+        \end{enumerate}
+    \end{column}
+    \begin{column}{5cm}
+        \includegraphics[width=\textwidth]{images/area.png}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Disclamer}
+\begin{block}{Disclamer}
+    Numbers shown in this presentation are specific for used hardware, operating
+    system, browser, position of stars and sun and other external conditions.
+
+    \vskip5mm
+
+    They are not meant to be taken as they are. They are here for illustration
+    purpose, to demonstrate relative differences between various rendering
+    techniques and libraries.
+\end{block}
+\end{frame}
+
+\begin{frame}{Icons versus no-style}
+\begin{center}
+    \includegraphics[width=0.45\textwidth]{images/no-style.png}~
+    \includegraphics[width=0.45\textwidth]{images/icons.png}\\
+
+    No-style versus image icons
+
+\end{center}
+\end{frame}
+
+\mode<all>
+\input{latexs/slides}
+
+\begin{frame}{Result}
+\begin{enumerate}[<+->]
+    \item OpenLayers 3 Api Branch
+    \item Leaflet 0.8-dev
+    \item OpenLayers 2 Canvas
+\end{enumerate}
+\end{frame}
+
+\section{Discussion}
+\begin{frame}
+\begin{itemize}[<+->]
+    \item DOM vs. Canvas
+    \item Image point icons versus no-style points
+    \item Code / Speed ratio
+    \item Parsing
+    \item Bright future: WebGL
+\end{itemize}
+\end{frame}
+
+\begin{frame}{DOM versus Canvas}
+    \begin{center}
+    \includegraphics[width=\textwidth]{images/dom.png}\\
+    DOM
+    \\
+    \includegraphics[width=\textwidth]{images/canvas.png}\\
+    Canvas
+    \end{center}
+\end{frame}
+
+\begin{frame}{Optimalizations}
+\begin{itemize}[<+->]
+    \item Data indexing
+    \item Generalization
+    \item Clustering
+    \item Optimal rendering engine (DOM (SVG | VML) vs. Canvas vs. WebGL)
+    \item Hardware improvements, browser improvements
+\end{itemize}
+\end{frame}
+
+
+\section*{Conclusion}
+\begin{frame}
+    Happy web mapping!\\
     ~
     \\
-    jachym.cepicky@gmail.com\\
-    http://les-ejk.cz\\
+    jachym.cepicky@gmail.com jachym.cepicky@geosense.cz\\
+    http://les-ejk.cz http://geosense.cz\\
     @jachymc
 \end{frame}
+
 
 \end{document}
