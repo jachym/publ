@@ -1,13 +1,13 @@
-[submodule "2014/ostrava/mapping-frameworks/pokus/javascript/lib/openlayers"]
-	path = 2014/ostrava/mapping-frameworks/pokus/javascript/lib/openlayers
+[submodule "2014/ostrava/mapping-frameworks/javascript/lib/openlayers"]
+	path = 2014/ostrava/mapping-frameworks/javascript/lib/openlayers
 	url = https://github.com/openlayers/openlayers
-[submodule "2014/ostrava/mapping-frameworks/pokus/javascript/lib/leaflet"]
-	path = 2014/ostrava/mapping-frameworks/pokus/javascript/lib/leaflet
+[submodule "2014/ostrava/mapping-frameworks/javascript/lib/leaflet"]
+	path = 2014/ostrava/mapping-frameworks/javascript/lib/leaflet
 	url = https://github.com/Leaflet/Leaflet.git
-[submodule "2014/ostrava/mapping-frameworks/pokus/javascript/lib/ol3"]
-	path = 2014/ostrava/mapping-frameworks/pokus/javascript/lib/ol3
+[submodule "2014/ostrava/mapping-frameworks/javascript/lib/ol3"]
+	path = 2014/ostrava/mapping-frameworks/javascript/lib/ol3
 	url = https://github.com/openlayers/ol3.git
-[submodule "2014/ostrava/mapping-frameworks/pokus/javascript/lib/ol3-vector-api"]
-	path = 2014/ostrava/mapping-frameworks/pokus/javascript/lib/ol3-vector-api
+[submodule "2014/ostrava/mapping-frameworks/javascript/lib/ol3-vector-api"]
+	path = 2014/ostrava/mapping-frameworks/javascript/lib/ol3-vector-api
 	url = https://github.com/openlayers/ol3.git
 	branch = vector-api

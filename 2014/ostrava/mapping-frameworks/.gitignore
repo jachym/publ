@@ -1,0 +1,9 @@
+graphs/*.png
+latexs/*.tex
+*.pdf
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc

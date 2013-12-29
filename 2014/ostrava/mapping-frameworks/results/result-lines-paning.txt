@@ -1,3 +1,0 @@
-      Leaflet-Canvas OL2-DOM   OL2-Canvas OL3-Canvas
-1.7k  0.155          0.120     0.451      0.18
-10k   0.780          0.200     2.52       0.11
