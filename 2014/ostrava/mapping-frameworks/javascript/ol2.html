@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>OpenLayers: Vector Features</title>
+    <script src="lib/openlayers/OpenLayers.js" type="text/javascript"></script>
+    <script src="data/polygon-8k.json" type="text/javascript"></script>
+    <style>
+        #map {
+            width: 800px;
+            height: 800px;
+        }
+        
+    </style>
+    <script type="text/javascript">
+        var map;
+        var renderer;
+        var features;
+        var l;
+
+        function init(){
+            map = new OpenLayers.Map('map');
+            var layer = new OpenLayers.Layer.OSM( "OpenStreetMap");
+            map.addLayer(layer);
+            map.setCenter(new OpenLayers.LonLat(1612500,6312500));
+            map.zoomTo(10);
+
+            renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+            renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+            
+            var style_mark = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+            style_mark.graphicWidth = 24;
+            style_mark.graphicHeight = 20;
+            style_mark.graphicXOffset = 10; // default is -(style_mark.graphicWidth/2);
+            style_mark.graphicYOffset = -style_mark.graphicHeight;
+            style_mark.externalGraphic = "http://dev.openlayers.org/releases/OpenLayers-2.13.1/img/marker.png";
+            style_mark.title = "this is a test tooltip";
+
+            l = new OpenLayers.Layer.Vector("vector",
+              {
+                //style: style_mark,
+                renderers: renderer
+            });
+            var p = new OpenLayers.Format.GeoJSON();
+            features = p.read(geojson);
+            map.addLayer(l);
+
+          //add_geojson();
+        }
+        var add_geojson = function() {
+
+            var t = new Date();
+            l.addFeatures(features);
+            var a = new Date();
+            console.log(a - t);
+        }
+
+var bbox = [1600000, 6300000, 1625000, 6325000];
+// 1600000 6300000 1650000 6350000
+
+var pan = function() {
+  map.setCenter(new OpenLayers.LonLat(bbox[2], bbox[1]));
+};
+    </script>
+  </head>
+  <body onload="init()">
+<h1 id="title">Drawing Simple Vector Features Example</h1>
+
+<div id="map" class="smallmap"></div>
+
+  </body>
+</html>
+
