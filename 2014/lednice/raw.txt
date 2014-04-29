@@ -1,0 +1,433 @@
+Jmenuji se Jáchym Čepický a původním vzděláním jsem lesník. Tématem mojí
+přednášky jsou Open Source mapové javascriptové frameworky pro kartografii. Jako
+lesník bych vám toho asi moc. Nepověděl, takže informace o sobě budu muset
+poněkud doplnit:
+
+Od roku 2002 se pohybují ve světě vývoje Open Source software pro GIS. Jsem
+bývalým členem GRASS Development teamu, původní autor programu PyWPS,
+přispěvatel do několika dalších projektů, jako jsou například OpenLayers a
+uživatel a propagátor otevřeného software pro geooblast.
+
+Mezi neprogramátorské aktivity patří zejména členství v představuje
+představenstvu Open Source Geospatial Foundation a jsem předseda českého
+sdružení Otevřená geoinfrastruktura.
+
+Posledních 6 let se zábavám především vývojem webových mapových aplikací pomocí
+různých frameworků a o svoje zkušenosti bych se s vámi dnes rád podělil.
+
+Nejdříve si musíme vymezit pojmy a tím prvním v záhlaví této přednášky je termín
+Open Source. Omlouvám se, pokud máte pocit, že toto téma pro vás není nic
+nového. Zkušenost posledních let mě vsak nutí vymezit tuto problematiku alespoň
+okrajově. Pod tímto - tedy open sourece, otevřený softwate - pojmem zahrnuji
+skupinu software, který je uvolněn pod určitou licencí, která přiznává uživateli
+tohoto software určitá práva, někdo by řekl, že svobody nebo podmínky: Svobodu
+vidět a studovat zdrojový kód programu Svobodu dále distribuovat program dalším
+uživatelům Svobodu provádět v tomto programu změny a program dále šířit s těmito
+změnami
+
+Díky těmto právům a svobodám se někdy hovoří o Svobodném software nebo Free
+Software (psáno s velkým F), v angličtině je někdy význam slova Free mylně
+chápán ve smyslu ceny - free as a beer - zadarmo jako pivo.  Ale znamená to
+skutečně svobodný od slova svoboda (nebo free as freedom) a jsou tím myšlena ona
+tři práva - studovat, měnit a sdílet program.
+
+Možná máte pocit, že Svobodný software je něco nového. Z pohledu IT světa byl
+ale tento koncept pojmenován v 80. letech Richardem Stallmanem, který založil
+nadaci Free Software Foundation a začal spolu s ostaními pracovat na svobodném
+operačním systému. Vzali to opravdu z gruntu  - nejdříve naprogramovali textový
+editor pro psaní zdrojového kódu a pokračovali kompilátorem zdrojového kódu.
+
+Přesto ale, koncept sdílení je základ naší vědeckého pokroku naší západní
+cilivizace. Pokud oběvíte něco nového o čem se domníváte, že stojí za to
+zveřejnit, tak publikujete výsledky svého výzkumu v časopise. Očekává se, že váš
+popis problému a vašeho řešení bude takový, že někdo jiný jej může zopakovat,
+aby vaše závěry potvrdil nebo vyvrátil. Může eventuálně váš pokus změnit a
+publikovat opět své výsledky s pozměněným postupem.
+
+Richard Stallman spolu se svými kolegy naprogramovali kompletní operační systém,
+jediné co jim do dnes chybí, je jádro systému, což je část, která je odpovědná
+za komunikaci s hardwarem, tedy "železem". V roce 1991 ale jistý finský student
+začal pracovat na takovém jádru a zveřejnil je pod svobodnou licencí General
+Public License - GPL. Zcela v souladu se svým výrokem "jenom srabi zálohují,
+opravdoví muži nahrají svou práci na FTP a nechají ostatní, aby si stáhli kopii"
+toto jádro zpřístupnil ostatním pod názvem Linux. Linux byl použit pro operační
+systém GNU a ten se stal tak úspěšným, že po sedmi letech se stal nejčastěji
+používaným operačním systémem na internetových serverech.  Trvalo 7 let od
+prototypu až po dobu, kdy GNU/Linux byl akceptován podnikovou sférou. Stalo se
+tak bez marketingového oddělení, bez liceční politiky, bez faktického
+vlastnictví, přímých prodejů nebo jakékoliv kontroly.
+
+Celé to ale není práce jednoho nebo dvou lidí. Je to spolupráce obrovské
+komunity vývojářů, kteří spolu navzájem sdílejí práci. Proč by ale někdo sdílel
+svou práci s ostatními? Protože Linux je Open Source a tak jakákoliv práce
+někoho jiného je okamžitě přístupná všem ostatním.
+
+Open Source vytváří intelektuální spoluvlastnictví, které nikdy nemůže být
+eliminováno. Lidé se chtějí na tomto bohatství podílet způsobem, jakým by se asi
+nikdy nepodílely na soukrém vlastnictví. Lidé celkem ochotně zvláště teď na jaře
+uklízejí odpadky v lesích a na cestách, ale můj trávník mi nikdo neposeká.
+
+Ale Open Source není izolovaným příkladem tohoto společenského hnutí. Díky
+internetu vznikla celá řada dalších společných intelektuálních bohatstvích.
+Takovým příkladem může být úspěšná encyklopdie Wikipedia, která zatlačila do
+pozadí encyklopedii Britanica. Britanica v podstatě skončila, protože byla
+převálcována ne National Geographic nebo jinou úspěšnou mediální firmou. Ale
+komunitou soustředěnou okolo jednoho projektu, sdílející společné vědomosti.
+Není to tak, že by se to stalo ze dne na den. Britanica samozřejmě tento proces
+sledovala po několik let, ale nedokázala jej zastavit. Nemohli spustit
+wiki.britanica.com, protože nikdo by jim nepřispíval. Nikdo nechce pracovat
+zadarmo pro někoho jiného. Lidé raději pracují na wikipedii, ale proč? Protože
+díky licenci, kterou Wikipedia používá - Creative Commons, což je vlastně open
+source licence - můžete sdílet, měnit a sdílet změněnou informaci s ostaními a
+ostatní s vámi.
+
+Tím se dostáváme od obecného ke konkrétnímu - k geoinformatice. Víte že většina
+geodat v České republice je vytvářena a spravována českým úřadem zeměměřičským a
+katastrálním. Katastrální mapa katastrálním úřadem, základní mapa zaměměřičským
+úřadem, kteří do určité míry fungují na sobě nezávisle. Pokud potřebujete
+například  polohopisnou mapu Základní báze geografických dat, tak si ji musíte
+koupit, protože tyto data mají výjimku z výjimky autorského zákona. Autorský
+zákon v České republice explicitně říká, že veškerá úřední díla jím nejsou
+chráněna. Co je ale základní mapa jiného, než úřední dílo? Vzniká za státní
+peníze, spravuje ji státní instituce ... proč ta data nemůžeme volně používat?
+Ta data si můžete koupit. Česká republika jako celek vás vyjde na bratru 4
+miliony korun, ale myslím, že byste dostali množstevní slevu 10%. Celkem: 3 726
+925 Kč Ortofoto by vás vyšlo na Celkem: 2 366 501 Kč
+
+Samozřejmě můžete používat mapy komerčních firem, ty jsou levnější (i když data
+vám nikdo nenabídne, maxilně obrázky v podobě dlaždic) a dokonce můžete tato
+data pomocí nástrojů pomáhat vylepšit a funguje to, sám jsem si to zkusil.
+Nevím, jestli  jste to někdy udělali, ale nemáte pocit, že ten vztah je trochu
+nevyvážený? Vy opravítě pokladová data a vaši práci, vaše intelektuální
+vlastnictví, použije nějaká firma pro vylepšení své roční bilance?
+
+V roce 2007 ale začal malý universitní projekt jménem OpenStreetMap, který měl
+za cíl vytvořit společné intelektuální vlastnictví geodat. Tento projekt je
+velice úspěšný, protože zaplnil poptávku, hlad po dobrých geodatech nebo po
+geodatech, která jsou "dostatečně dobrá". Jejich licence umožňuje data sdílet,
+měnit a opět sdílet. Na internetu můžete najít celou řadu konkrétních srovnání
+mezi různými službami, jako je Google, Bing maps nebo Nokia mapy a
+OpenStreetMap, kdy OpenStreetMap vyjde jako zdroj s nejlepším pokrytím. V České
+republice někdy vychází lépe OpenStreetMap, někdy komerční mapy. Co je ale
+podstatné: Existuje datový zdroj, otevřený datový zdroj, který nabízí data pro
+vaše použití. Ne jen předgenerované dlaždice - obrázky, ale původní data se
+vším, co se do dlaždic nevešlo. A ta data jsou pro řadu aplikací dostatečně
+kvalitní. Projekt, který při pohledu z venčí dělá pár bláznů s GPSkami je
+nebojím se to říci veleúspěšný a zdatně konkuruje komerčním projektům, za
+kterými stojí finančí kapitál nebo státní peníze. Ten projekt vzniknul z
+potřeby, z nedostatku legálních dat. Kdyby existovala dostupná otevřená geodata,
+pravděpodobně by nikdy nebyl potřeba. Pokud potřebujete data přes celou
+republiku, neřku-li Evropu, víte kam sáhnout.  Nastávají z mého pohledu absurdní
+situace, kdy veřejné instituce, než aby řešili licence a nákup a poskytování dat
+s pověřenou osobou (jako příklad můžeme vzít právě český zěměměřicský úřad),
+raději použijí OpenStreetMap pro své interní potřeby. 
+
+Abych tuto část nějak uzavřel: Open Source software je jenom jedna část tohoto
+způsobu vytváření společné znalostní báze. Ale stejným způsobem pracuje
+Wikipedia nebo OpenStreetMap. Komunity spojené internetem vytvářejí hodnoty, pro
+jejichž vytvoření byly dříve potřeba velké instituce.
+
+Zní to jako pohádka. Ale ve skutečnosti je to kombinace společných potřeb a
+zájmů, pravidel pro sdílení, která nikoho nestaví do podřízenecké role, a
+moderních komunikačních technologií, které umožňují spolupráci lidí, kteří se
+nikdy neviděli.
+
+Open Source software a otevřený způsob spolupráce není nějaké náboženství. Je to
+prostě normální. Lidé spolu sdíleli svoje znalosti v minulosti a dělají tak i v
+současnosti. Otevřenost je norma. Open Source software je všude kolem nás.
+Google by nebyl čím je bez tisíců linuxových serverů, na kterých běží. Facebook
+by neexistoval ze stejného důvodu. Android používá linuxové jádro. Tyto úspěšné
+firmy nejen že používají Open Source (v případě Facebooku např. MySQL, PHP,
+samozřejmě také Linux), ale sami jej aktivně vytváří -- Google mimo jiné
+prohlížeč Chromium, javascriptovou knihovnu Closure, Facebook úspěšný
+šablonovací systém React nebo nosql databázi Cassandra. Většina vašich routrů
+doma používá Open Source. 
+
+Takže jak je to v našem geosvětě s open source? No, očekával bych asi větší
+podporu pro Open Source technologie v české geo-komunitě, než jakou vidím. Ale
+proč to tak je?
+
+Především - lidé používají co znají, co je "normální". Normální je, co znáte ze
+školy, s čím jste vyrostli, co vás provází vaším profesním životem.  Zadruhé je
+to množství znalostí, které potřebujete na začátku, než můžete software začít
+používat. Změna vždycky bolí. Projekty se snaží zploštit tak zvanou křivku
+učení, ale pro někoho je prostě stále příliš exponciální.  A nakonec: Open
+Source nemá marketingové oddělení. Není tu nikdo kdo by vám řekl, že potřebujete
+tu a tu funkci. Lidé mají tendenci zkracovat a říkat, že potřebují ten a ten
+konkrétní produkt, místo aby se nejdříve zamysleli nad celkovou architekturou a
+teprve podle té mohou udělat dobré rozhodnutí o tom, jaký proudukt tyto potřeby
+splňuje.
+
+Každá webová aplikace má tři nebo čtyři základní komponenty:
+
+Někde na serveru jsou surová data v nějaké databázi.  Z těchto dat jsou
+generovány kartografické a datové výstupy pomocí nějakého mapového serveru.
+Pokud chcete věci zrychlit, použite často caschovací mezivrstvu, která ukládá
+předgenerované dlaždice a může tak rychleji s menší režijí vybavit  požadavky
+klienta.  A konečně na klinetské straně je nějaká webová stránka, která
+zobrazuje tyto obrázky. Všechny moderní open source nebo komerční systémy
+používají pro účely zobrazení program napsaný v programovacím jazyk JavaScript.
+U starších systémů se můžete setkat s Flasham nebo SilverLightem. Mapa mluví buď
+přímo se serverem a dostává čerstvě vyrenderovaná nebo přímo surová data, nebo s
+dlaždicovou cashí a dostává předgenerované statické dlaždice a uspořádá je do
+mapového pohledu.
+
+Asi mi věříte, že bychom mohli jednotlivé části tohoto stacku hodiny rozebírat a
+zvažovat aspekty různých softwarových balíků, ať už jsou open source nebo
+proprietární. Asi vás nepřekvapí, že na serveru bych já asi zvolil databázi
+PostgreSQL s nadstavbou PostGIS, mapový server bych nasadil MapServer nebo
+GeoServer, na cache bych nasadil např. MapCash. Tato přednáška by se ale měla
+týkat především té klientské webové části - frontendu, přes který komunikují
+přímo uživatelé. Je důležité zmínit, že ať už použijete jakýkoukoliv technologii
+na straně serveru v některé z jeho částí, držte se standardů OGC a zvažujte
+vzájemnou kompatibilitu a interoperabilitu. Tím si zajistíte, že budete v
+budoucnu schopni nevyhovující technologii nahradit jinou, ať už to bude z
+technologických, licenčních nebo výkonnostních důvodů.
+
+Pokud se posuneme na stranu klienta a webového prohlížeče, máme na výběr v
+podstatě ze tří hlavních možností: OpenLayers, Leaflet a OpenLayers 3.
+
+OpenLayers je nejstarší a tudíš nejstabilnější projekt z těchto tří zmíněných.
+Začala je vyvíjet firma MetaCarta v roce 2005. První představení Open Sourcové
+veřejnosti proběhlo na konferenci FOSS4G (Free and Open Source Software for
+Geoinformatics) v roce 2006. OpenLayers tenkrát bylo menší senzaci. Musíme si
+uvědomit, že od roku 2005, kdy Google představil svoje mapové rozhraní a v
+podstatě redefinoval způsob, jakým jsme se do té doby dívali na webové mapové
+aplikace, neexistovala použitelná Open Source alternativa ke Google Maps.
+Všichni tedy čekali na něco nebo někoho, kdo se toho chopí a OpenLayers rychle
+získaly na popularitě. Projekt rostl prakticky do minulého roku. Snažil se vždy
+podporovat všechny prohlížeče na trhu. Používal tehdy moderní technologie pro
+vykreslování dat, jako je SVG - Scalable Vector Graphics pro webové prohlížeče,
+a Vector Markup Language Language pro Internet Explorer. Mají podporu pro
+dlaždicované mapy. OpenLayers jsou momentálně ve verzi 2.13 a obsahují podporu
+pro celou řadu rastrových a vektorových formátů. Z rastrových bych uvedl WMS,
+WMTS, prostý obrázek. Z vektorových GML, GeoJSON, GeoRSS, GPX a další. Obsahují
+také podporu pro komernčí API jako je Google Maps, BING. Obsahují také podporu
+prorietárních protkolů, jako ESRI ArcIMS. Lze je využít na práci s dalšími
+komunikačními protokoly, jako je parsrování GetCapabilities pro WMS a WFS,
+kompletní podpora pro OGC Web Processing Service a další a další. 
+
+Z pohledu vývojářského je to čistě JavaScriptová knihovna, která má něco okolo 4
+MB zdrojového kódu. Je to napsáno velice čistě a standardy pro přijmutí patche -
+(nebo) opravy zdrojového kódu byly nastaveny ve srování s jinými projekty, se
+kterými jsem měl do té doby nějakou zkušenost, velice vysoko. Kromě pevně daného
+coding starndardu je celý zdrojový kód pokryt unit testy. Co to všechno znamená:
+OpenLayers je stabilní, dlouhodobě udržovaný a udržitelný projekt. Podíváte-li
+se na aktivitu OpenLayers např. na serveru Ohloh zjistíte, že OpenLayers mají
+celkem 114 přispěvatelů do zdrojového kódu. Nejvíce aktivních vývojářů bylo v
+roce 2012 - celkem 21. Celkové náklady na vývoj jsou odhadovány podle serveru
+Ohloh na $1.7Mil, při 32 člověko-letech práce a ročních nákladech na vývojáře
+$55000. Bavíme se o 126 000 řádcích zdrojového kódu. Tím chci říct, že vývoj
+Open Source software není zadarmo. U takto velkého projektu je potřeba zaplatit
+kvalifikované vývojáře a u OpenLayers se to daří. Většina kódu byla de-facto
+zaplacena několika firmami, zejména firmou MetaCarta a Boundless (dříve
+OpenGeo). To jsou firmy, které dlouhodobě investují do vývoje Open Source
+mapových softwarů a jsou skutečně leadry v oboru. Kde se používají? V české
+republice je najdete např. na národním Geoportálu INSPIRE nebo na portálu ČUZK.
+Ten dělala firma Integraph, kterou si dovolím označit za všechno možné - jen ne
+Open Source - pozitivní firmu. OpenLayers jim ale nevadí.
+
+Po nějaké době OpenLayers jako projekt poněkud zbytněl. Začal obsahovat funkce,
+které jste z 90% nevyužili. Ví někdo, co je to WPS a použitl to někdo z vás na
+webu? Takže pro většinu z vás je informace, že OpenLayers obsahují podporu pro
+OGC WPS asi nic moc říkající (jakkoliv může být důležitá pro mě). Doba
+pokročila, Microsoft přestal tvrdit, že v oblasti prohlížečů je vrchol evoluce
+IE 6 a začal vydávat nové prohlížeče s podporou moderních technologií,
+uživatelské rozhraní se také mění, uživatelé začínají být namlsaní funkcemi a
+chtějí více a více a hlavně rychleji. OpenLayers je zvíře z minulé geologické
+éry, které stále má co říct, díky dynamice, kterou nastartovalo, ale objektivně
+mu během dalších let ujede vlak. A hlavně je to opravdu veliké zvíře, které
+velké části lidí přišlo prostě moc komplikované. A jak už to bývá, objevil se
+někdo, kdo měl problém, lekl se OpenLayers a začal něco vlastního. Ten člověk se
+jmenoval Vladimir Agafonkin, je z Ukrajiny, i když dnes se pohybuje spíše ve
+Spojených státech a vytvořil knihovu Leaflet.
+
+Leaflet je nepoměrně menší projekt. Obsahuje cca 6000 řádků kódu, náklady jsou
+odhadnuty na $78 000, tedy přibližně 20x menší, než u OpenLayers. Projekt začal
+okolo roku 2010 a nabral úžasnou dynamku - do této chvíle měl 180 přispěvatelů
+(což je dokonce o 66 více, než OpenLayers).  Získal si ohromnou popularitu i
+přesto - nebo právě proto - že obsahuje oproti OpenLayers asi 1/10 funkcí. Např.
+podpora projekcí a souř. systémů je žalostná ve srovnání s OpenLayers, kde
+můžete na klientské straně transformovat vektorová data mezi souř. systémy,
+Leaflet umí v podstatě jenom Googlí Mercator projekci, o S-JTSK si můžete nechat
+zdát. Vladimir je původem matematik a baví ho vymýšlet různé zlepšováky a
+algoritmy. Leaflet zavedl celou řadu generalizujících algoritmů vektorových dat,
+které umožňují zobrazovat velké objemy vektorových dat přímo na klientovi.
+Začínáme se tady bavit o v postatě GISových technikách, jak jsou prostorové
+indexy, generalizace, topologické operace a podobně. Stejně jako na desktopu,
+tak i u vektorů platí, že nejnáročnější operace je vykreslení vektorů. Vyplatí
+se data 3x prohnat nějakým algoritmem, který sníží počet vykreslovaných objektů
+na minimum. To Vladimir pochopil a zavedl a slaví s tím úspěch. OpenLayers 2 si
+tyto věci nemohli dovolit kvůli zpětné kompatibilitě. Vladimir vesele s každou
+další verzí Leafletu odstraňuje funkce, místo aby je přidával a dělá tak Leaflet
+ještě rychlejším. OpenLayers stále funkce přidává. Leaflet je tedy malá
+knihovna, která dělá jednu věc - zobrazování dat - a dělá to fakt dobře.
+OpenLayers je na druhé straně vyspělé prostředí GIS, které vám umožní provádět
+na webovém prohlížeči plnohodnotné GIS operace. Leaflet si našel cestu zejména
+do médií. Používají ho Hospodářské noviny (resp. server. IHned) a  nedávno jste
+si mohli všimnout aplikace Volby od firmy T-Mapy.
+
+Nicméně doba se nezastavila. V roce 2012 byly započaty práce na zcela nové
+knihovně OpenLayers 3. Vývojový team v čele s firmami Boundless a Camp2Camp
+hodil za hlavu zpětnou kompatibilitu a navrhnul mapovou knihovnu pro toto
+desetiletí. OpenLayers 3 jsou momentálně ve fázi BETA a snad během letošního
+jara by měla být uvolněna první verze, která by měla podporovat zhruba to, co
+umí OpenLayers 2. Při přechodu ze starých OpenLayers na nové máte pocit, že věci
+jsou více komplikované, ale při hlubším seznámení zjistíte, že to celé dává
+smysl. OpenLayers 3 zavádějí podporu pro 2D i 3D zobrazení přímo v mapě. Data
+jsou vykreslována pomocí Canvasu a WebGL - to nám umožňuje pracovat s datasety
+to deseti tisích prvcích. Dříve se používala technika DOM - document object
+model, která je absolutně neefektivní. Pokud jste někdy dělali jednoduché webové
+stránky, můžete si představit, že každý vektorový objekt je samostatný element,
+který se musí na stránce vykreslit. To je neuvěřitelně neefektivní. Moderní
+prohlížeče podporují tzv. Canvas - jakési rastrové plátno, do kterého můžete
+objekty vykreslit a vše je zobrazeno najednou jako obrázek. To používá částečně
+i Leaflet, ale OpenLayers 3 to používají především. Také OpenLayers 3 zavedli
+generalizační algoritmy, takže se vykresluje jenom to, co vykreslovat smysl má. 
+
+OpenLayers 3 jsou napsány za pomocí Google Closure library. Výsledkem je, že
+většina neduhů jazyka JavaScript se do jisté míry eliminuje. Nevím, jestli
+seledujete dění okolo jazyka JavaScript v poslední době, ale opravdu prošel
+dynamickým vývojem. Od pomocného jazyka sloužícího k obarvení nadpisu na
+červeno, se zněj stala plnohodnotná programovací platforma s možností typové
+kontroly, unit testy, kompilací kódu a tak dále. JavaScript dávno není jazykem
+webových prohlížečů, ale je spouštěn na serverech, vznikají vazby do dalších
+knihoven. Osobně se domnívám, že JavaScript je budoucí Geo- programovací jazyk,
+podobně jako jím je dnes Python. Díky Closure můžeme tzv. vybuildit - sestavit a
+zkomprimovat - mapovou aplikaci na míru, obsahující pouze potřebné komponenty.
+OpenLayers 3 už jsou nasazovány v produkčním prostředí, přesto že jsou sotva ve
+fázi beta a podstatné části knihovny se stále mění pod rukama vývojářů. Jak je
+to možné? Je to Open Source software, každý může sledovat vývoj on-line, můžete
+se zúčastnit týdenních porad vývojového teamu přes Google Hangout. Na dotaz do
+mailing listu dostanete relevantní odpověď do půl hodiny. Můžete tedy velice
+dobře ohodnotit, do jakého rizika a nestability jdete a nikdo vám neplánovaně
+nepodtrhne nohy. Každá změna je transparentní, dokumentovaná (pořád se bavíme o
+dynamicky vyvíjeném, software), a je na vás, kdy ji začleníte do svého projektu.
+Máte možnost ale vždy vědět, na čem jste. Tím, že je to zatím opravdu Beta, se v
+české republice zatím moc dobrodruhů nenašlo, kteří by OL3 nasadily. Ve firmě
+Geosense pracujeme na nové prohlížečce geodat, která je kompletně postavená nad
+Closure a OL3. Jak ale praví klasik: chození po vodě a psaní software proti
+standardům je jednoduché, pokud je obojí zamrzlé. OL3 jsou zatím pohyblivý cíl.
+
+Podíváme-li se na tyto tři knihovny vedle sebe, pak generačně vzato jsou OL2
+nejníže, Leaflet někde mezi OL2 a OL3 a OpenLayer 3 považuji v tuto chvíli za
+nejvyšší vývojový stupeň. Chcete-li zobrazit mapičku, pravděpodobně použijete
+Leaflet. Chcete-li víc, asi sáhnete po některé z OpenLayers. Pokud nepotřebujete
+zrovna nejmodernější techniky, OL2 jsou stále dobrá, stabilní a prověřená
+platforma.
+
+Díky možnostem dneších prohlížečů se zcela změnil problém vykeslování dat na
+prohlížeči. Už jsem zmínil, že vykreslit deseti tisíce prvků není problém.
+Problémem je přenos těchto dat ze strany serveru na klienta. Rastrová data
+bývají používána pouze jako podkladové dlaždicované mapy. Veškerá vektorová data
+jsou trasnportována na klienta a tam se odehrává vlastní kartografické
+stylování. To poskytuje obrovské možnosti analýzám a vizualizacím přímo ve
+webovém prohlížeči. Jak ale data přenést?
+
+Asi chápete, že ESRI Shapefile není nejvhodnější formát. I když existují webové
+zobrazovačky Shapefilů, daleko jednodušší je použít nějaký textový formát typu
+XML nebo JSON. Od XML se v poslední době odkláníme pro jeho ukecanost a
+systémovou nenažřanost - smím-li to tak říct. Moderní formáty založené na JSON
+jsou dobře čitelné a přitom řádově menší. V oblasti GIS používáme samozřejmě
+rošíření GeoJSON. Nejedná se o de-jure standard, ale otevřený a uznávaný
+de-facto standard. Prohlížeče mají menší problém s jejich parserováním, nedojde
+tak snadno k zahlcení prohlížeče. Jak ale "protlačit" desítky tisíc polygonů -
+což odpovídá desítkám megabajtů dat - ze strany serveru na klienta, když máte
+např. mobilní připojení tak, aby uživatel nebyl nucen si jít uvařit kafe, než se
+"to" načte?
+
+Základem je komprese komunikace mezi serverem a klientem. Webový server Apache
+např. umí data transparentně zipovat. Webový prohlížeč je na druhé straně sám
+rozbalí a předá aplikaci. Tím můžete ušetřit desítky procet datového toku a je
+to pouze otázka jednořádkové konfigurace serveru.
+
+Další možností je data kompriovat ještě agresivněji, např. převodem na binární
+podobu. Trochu tím více zatížíte server a klienta, na druhou stranu data tečou
+rychleji. To dokáže např. formát MessagePage, který umožní JSON formáty převézt
+na binární a zpět.
+
+Další možností je oříznout data jako taková, např. tím, že na klienta půjdou v
+topologicky čisté podobě. V případě polygonů opět můžete ušetřit desítky procent
+z objemu dat jenom tím, že "rozpustíte" dvojité hranice mezi sousedními
+polygony. Opět to klade určitou náročnost na klienta při zpracování, ale z
+pohledu uživatele se "něco děje". To umí např. formát TopoJSON.
+
+Poslední mě známou technikou je data rozkouskovat a posílat je na klienta
+postupně - po dlaždicích. Hovoříme o dlaždicovaných vektorech, jejichž asi
+nejvyšší evoluční stupeň je dlaždicovaný TopoJSON. Před uživatelem se tak mapa
+vykresluje postupně, můžeme vektory předcachovat na straně serveru a o to
+rychleji je pak vybavovat ke klientovi. Objem dat se tím nezmění, ale jejich
+přenos se v čas rozloží. 
+
+Už jsem zmínil, že ani GeoJSON, ani TopoJSON nejsou formálně vzato standardní
+formáty. O jejich vývoj (naposledy v GeoJSONu je přidávána podpora pro časovou
+složku) se stará komunita, které může být součástí každý. Konsorcium OGC trochu
+zaspalo a sám jsem zvědavý, jak se situace okolo GeoJSON a TopoJSON bude
+vyvíjet. Důležité ale je, že jsou to standardy otevřené, každý je může studovat,
+měnit, dále distrubuovat a implemenvat do svého software. Naposledy se takto
+sešly projekty MapServer, OpenLayers, QGIS, PostGIS a další tento rok ve Vídni a
+diskutovali spolu vývoj právě dlaždicovaného vektorového topologického formátu.
+Rád bych řekl, že je všechno růžově krásné a spolupracující, ale není. Svět Open
+Source je do určité míry světem chaosu a pravdou je, že takový dlaždicovaný,
+kompriovaný, topologický a nově i otevřený formát už existuje. Jeho nevýhoda je,
+že jej vytvořila jedna firma pro svou potřebu, za zavřenými dveřmi a i když jej
+teď nabízí komunitě, začátek nebyl šťastný. Google kdysi se svým formátem KML
+uspěl (kde je dneska KML?), snad se to podaří i MapBoxu.
+
+MapBox je americká firma, která se bez nadsázky snaží uspět proti Google Maps na
+globálním trhu. Nabízí pokladové mapy a (zatím) družicové snímky za rozumných
+finančích podmínek. Řada jejich produktů je Open Source, např. nástroj pro
+správu dalždicových cashí TileMill. Mezi jejich zaměstnance patří nově i
+Vladimir Agafonkin a i když jejich API podporuje i další knihovn a standardní
+rozhraní, Leaflet je vzat jako jejich výchozí knihovna.
+
+Už jsem říkal, že pokladové letecké snímky jsou vlastně snímky satelitními.
+Topografický poklad používá kompletně projekt OpenStreetMap. Většinu dat si ale
+můžete ostylovat na klientovi. MapBox k tomuto účelu vyvinuly právě úsporný
+formát pro přenos dat na klienta.
+
+
+To bychom měli základní přehled OpenSource JavaScriptových frameworků. Co dodat?
+Snad pár rad na závěr, jakým způsobem nejlépe zvolit to správné prostředí. Dobrá
+správa je, že ať nasadíte na serveru cokoliv, můžete vyměnit front-end a
+obráceně, výměna front-endové knihovny nezakládá důvod pro změnu back-endu -
+pokud tedy používáte oteřevné, vzájemě interoperabilní knihovny.
+
+Už jsem říkal, že Open Source nemá marketingové oddělení. Nikdo vám neukáže
+světélkující prezentaci s úžasnými funkcemi, žádný obchodník za vás to
+rozhodnutí neudělá. Nemusíte podepisovat žádnou smlouvu, musíte se "jenom"
+rozhodnout. Takže jak?
+
+Evaluačními kritérii pro výběr Open Source projekt je pro mě historie zdrojového
+kódu. Pokud se projekt dlouho nevyvíjí, může to znamenat, že je vše hotovo.
+Častěji to ale znamená, že je mrtvý. Dalším kritériem je velikost a stabilita
+komunity. Existuje mailing list? Je na něm provoz? Jak rychle dostatete odpověď?
+Důležitá je dokumentace - lze ji použít? Dává návod? Pokud to umím, podívám se
+na zdrojový kód a na to, jaký na mě udělá dojem. To jsem ale schopen udělat
+pouze u několika projektů a popravdě - raději to nedělám, pokud nemusím.
+
+Určitým vodíkem vám může být aktivita, kterou jednoduše uvidíte např. na serveru
+Ohloh nebo Github. Dále jsou zde různé ornganizace, zejména Open Souce
+Geospatial Foundation - OSGeo.org. OSGeo certifikuje Open Source projekty,
+hodnotí velikost a aktivitu komunity, kvalitu zdrojového kódu, rozhodovací
+procesy v komunitě atd atd. Je-li nějaký projekt OSGeo-projekt, znamená to, že
+je stabilní a kvalitní. Na okraj: OpenLayers jsou OSGeo projekt, Leaflet není,
+což není z důvodu jeho nekvality, ale protože Vladimir Agafonkin prostě nechce.
+Z tohoto pohledu je Leaflet one-man-show (i když má 180 přispěvatelů), zatím co
+OSGeo-projekty řídí project steering committee.
+
+Může se stát, že na váš úkol neexistuje Open Source odpověď. V tom případě máte
+dvě možnosti: zvažte, jestli je ve vašich silách jakkoliv přispět do
+existujícího projektu nebo vytvořit nový - je to tak snadné. Nebo jděte do
+proprietárního software. Buďte si ale vždy vědomi, proč to děláte a co tím
+ztrácíte.
+
+Máte chuť jít do Open Source? Především, začněte na malém projektu, zkuste jak
+to funguje. Dejte vývojářům a sami sobě čas na učení a experimentování. Na jednu
+stranu jste v tom sami - neexistuje marketingové oddělení. Ale na druhou stranu
+stojí za vámi komunita o kterou se můžete opřít. A jsou zde i firmy či
+jednotlivci, nabízející profesionální konzultační šlužby a podporu pro různé
+projekty, i v České republice.
+
+
+Díky

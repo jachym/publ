@@ -1,0 +1,221 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+%\documentclass[notes=only]{beamer}
+%\documentclass[xcolor=dvipsnames, notes=hide]{beamer} 
+\usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{xcolor,colortbl}
+\usepackage{pgfpages}
+
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+\definecolor{Gray}{gray}{0.85}
+\definecolor{LightGreen}{rgb}{1,0.88,1}
+
+\newcolumntype{a}{>{\columncolor{Gray}} X }
+\newcolumntype{b}{>{\columncolor{white}} X }
+
+\usepackage{default}
+\usepackage{pgfpages} %This is needed for notes presentation!
+\setbeameroption{show notes on second screen=left}
+\usepackage{soul}
+
+% This file is a solution template for:
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 20min.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+\usepackage[czech]{babel}
+% or whatever
+
+\usepackage[utf8]{inputenc}
+% or whatever
+
+%\mode<presentation>
+%{
+%  %\usetheme{boxes}
+%  %\usecolortheme{seagull}
+%  % or ...
+%
+%  \setbeamercovered{transparent}
+%  % or whatever (possibly just delete it)
+%
+%    \usecolortheme[named=OliveGreen]{structure} 
+%    \usetheme[height=7mm]{Rochester} 
+%    \setbeamertemplate{items}[ball] 
+%    \setbeamertemplate{blocks}[rounded][shadow=true]
+%}
+
+\newcommand\mynext{
+    \alert{\textbf{$\downarrow$}}
+}
+
+\newcommand\mythanks{
+{\fontsize{0.75em}{0.75em}\selectfont {Tato prezentace je spolufinancována Evropským sociálním
+fondem a státním rozpočtem ČR.}}}
+\makeatother
+\setbeamertemplate{footline}
+{%
+  \leavevmode%
+  \hbox{
+  \begin{beamercolorbox}[wd=.45\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{}%
+      ~\includegraphics[width=0.15\paperwidth]{imgs/kecy2.png}
+      \fontsize{0.75em}{0.75em}\selectfont
+      CZ.1.07/2.4.00/31.0010
+      \end{beamercolorbox}
+    \hfill
+    \begin{beamercolorbox}[wd=.65\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{}%
+      \mythanks
+  \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+\setbeamertemplate{headline}
+{%
+  \leavevmode%
+  \hbox{
+      \begin{beamercolorbox}[wd=1\paperwidth,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{}%
+      \hfill \includegraphics[width=0.35\paperwidth]{imgs/kecy.png}
+  \end{beamercolorbox}
+  }%
+}
+\makeatletter
+\newcommand{\removeheadings}{
+    \setbeamertemplate{footline}{}
+    \setbeamertemplate{headline}{}
+}
+
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+
+  \begin{flushright}
+  \includegraphics[width=0.5\paperwidth]{imgs/kecy2.png}
+  \end{flushright}
+  \usebeamerfont{title}\inserttitle\par
+  \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+  \bigskip
+  \usebeamerfont{author}\insertauthor\par
+  \usebeamerfont{institute}\insertinstitute\par
+  \usebeamerfont{date}\insertdate\par
+  \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
+  \bigskip
+  \setbeamercolor{mycolor}{fg=black,bg=white}
+  \hbox{
+      {\usebeamercolor[fg]{mycolor}
+      \begin{beamercolorbox}[wd=0.4\paperwidth]{}%
+            Tato prezentace je spolufinancována Evropským sociálním
+            fondem a státním rozpočtem ČR.
+        \end{beamercolorbox}%
+    }
+  %      \begin{beamercolorbox}
+          \includegraphics[width=0.45\paperwidth]{imgs/kecy.png}
+  %      \end{beamercolorbox}
+  }%
+}
+
+
+\usepackage{hyperref}
+%\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=OliveGreen,urlcolor=OliveGreen}
+
+\usepackage{times}
+% \usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+%\pgfdeclareimage[height=1.cm]{conference-logo}{images/IGif2004f.jpg}
+%\pgfdeclareimage[height=1.cm]{ol-logo}{images/openlayers.png}
+%\pgfdeclareimage[height=1.cm]{ol3-logo}{images/ol3.png}
+%\pgfdeclareimage[height=1.cm]{leaflet-logo}{images/leaflet.png}
+%\logo{\pgfuseimage{conference-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\mode<presentation>
+\AtBeginSection[]
+{
+%\logo{\pgfuseimage{conference-logo}}
+  \begin{frame}<beamer>{TOC}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\title {Open Source mapové JavaScriptové frameworky pro webovou kartografii}
+
+\subtitle {}
+
+\author[J. Čepický] % (optional, use only with lots of authors)
+{Jáchym~Čepický}%\inst{1}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+%\institute % (optional, but mostly needed)
+%{
+%  \inst{1}%
+%  \url{http://les-ejk.cz}\\
+%}
+  
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[JS 2014] % (optional, should be abbreviation of conference name)
+{Jarní škola KGI 2014, Lednice}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+
+
+
+
+\begin{document}
+
+%\begin{abstract}
+%\end{abstract}
+{\removeheadings 
+
+    \begin{frame}
+      \titlepage
+      \note<1>{Dobrý den}
+    \end{frame}
+
+\end{frame} 
+
+%\begin{frame}{TOC}
+%  \tableofcontents
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+
+\include{body}
+
+\end{document}
