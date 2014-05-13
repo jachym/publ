@@ -89,7 +89,7 @@ uvedu to, že člověk používá to, co zná. Věřím, že obsahem výuky na
 školách ve všech oborech a stupních by měly být především obecně platné
 principy, až od nich odvozené konkrétní situace. Učíme obecně Archimedův zákon,
 a teprve následně několik jeho praktických aplikací, jako že ve vodě je slon
-lehčí nebo spolu s inženýry španělského námořctva, že ponorka, má-li se vynořit,
+lehčí nebo spolu s inženýry španělského námořnictva, že ponorka, má-li se vynořit,
 musí mít především v součtu menší objemovou hustotu, než voda. Proč se ale tento
 princip uplatňuje při výuce software jen velice zřídka? Proč výuka počítačí
 obecně a GIS konkrétně se téměř bez výjimky provádí na konkrétním jednom
@@ -120,9 +120,9 @@ kvalitou.
 
 Důvodů, proč open source software není úspěšnější - myšleno absolutně - je ještě
 celá další řada. Některé z nich a některé z již zmíněných se bude snažit zaplnit
-na naší geo- scéně projekt GISMasters.
+na naší geo- scéně projekt GISMentors.
 
-Projekt GISMasters je společný projekt několika jednotlivců, kteří se rozhodli
+Projekt GISMentors je společný projekt několika jednotlivců, kteří se rozhodli
 spojit své síly a nabídnout pod společnou hlavičkou kvalitní školení pro
 co nejširší oblast open source GIS. Školení budou obsahovat všechno to, na co
 jsou účastníci podobných akcí zvyklí, ale ještě i něco navíc -- účastníci si
