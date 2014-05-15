@@ -63,8 +63,8 @@
 \begin{frame}
 \titlepage
 
-\note{Dobrý den}
-\note{jmenuji se Jáchym Čepický}
+\note{Dobrý den\\
+jmenuji se Jáchym Čepický}
 \end{frame}
 
 \begin{frame}\begin{center}
@@ -110,7 +110,7 @@ nainstalovali jsme můj první Linux.}
 
 
 \begin{frame}\begin{center}
-\includegraphics[width=0.6\textwidth]<1>{images/grass.jpg}
+\includegraphics[width=0.75\textwidth]<1>{images/grass.jpg}
 \includegraphics[width=0.6\textwidth]<2>{images/fsvsoss.jpg}
 \includegraphics[width=0.6\textwidth]<3>{images/crowdsource.png}
 
@@ -137,14 +137,14 @@ crowd source úspěšně používá.}
 
 \begin{frame}\begin{center}
 \includegraphics[width=0.6\textwidth]<1>{images/rms.jpg}
-\only<2-4>{
-    \begin{itemize}
-        \item<2-> prohlížet, studovat
-        \item<3-> sdílet
-        \item<4-> měnit a změny sdílet
-    \end{itemize}
+\only<2-5>{
+\begin{itemize}
+    \item<2-> prohlížet, studovat
+    \item<3-> sdílet
+    \item<4-> měnit a změny sdílet
+\end{itemize}
 }
-\includegraphics[width=0.6\textwidth]<5>{images/linux-milestones.png}
+\includegraphics[width=0.6\textwidth]<6>{images/linux-milestones.png}
 
 \note<1>{
 Většina z vás už určitě slyšela o tom, že hnutí free software založil Richard
@@ -153,15 +153,15 @@ Definoval tři základní svobody nebo práva, které by měl každý uživatel 
 mít:
 }
 
-\note<2-4>{
-    \begin{itemize}
-        \item<2->právo vidět zdrojový kód
-        \item<3->právo sdílet zdrojový kód a 
-        \item<4->právo měnit zdrojový kód a dále ho sdílet.
-    \end{itemize}
+\note<2->{
+\begin{itemize}
+    \item<2->právo vidět zdrojový kód
+    \item<4->právo sdílet zdrojový kód a 
+    \item<5->právo měnit zdrojový kód a dále ho sdílet.
+\end{itemize}
 }
 
-\note<5>{
+\note<6>{
 V systém se stal úspěšný také díky jádru operačního systému Linux. Dnes je Linux
 nejpoužívanějším serverovým operačním systémem, používá se v mobilních
 zařezních, na super počítačích. Proč se tak stalo?
@@ -171,10 +171,12 @@ zařezních, na super počítačích. Proč se tak stalo?
 
 \begin{frame}\begin{center}
 
-\only<1-2>{
+\only<1>{
 \includegraphics[width=0.6\textwidth]{images/common-property.jpg}\\
 Sdílené intelektuální spoluvlastnictví
 }
+
+\includegraphics[width=0.3\textwidth]<2>{images/pythagoras.jpg}
 
 \only<3->{
     \begin{itemize}
@@ -191,15 +193,14 @@ Sdílené intelektuální spoluvlastnictví
 \note<2>{Ale koncept sdílení není přece vynalezen v 80 letech. Západní věda tak jak ji
 chápeme je snad od dob antiky postavena na stejných principech:}
 
-\note<3->{
-
+\note<3>{
 \begin{itemize}
-\item<3-5>publikuji výsledek způsobem, že je opakovatelný
-\item<4-5>očekávám, že někdo jiný mou práci zopakuje přezkouší její platnost
-\item<5-5>případně navrhne některé změny, a výsledek opět publikuje.
+\item publikuji výsledek způsobem, že je opakovatelný
+\item očekávám, že někdo jiný mou práci zopakuje přezkouší její platnost
+\item případně navrhne některé změny, a výsledek opět publikuje.
 \end{itemize}
 }
-\note<6>{
+\note<4>{
 Vědecká komunita díky sdílení informací posouvá hranice našeho
 poznání dále, stejně jako komunita vývojářská posouvá hranice software.
 }
@@ -208,7 +209,7 @@ poznání dále, stejně jako komunita vývojářská posouvá hranice software.
 \begin{frame}\begin{center}
 
 \includegraphics[width=0.6\textwidth]<1>{images/wikipedia.jpg}
-\includegraphics[width=0.6\textwidth]<2>{images/osm-logo.png}
+\includegraphics[width=0.3\textwidth]<2>{images/osm-logo.png}
 \only<3>{
     \begin{itemize}
         \item prohlížet, studovat
@@ -342,7 +343,7 @@ listech bývá u větších projektů v řádu minut.}
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
-\includegraphics[width=0.6\textwidth]<1>{images/stamp.jpg}
+\includegraphics[width=0.6\textwidth]{images/stamp.jpg}
 \note<1>{Dalším důvodem je nejednotný systém návazného vzdělávání. Existují spíše
 jednotlivci, nebízející školení. Školení jsou ale nejednotná, různá obsahem i
 kvalitou. V zahraniční vznikají certifikační projekty, k nám zatím nedorazily.
@@ -357,20 +358,33 @@ na naší geo- scéně projekt GISMentors.
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
-\note{
-Projekt GISMentors je společný projekt několika jednotlivců, kteří se rozhodli
-spojit své síly a nabídnout pod společnou hlavičkou kvalitní školení pro
-co nejširší oblast open source GIS. Školení budou obsahovat všechno to, na co
-jsou účastníci podobných akcí zvyklí, ale ještě i něco navíc -- účastníci si
-odnesou s sebou domů i software, na kterém školení probíhalo spolu s daty, která
-byla použita. Doufáme, že se nám tak podaří snížit jednu z bariér pro větší
-rozšíření open source software pro geoprostorové informace.
+\only<1>{
+    \includegraphics[width=0.7\textwidth]{images/mentors.png}\\
+    \hfill{}a další\dots
+}
+\includegraphics[width=0.7\textwidth]<2>{images/mentors-team.png}
+\note<1>{
+    Projekt GISMentors je společný projekt několika jednotlivců, kteří se rozhodli
+    spojit své síly a nabídnout pod společnou hlavičkou kvalitní školení pro
+    co nejširší oblast open source GIS. Školení budou obsahovat všechno to, na co
+    jsou účastníci podobných akcí zvyklí, ale ještě i něco navíc -- účastníci si
+    odnesou s sebou domů i software, na kterém školení probíhalo spolu s daty, která
+    byla použita. Doufáme, že se nám tak podaří snížit jednu z bariér pro větší
+    rozšíření open source software pro geoprostorové informace.
+}
+\note<2>{
+    Máme tým zkušených školitelů, kteří za sebou mají doposud individuální školicí a konzultační
+    praxi v oblasti Open Source GIS. Dali jsme se dohromady tak, abychom pokryli
+    co nejšiřší spektrum poptávky. Víme, že nemáme pokryté všechny open source
+    projekty a proto očekáváme jeho růst.
 }
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
 \includegraphics[width=0.6\textwidth]<1>{images/marketing.jpg}
-\note{
+%\includegraphics[width=0.6\textwidth]<2>{images/mentors-team-2.jpg}
+\note<1>{Pardon, špatná fotka}
+\note<2>{
 Takže věříme, že budete-li mít v budoucnu problém s open source software pro GIS
 nebo budete-li si chtít doplnit vzdělání, budete mít kde.
 }
@@ -380,11 +394,22 @@ nebo budete-li si chtít doplnit vzdělání, budete mít kde.
 %\end{center}\end{frame}
 
 \section*{Závěr}
-\begin{frame}
-    Dotazy?
-\note{Děkuji Vám za pozornost, kterou jste mi věnovali a jsem připraven
-odpovědět na vaše dotazy, máte-li nějaké}
-\end{frame}
+\begin{frame}\begin{center}
+    Dotazy?\\
+
+    \vfill
+
+    \href{mailto:info@gismentors.eu}{info@gismentors.eu} $|$ \url{http://gismentors.eu}
+
+    \vfill
+    \includegraphics[width=0.15\textwidth]{images/cc.png}
+
+\note{Tato prezentace je samozřejmě uvolněna pod licencí Creative Commons,
+Uveďte autora. \\
+~\\
+Děkuji Vám za pozornost, kterou jste mi věnovali a jsem připraven
+čelit vašim dotazům, máte-li nějaké}
+\end{center}\end{frame}
 
 
 \end{document}
