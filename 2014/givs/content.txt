@@ -130,5 +130,10 @@ odnesou s sebou domů i software, na kterém školení probíhalo spolu s daty, 
 byla použita. Doufáme, že se nám tak podaří snížit jednu z bariér pro větší
 rozšíření open source software pro geoprostorové informace. 
 
+Máme tým zkušených školitelů, kteří za sebou mají doposud individuální školicí a konzultační
+praxi v oblasti Open Source GIS. Dali jsme se dohromady tak, abychom pokryli
+co nejšiřší spektrum poptávky. Víme, že nemáme pokryté všechny open source
+projekty a proto očekáváme jeho růst.
+
 Takže věříme, že budete-li mít v budoucnu problém s open source software pro GIS
 nebo budete-li si chtít doplnit vzdělání, budete mít kde.
