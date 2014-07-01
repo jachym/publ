@@ -1,0 +1,285 @@
+\documentclass[twoside]{oss-conf}
+\usepackage[english,czech]{babel}             % use english and your language respectively ... czech, polish, ...
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}                    % use only UTF-8 encoding 
+\usepackage{amsmath}
+\usepackage{amscd,amssymb,amsfonts}
+\usepackage[sort,nocompress]{cite} 
+\usepackage{graphicx}                          % use for include pictures *.jpg, *.png, *.pdf
+  %\usepackage{color}
+  %\usepackage{colortbl}
+  %\usepackage{multicol}
+  %\usepackage{comment}
+\usepackage{fancyhdr}
+\usepackage[pdftex,unicode,bookmarks=false]{hyperref}  % for e-mail and url adress
+\usepackage{eurosym}
+\usepackage{listings}
+
+
+
+%.............................................................................
+\begin{document}
+
+%..................................................................................
+\setcounter{page}{1}                            % číslo prvej stránky príspevku
+\def\volumeDOI{OSSConf 2014:\  }                % číslo zborníka
+\def\konfera{Konferencia OSSConf 2014}
+
+\pagestyle{fancy}
+\fancyfoot{}\fancyhead[LE,RO]{\thepage}\fancyhead[LO]{\nouppercase{\leftmark: \rightmark}}\fancyhead[RE]{\nouppercase{\konfera}}
+
+
+
+%........................................................................................................................................
+%     TU ZAČÍNA PÍSAŤ AUTOR
+%........................................................................................................................................
+
+
+	
+
+%.............................................. pre slovenčinu
+%\def\solutionname{Riešenie}
+%\def\addressS{Kontaktná adresa}
+%\def\addressSis{Kontaktné adresy}
+%\def\rbCurrentaddress{Aktuálna adresa}
+%\def\rbEmailaddress{E-mailová adresa}
+%\def\keywordsnameS{Kľúčové slová}     
+%.............................................. pre češtinu odpoznámkovať
+\def\solutionname{Řešení}
+\def\addressS{Kontaktní adresa}
+\def\addressSis{Kontaktní adresy}
+\def\rbCurrentaddress{Aktuální adresa}
+\def\rbEmailaddress{E-mailová adresa}
+\def\keywordsnameS{Klíčová slova}
+
+
+%%.............................................. slovenský alebo český názov
+% pre kratšie názvy  použi iba príkaz   \title{CELÝ NÁZOV ČLÁNKU}  
+\title[Otevřený Geosvět]{Otevřený svět Geo*} 
+
+
+%.............................................. anglický názov
+\titleA[]{Opened world of Geo*}
+
+
+%.............................................. autori (jeden alebo viac) .. každý podľa vzoru:
+% \author[Skratka mena do hlavičky]{Pred titul}{Meno priezvisko}{Po titul}{skratka štátu}
+% \address{adresa..práca}
+% \curraddress{alternatívna adresa}
+% \emailh{sanonymous@water.sun.xy}
+% \urladdressh{http://www.sanous.tows.xy/~sanonymous}
+
+
+
+\author[J. Čepický]{Jáchym Čepický}{Ing.}{}{}
+\address{Česká republika}
+\curraddress{Česká republika}
+\emailh{jachym@les-ejk.cz}
+\urladdressh{http://les-ejk.cz, http://gismentors.eu}
+
+%.............................................. venovanie
+%\dedicatory{Ak to chcem niekomu venovať\dots nepovinné}
+
+
+%.............................................. kľúčové slová slovensky/anglicky
+\keywords{GIS, Open Source, Free Software}
+\keywordsA{GIS, Open Source, Free Software}
+
+%.............................................. (obligatory) AMS Classification 2000
+% The 1-st classification is obligatory, the 2-nd classification is optional
+% \subjclass{primary}{secondary}      f.e. \subjclass{35R35, 49N50}{}
+  % \subjclass{35R35, 49M15, 49N50}{}
+
+
+
+%.............................................. slovenský abstrakt
+\selectlanguage{czech}
+
+\begin{abstract}
+Open Source Geosvět se od toho ,,normálního`` IT svět trochu v něčem liší. Co je
+to ale otevřenost, jako koncept, kde se vzala tak najednou? A nebo to nebylo
+najednou? A proč vlastně veškerý software není otevřený? A měl by být?
+\end{abstract}
+
+
+%.............................................. anglický abstrakt
+\selectlanguage{english}
+
+\begin{abstractA}
+    Open Source for geospatial is always little bit different from ,,standard``
+    IT world. What is it \emph{to be open}, where does it come from? Or it was
+    not all at sudden? Why isn't all software open sourced? Should it be?
+\end{abstractA}
+
+
+
+\selectlanguage{czech}
+%.............................................. moje makrá
+\newtheorem{theorem}{Veta}[section]
+\newtheorem{corollary}[theorem]{Tvrdenie}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{exmple}[theorem]{Príklad}
+\newtheorem{defn}[theorem]{Definícia}
+\newtheorem{rmrk}[theorem]{Poznámka}
+            %%% for no-italic, numbered environments, use:
+\newenvironment{definition}{\begin{defn}\normalfont}{\end{defn}}
+\newenvironment{remark}{\begin{rmrk}\normalfont}{\end{rmrk}}
+\newenvironment{example}{\begin{exmple}\normalfont}{\end{exmple}}
+            %%% for unnumbered environments, use f.e.
+\newtheorem*{remarque}{Poznámka}
+
+\newcommand\dd{\mathop{\rm d\!}\nolimits}
+\newcommand\sgn{\mathop{\rm sgn}\nolimits}
+
+
+
+%.............................................. telo článku
+\maketitle
+\bigskip
+
+Více než deset let se zabývám vývojem open source software
+pro geoinformatiku. Úzce s tím souvisí i to, že trochu déle se počítám mezi
+uživatele operačního systému GNU/Linux. To obyčejně nepovažuji za důležité
+zmiňovat, ale v kontextu této přednášky to považuji za významnou skutečnost.
+
+Během studií jsem u svého kamaráda našel v jeho knihovničce knížku Učíme se Red Hat Linux
+a při jejím čtení mi došlo, že vedle počítačů jak je znám existuje jiný
+svět, který bych rád poznal. V té době pro mě počítač bylo PC s MS Windows 98,
+používal jsem Excel na tvorbu protokolů a prací pro svůj obor (kterým bylo lesní
+inženýrství). Nikdy jsem neměl ambici programovat, počítače jsem chápal jako
+nástroje, které by mi měli v ideálním případě usnadnit práci. V knížce jsem se
+seznámil se základními ideemi open source a free software a byly mi sympatické,
+jakkoliv jsem nedokázal pochopit, proč by někdo sdílel svoji práci --
+intelektuální vlastnictví -- s kýmkoliv jiným. Když se mi v krátké době podařilo
+pořídit si svůj vlastní nový počítač, požádal jsem kamaráda o pomoc
+nainstalovali jsme můj první Linux. 
+
+Od té doby jsem se stal uživatelem open source a free software a postupem času i
+jeho spolutvůrcem. Naučil jsem se, jak funguje komunita uživatelů a přispěvatelů
+do open source software, pochopil jsem některé jemné rozdíly mezi svobodným
+software a otevřeným software a tak dále. A dnes chápu, že open source, nebo
+obecně tak zvaný crowd source -- sdílený přístup -- není žádná anomálie.
+
+Většina z vás už určitě slyšela o tom, že hnutí free software založil Richard
+Matthew Stallman v 80.~letech minulého století prací na operačním systému GNU.
+Definoval tři základní svobody nebo práva, které by měl každý uživatel software
+mít: právo vidět zdrojový kód, právo sdílet zdrojový kód a právo měnit zdrojový
+kód a dále ho sdílet.
+
+V systém se stal úspěšný také díky jádru operačního systému Linux. Dnes je Linux
+nejpoužívanějším serverovým operačním systémem, používá se v mobilních
+zařízeních, na super počítačích. Proč se tak stalo? Protože je to otevřený systém
+-- systém, ve kterém ostatní sdílí svůj kód -- svoje know-how -- svoje
+ intelektuální vlastnictví s ostatními.
+
+Ale koncept sdílení není přece vynalezen v 80 letech. Západní věda tak jak ji
+chápeme je snad od dob antiky postavena na stejných principech: publikuji
+výsledek způsobem, že je opakovatelný, očekávám, že někdo jiný mou práci
+zopakuje, přezkouší její platnost, případně navrhne některé změny, a výsledek
+opět publikuje. Vědecká komunita díky sdílení informací posouvá hranice našeho
+poznání dále, stejně jako komunita vývojářská posouvá hranice software.
+
+Open source software není jediný příklad pro fungující intelektuální
+spoluvlastnictví. Nikdo snad nepochybuje, že wikipedia je spolehlivý informační
+zdroj a přitom na její obsah nemá nikdo monopol, neexistuje globální autorita,
+která by strážila věcný obsah Wikipedie. OpenStreetMap je podle mě další
+úspěšný projekt. Jako geoprostoroví profesionálové můžete zpochybňovat polohovou
+přesnost dat, jejich faktickou správnost nebo aktuálnost, ale nemůžete
+zpochybnit, že globálně vzato je to ucelený dataset který nemá v prorietárním
+světe obdoby.
+
+Všechny tyto příklady mají díky svým licencím společné tři základní vlastnosti,
+které vyzývají další a další uživatele aby se přidali: vidět obsah, sdílet obsah
+a provádět změny v obsahu a sdílet tyto změny dál.
+
+Je jen málo oblastí geoinformatiky, které by nebyly pokryty kvalitním open
+source software -- i když připouštím, že jsou. Stále vznikají nové programy pro
+další oblasti, staré ozkoušené projekty jsou ale stále zde, stabilní, s
+rozšířenou vývojářskou a uživatelskou komunitou, stále dostávají nové funkce, ty
+staré jsou oprašovány a udržovány.
+
+Dovolte mi jako příklad zmínit několik z nich:
+\begin{description}
+    \item[GRASS GIS] -- Desktopový GIS, vyvíjený původně americkou armádou od roku 1982,
+který obsahuje množství kódu českých a slovenských vývojářů.
+
+\item[QGIS], který je sice mladší než GRASS, ale na Slovensku je opět velice populární.
+Daří se mu stále více nahrazovat co do vzhledu a funkcí komerčně rozšířený
+ArcGIS.
+
+\item[PostGIS] je prostorové rozšíření databáze PostgreSQL.
+
+    \item[MapServer a GeoServer] jsou zástupci serverových programů, které po světě
+vydávají mapy a jsou nasazováni i všude tam, kde je potřeba řešit iniciativu
+INSPIRE.
+
+\item[PyCSW] je serverová aplikace shromažďující a vydávající metadata.
+\end{description}
+
+A mnoho dalších.
+
+Kdo jste ještě nebyli na žádné konferenci zabývající se obecně geo* open source
+software, doporučuji vám navštívit některou z konferencí FOSS4G, ať už letos ve
+Spojených státech globální, nebo její evropskou odnož v Brémách. Máte také
+možnost nahlídnout přímo do  vývojářské kuchyně na některém z code sprints,
+naposledy ve Vídni, další možnost budete mít v italském Bozlanu. 
+
+Z toho všeho co říkám si možná říkáte: proč to tedy nikdo nepoužívá, když je to
+tak skvělý produkt? Proč není open source software dávno rozšířenější, než jak
+to vypadá?
+
+Důvody pro tento stav -- a je jedno jestli je to objektivní fakt nebo subjektivní
+pocit -- jsou samozřejmě mnohé a jak už to bývá, mají povahu vnitřní i vnější.
+
+Jako jeden z prvních důvodů (bez nároku na prvenství z hlediska významnosti)
+uvedu to, že člověk používá to, co zná. Věřím, že obsahem výuky na
+školách ve všech oborech a stupních by měly být především obecně platné
+principy, až od nich odvozené konkrétní situace. Učíme obecně Archimedův zákon,
+a teprve následně několik jeho praktických aplikací, jako že ve vodě je slon
+lehčí nebo spolu s inženýry španělského námořnictva, že ponorka, má-li se vynořit,
+musí mít především v součtu menší objemovou hustotu, než voda. Proč se ale tento
+princip uplatňuje při výuce software jen velice zřídka? Proč výuka počítačí
+obecně a GIS konkrétně se téměř bez výjimky provádí na konkrétním jednom
+software?
+
+Dalším důvodem je neexistence jednotného telefonního čísla -- chybí marketingové
+oddělení open source GIS, není tu někdo, kdo by zákazníkům vysvětlil proč je
+konkrétní produkt ten nejlepší (v absolutním i relativním významu). U open source
+software se předpokládá, že jste dospělí, že jste nebo se chcete stát experty a
+proto na to, co je pro váš případ to nejlepší si přijdete sami. Open source je
+náročný na lidské zdroje, pokud nemáte u sebe někoho dalšího, jste v tom tak
+trochu sami, ,,jenom`` s podporou komunity. To může hodně lidí odradit, ale
+bylo mnohokrát  ilustrováno, že podpora komunity funguje, první odpověď v mailing
+listech bývá u větších projektů v řádu minut.
+
+Dalším důvodem bude roztříštěná nabídka open source software. Jak jsem řekl
+dříve, nemáte se moc koho zeptat a ještě ke všemu si musíte vybírat z množství
+variant -- sám s tím mám často problém. Provozní výzkum, porovnávání různých
+programů a sledování nových je denní chléb. Mám vzít TileCache, MapStach,
+GeoServer cache, MapCache? A co je to ten Mapnik? A jaký je rozdíl mezi Leaflet
+a OpenLayers? Na tyto otázky získáte nejlépe odpověď tak, že budete číst nebo se
+zeptáte někoho, kdo to ví, ale jak jsem již řekl -- ve vašem okolí je většinou
+problém najít někoho kdo by to věděl. Nebo snad ne?
+
+Dalším důvodem je nejednotný systém návazného vzdělávání. Existují spíše
+jednotlivci, nabízející školení. Školení jsou ale nejednotná, různá obsahem i
+kvalitou.
+
+Důvodů, proč open source software není úspěšnější -- myšleno absolutně -- je ještě
+celá další řada. Některé z nich a některé z již zmíněných se bude snažit zaplnit
+na nejen naší geo- scéně projekt GISMentors.
+
+Na Slovensku už jsou firmy, nabízející, podle toho, co jsem mohl vidět, open
+source řešení na profesionální úrovni, včetně možnosti, jak říkávám ,,sáhnout do
+stroje`` a opravit chybu nebo přidat funkci. Myslím, že i vzhledem k tomu kolik
+Slovenských vývojářů se pohybuje na open source GIS scéně, má Slovensko světlou
+geo-budoucnost.
+
+
+\begin{acknowledgment}[Poďakovanie]
+Tento príspevok vznikol s láskavým prispením grantu VEGA-FRC~2012/003 štedro sponzorovaného
+Slovenskou grantovou agentúrou.
+\end{acknowledgment}
+
+
+\end{document}

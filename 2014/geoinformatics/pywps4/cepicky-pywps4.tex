@@ -1,0 +1,223 @@
+\documentclass[xcolor=dvipsnames,notes=hide]{beamer}
+%\documentclass[notes=only]{beamer}
+%\documentclass[xcolor=dvipsnames, notes=hide]{beamer} 
+\usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{xcolor,colortbl}
+\usepackage{pgfpages}
+
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+\definecolor{Gray}{gray}{0.85}
+\definecolor{LightGreen}{rgb}{1,0.88,1}
+
+\newcolumntype{a}{>{\columncolor{Gray}} X }
+\newcolumntype{b}{>{\columncolor{white}} X }
+
+\usepackage{default}
+\usepackage{pgfpages} %This is needed for notes presentation!
+\setbeameroption{show notes on second screen=left}
+\usepackage{soul}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=NavyBlue,urlcolor=NavyBlue}
+\usepackage{times}
+
+
+
+\pgfdeclareimage[height=1.cm]{conference-logo}{images/dasenka.jpg}
+\logo{\pgfuseimage{conference-logo}}
+
+\title{PyWPS4}
+
+\subtitle {Status report}
+
+\author[J. Čepický] % (optional, use only with lots of authors)
+{Jáchym~Čepický\inst{1}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute % (optional, but mostly needed)
+{
+  \inst{1}%
+  \url{http://les-ejk.cz}, \url{http://geosense.cz}\\
+}
+  
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[Geoinformatics 2014] % (optional, should be abbreviation of conference name)
+{Geoinformatics 2014}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+
+
+\begin{document}
+
+%\begin{abstract}
+%\end{abstract}
+
+\begin{frame}
+\titlepage
+
+\note{Dobrý den\\
+jmenuji se Jáchym Čepický}
+\end{frame}
+
+\begin{frame}\begin{center}
+\includegraphics[width=0.4\textwidth]<1>{images/pywps_logo.png}
+
+\note<1>{dnes tady mluvím za vývojový tým projektu PyWPS}
+\note<2>{
+    PyWPS je projekt vyvíjený od roku 2006, jedná se o implementaci standardu OGC
+    WPS na straně serveru v jazyce Python. Stávající verze je vyvíjena pod licencí
+    GNU/GPL, nová verze pod licencí BSD
+}
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+\includegraphics[width=1\textwidth]<1>{images/python.jpg}
+
+\note<1>{Už jsem zmínil to, že PyWPS je vyvíjen v jazyce Python. Mezi ostatními
+implementacemi vyniká především rychlostí instalace a konfigurace. Instalace
+proběhne během několika minut. Psaní skriptů je také velice jednoduché.}
+
+\includegraphics[width=1\textwidth]<2>{images/grass.jpg}
+\note<2>{PyWPS obsahuje od začátku podporu pro skripty v GRASS GIS}
+
+\includegraphics[width=0.4\textwidth]<3>{images/gdal.png}
+\note<3>{GDAL/OGR nebo}
+
+\includegraphics[width=0.4\textwidth]<4>{images/r.png}
+\note<4>{R. Proč jsme se rozhodli pro přepsání}
+
+\end{center}\end{frame}
+
+
+\begin{frame}\begin{center}
+    \includegraphics<2>[height=7cm]{images/desert.jpg}
+\note<1>{ Už jsem to tady říkal vloni. V roce 2006 vypadala krajina geopythonu jinak }
+
+\note<2>{
+    \begin{itemize}
+        \item GRASS neměl žádné rozhraní pro jazyk python
+        \item Python 2.2 byla aktuální verze
+        \item Prakticky žádná podpora pro parserování XML souborů
+        \item Chyběly další knihovny pro práci s OGC
+        \item Nejúžívanější formát byl ESRI Shapfile, mluvilo se o GML, GeoTIFF
+    \end{itemize}
+}
+
+\includegraphics<3>[height=7cm]{images/prales.jpg}
+\note<3>{
+    \begin{itemize}
+        \item Python 3
+        \item GRASS má nativní vazbu do Pythonu, stejně jako další knihovny
+        \item Nové projekty lxml, owslib, werkzeug
+    \item Nové formáty - GeoJSON, TopoJSON (kde je dneska KML, \dots)
+    \end{itemize}
+}
+\end{center}\end{frame}
+
+
+\begin{frame}\begin{center}
+    \url{https://github.com/jachym/pywps-4/issues/milestones}
+    \note{
+Na uvedené adrese najdete roadmap, která je
+stále ve vývoji. Máme to rozděleno na PyWPS 4.0.0 a PyWPS 4.1.0 verze.
+}
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+    PyWPS 4.0: Co máme
+    \begin{itemize}
+        \item Validators
+        \item Server implementation based on werkzeug
+        \item IOHandler
+        \item File Storage
+    \end{itemize}
+    \note{
+        \begin{itemize}
+            \item Validators - gml, shp, 4 stupně
+            \item Server implementation based on werkzeug - populární knihonva na
+                tvorbu serverových aplikací
+            \item IOHandler univerzální objekt pro převod dat mezi objekty stream,
+                data, in memory object a další
+            \item File Storage - obsluha výsledných souborů
+        \end{itemize}
+    }
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+Do PyWPS 4.1.0 by měly patřit nové vlastnosti:
+    
+\begin{itemize}
+    \item Výstupy přes GeoServer, MapServer, QGIS Server
+    \item Administrativní RESTové rozhranní
+\end{itemize}
+    \note{
+        PyWPS 4.1 by mělo obsahovat
+\begin{itemize}
+    \item Výstupy přes GeoServer, MapServer, QGIS Server
+    \item Administrativní RESTové rozhranní
+    \item Database storage, external service storage (FTP, Dropbox, ...)
+\end{itemize}
+    }
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+Co nás brzdí
+
+\begin{itemize}
+    \item Čas
+    \item Peníze
+\end{itemize}
+
+\note{
+    Nedostatek času a peněz. Momentálně nikdo nemá v popisu práce pracovat na PyWPS.
+    Chybí nám sponzoři, dělníci. Něco se na obzoru vrbí, ale zatím nic
+    konkrétního. Pro open source projekt jako je tento je nedostatek pracovníků
+    kritický. Na aktuálním kódu pracují ve svém velice volném čase asi 3 lidi.
+~\\
+
+    Získali jsme jednoho studenta do Google Summer of Code Project - ve
+    spolupráci s OSGeo.
+}
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+    \begin{itemize}
+\item Intevation GmbH
+\item Help Service - Remote Sensing
+\item Deutsche Bundesstiftung Umwelt
+    \end{itemize}
+
+    \note{S tím souvisí i naši minulí sponzoři, byl bych rád,kdybych mohl příští
+    rok zde ukazovat delší seznam našich podporovatelů, a hlavně aktuální.
+Každpáně bez těchto firem a institucí by PyWPS nebylo dnes tam kde je.
+}
+\end{center}\end{frame}
+
+\section*{Závěr}
+\begin{frame}\begin{center}
+    Dotazy?\\
+
+    \vfill
+
+    \url{http://pywps.intevation.org}
+
+    \vfill
+    \includegraphics[width=0.15\textwidth]{images/cc.png}
+
+\note{Tato prezentace je samozřejmě uvolněna pod licencí Creative Commons,
+Uveďte autora. \\
+~\\
+Děkuji Vám za pozornost, kterou jste mi věnovali a jsem připraven
+čelit vašim dotazům, máte-li nějaké}
+\end{center}\end{frame}
+
+
+\end{document}
