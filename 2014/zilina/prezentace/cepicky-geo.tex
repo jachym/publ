@@ -251,15 +251,24 @@ a provádět změny v obsahu a sdílet tyto změny dál.
 \includegraphics[width=0.7\textwidth]<1>{images/internet.jpg}
 
 \note<1>{A kromě licencí, které umožňují sdílet myšlenky bezestrachu, že by se je někdo
-pokoušel uzavřít ... doufám, že i vám je ze sousloví "uzavřít myšlenky" poněkud
-chladno ... byl úspěch všech těchto projektů podmíněn ještě jedním důležitým
+pokoušel uzavřít nebo znepřístupnit, 
+byl úspěch všech těchto projektů podmíněn ještě jedním důležitým
 aspetktem, a to je jednoduché spojení velkého množství lidí na stejné úrovni. Je
 to díky síti Internet, který je technologicky a většinou i politicky a sociálně
 neutrální. Díky této síle může vznikat opravdu něco, z ničeho.
 }
 
-\note<2>{Spojte lidi, dejte jim tu správnou licenci a stane se kouzlo, přesto ... tak
-jednoduché to je.}
+\note<2>{
+    Když se mě lidi ptají, jak může open source software fungovat, proč by někdo
+    pracoval na cizím písečku, a jak se z toho dají udělat peníze říkám, že
+    jednak je obchodní model úplně jiný, ale hlavně:
+    Spojte lidi, odstraňte bariéry v jejich komunikaci, dejte jim tu
+    správnou licenci, která zajistí, že o svoji práci nepřijdou a stane se
+    kouzlo.\\
+    ~\\
+    Já vlastně nevím jak to, že komunita funguje, ale dlouholetá nejen moje
+    zkušenost říká, že to funguje a dá se s tím počítat.
+}
 
 \end{center}\end{frame}
 
@@ -278,7 +287,7 @@ jednoduché to je.}
 }
 \only<4>{
     \includegraphics[width=0.5\textwidth]{images/zabaged-cena-circle.png}\\
-    Celkem: 3~726~925 Kč\\
+    Celkem: 3~726~925 Kč~\~~120~000~Eur\\
     \url{http://geoportal.cuzk.cz/(S(pi4gmefgc1dw3s55gomgoo45))/Default.aspx?mode=eShop\&head_tab=sekce-01-gp\&menu=13}
 }
 \note<1>{
@@ -311,6 +320,21 @@ jednoduché to je.}
 \end{center}
 \end{frame}
 
+
+
+\begin{frame}\begin{center}
+\includegraphics[width=0.7\textwidth]{images/FOT_6075.JPG}\\
+\url{http://www.gismentors.eu/geodatahackathon2014/}
+\note{
+Minulý měsíc jsme ve spolupráci s Institutem plánování a rozvoje hlavního města
+Prahy  a Fondem Otakara Motejla a firmy RedHat uspořádali 1. Pražský
+GeoDataHackathon. IPR
+dodal nově otevřená data a 12 účastníků se do nich zakouslo. Vzniklo 6 projektů,
+které se podívaly na problematiku cen bytů, parkování v Praze, adres úřadů nebo
+postup stínů na dětských hřištích. Teď pracujeme na případové studii, kterou
+zveřejníme, ale chci tím říct, že se věci hýbou a geodata se otevírají.
+}
+\end{center}\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame} % OSM
 \begin{center}
@@ -342,8 +366,21 @@ jednoduché to je.}
     \includegraphics[width=0.5\textwidth]{images/osm-vectors.png}
 }
 
+\only<7>{
+    \includegraphics[width=0.8\textwidth]{images/mapbox.png}\\
+    \url{http://mapbox.com}
+}
+\only<8>{
+    \includegraphics[width=0.6\textwidth]{images/osm3d.jpg}\\
+    \url{http://osmbuildings.org}
+}
+\only<9>{
+    \includegraphics[width=0.8\textwidth]{images/freemap.png}\\
+    \url{http://freemap.sk}
+}
 \note<1>{
-    V roce 2007 ale začal malý universitní projekt jménem OpenStreetMap, který měl
+    Jenomže v podstatě z nedostaku volně dostupných geodat, v roce 2007 ale
+    začal malý universitní projekt jménem OpenStreetMap, který měl
     za cíl vytvořit společné intelektuální vlastnictví geodat. Tento projekt je
     velice úspěšný, protože zaplnil poptávku, hlad po dobrých geodatech nebo po
     geodatech, která jsou "dostatečně dobrá". Jejich licence umožňuje data sdílet,
@@ -375,8 +412,23 @@ jednoduché to je.}
     s pověřenou osobou (jako příklad můžeme vzít právě český zěměměřicský úřad),
     raději použijí OpenStreetMap pro své interní potřeby. 
 }
-\end{center}
-\end{frame}
+\note<7>{
+    Okolo OpenStreetMap už existuje řada komerčních služeb, jako je německá
+    Geofabrik nebo americký MapBox, který se pustil do souboje s globální
+    službou Google Maps a nabízí mapové podklady (javascriptovou knihovnu, což
+    je ve skutečnosti Leaflet) na komerční bázi. Osobně se mi tato služba hodně
+    líbí, i když jsem zatím neviděl u nás projekt, který by ji využil. To už
+    častěji lidi používají TileMill - Open Source řešení právě od MapBoxu pro
+    generování a správu dlaždic.
+}
+\note<8>{
+    Jiným zajímavým projektem okolo OpenStreetMap jsou osm buildings, které
+    vytvářejí takovou hezkou pseudo-3D grafiku nad vektorvými daty.
+}
+\note<9>{
+    A nebo třeba projekt Freemap.sk
+}
+\end{center} \end{frame}
 
 
 \begin{frame}
@@ -414,7 +466,7 @@ vytvářejí hodnoty, pro jejichž vytvoření byly dříve potřeba velké inst
 }
 
 \only<3-4>{
-    \includegraphics[width=.5\textwidth]{images/osgeo-wordle.png}
+    \includegraphics[width=.8\textwidth]{images/osgeo-wordle.png}
 }
 
 \only<5>{
@@ -434,7 +486,8 @@ komunitou (v tuto chvíli je nás cca 180). OSGeo má různé aktivity, ale je
 potřebné zdůraznit, že se jedná o dobrovolnickou organizaci. Kromě 9 členů
 představenstva má ještě prezidenta, kterým je v současnosti Jeff McKenna.
 Jednou z nejvýraznější akcí je pořádání konference Foss4G, která má i svoji
-evropskou verzi, letos v německých Brémách.
+evropskou verzi, letos v německých Brémách. Pro příští rok bude vyhlášena
+poptávka po lokaci a já tajně doufám, že Žilina by se mohla přihlásit.
 }
 
 \note<3>{
@@ -456,18 +509,15 @@ OSGeo.org nebo na stránkách Google.com, přesto ale
     Je jen málo oblastí geoinformatiky, které by nebyly pokryty kvalitním open
 source software -- i když připouštím, že jsou. Většinu znich naleznete na CDčku
 OSGeo live, které můžete spustit i jako virtuální stroj. Obsahuje programy, data
-tutoriály. ~\\
-~\\
-Stále vznikají nové programy pro
-další oblasti, staré ozkoušené projekty jsou ale stále zde, stabilní, s
-rozšířenou vývojářskou a uživatelskou komunitou, stále dostávají nové funkce, ty
-staré jsou oprašovány a udržovány.
+tutoriály, všechno co potřebujete pro objevování otevřenéo geo světa. ~\\
 }
 \end{center}\end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}\begin{center}
 \includegraphics[width=0.7\textwidth]{images/desktop.jpg}
-\note<1>{Představne si nyní nejznámější programy a oblast jejich použití,
+\note<1>{Představme si nyní nejznámější programy a oblast jejich použití,
 začneme desktopem}
 \end{center}\end{frame}
 
@@ -475,33 +525,69 @@ začneme desktopem}
 \includegraphics<1>[width=0.8\textwidth]{images/qgis.png}
 \includegraphics<2>[width=0.8\textwidth]{images/gis20_headers_cartography.jpg}
 \includegraphics<3>[width=0.8\textwidth]{images/qgis20_headers_editing.jpg}
+\includegraphics<4>[width=0.8\textwidth]{images/mapbender-qgis-treffen2009.jpg}
 \\\url{http://qgis.org}
-\note{
-QGIS je destkopová prohlížečka geodat, která se postupně mění na plnkrevný GIS,
-včetně serverové části. \mynext
-
-Obsahuje mnoho  zásuvných modulů, které jeho funkce ještě rozšiřují. \mynext
+\note<1>{
+QGIS je destkopová prohlížečka geodat, která se postupně mění na plnotučný GIS,
+včetně serverové části.
+}
+\note<2>{
+Obsahuje mnoho  zásuvných modulů, které jeho funkce ještě rozšiřují.
+}
+\note<3>{
+Ke QGISu mám osobně rozporuplný vztah, protože jsem začínal s GRASSem a pamatuju
+dobu, kdy QGIS vznikal a přišlo mi to tenkrát jako úplné plýtvání silami na něco
+tak zbytečného, jako je prohlížečka geodat. QGIS je ale nejúspěšnější projekt,
+měřeno tím, kolik lidí ho zná a počítá s ním jako s alternativou k prorietárnímu
+světu, což je v našem případě firma ESRI s produktem ArcGIS. QGIS nejenom že na
+spoustu oblastí stačí, ale v některých oblastech je už lepší a přitom si pořád
+zachovává, alespoň pro mě, dojem jednoduché prohlížečky.~\\
+~\\
+Dneska je QGIS první po čem sáhnu, když si potřebuju nějaká data prostě zobrazit. Mám
+někdy výhrady k jeho užit. rozhran., ale ta věc prostě funguje. Nezanedbatelnou
+výhodou je také možnost dopisování modulů v Pythonu, stejně jako vybudování
+vlastního programu pomocí pythonu nad knihovnami QGISu.
+}
+\note<4>{
+    Okolo QGISu existuje velice aktivní vývojářská a uživatelská komunita, která
+    se pravidělně, několikrát ročně, schází na pracovních setkáních a spolu
+    pokračují na vývoji QGISu. Exiustuje i podkast, kde si můžete poslechnout
+    rozhovory s některými členy komunity, několik knížek o QGISu. 
 }
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
 \includegraphics<1>[width=0.8\textwidth]{images/grass-wxgui.png}
-\includegraphics<2>[width=0.8\textwidth]{images/grass.png}
+\includegraphics<2>[width=0.8\textwidth]{images/grass-terminal.png}
 \includegraphics<3>[width=0.8\textwidth]{images/grass-floods.jpg}
-\note{
+\includegraphics<4>[width=0.8\textwidth]{images/grass-community.jpg}
+\note<1>{
 GRASS GIS je projekt vyvíjený od roku 1982 a měl jsem tu čest být členem jeho
 vývojového teamu. GRASS je GIS obsahující na 500 modulů pro práci s rastrovými i
 vektorovými daty. Unese analyzovat opravdu velké množství dat, lze ho spouštět
 pomocí skriptů (momentálně mi na cloudové platformě Microsoft Azure běží už
-druhý týden výpočet některých analýz v Praze). Čím je mezi programy pro psaní
-textů LaTeX, tím je mezi GISy GRASS. \mynext \\
-~\\
+druhý týden výpočet některých analýz v Praze). Říkávám, že čím je mezi programy pro psaní
+textů LaTeX, tím je mezi GISy GRASS.}
+\note<2>{
 GRASS můžete ovládat z grafického uživatelského zohraní pomocí myši nebo pomocí
 příkazové řádky, ve které lze také množstí úkolů zautomatizovat. Takhle to
-vypadá, když pouštím GRASS já. \mynext \\
-~\\
+vypadá, když pouštím GRASS já.}
+\note<3>{
 GRASS je poměrně silný ve svých vizualizačníh schopnostech, umí zobrazit nejen
-2D a 2.5D data, ale i plnohodnotná 3D (rastrová i vektorová) data.
+2D a 2.5D data, ale i plnohodnotná 3D (rastrová i vektorová) data. Slabý je
+např. v kartografii. GUI GRASSu je dlouhý příběh s rozpačitou současností. Pro
+nové uživatele je GUI asi ta největší překážka. Trochu to připomíná GIMP, ale je
+možná ještě roztříštěnější. Novým uživatelům se snaží nějak vizuelně pomoct.
+Síla GRASSu je ale v příkazové řádce -- už se mi mockrát stalo, že mi pár
+nadšených uživatelů QGISu koukali pod prsty a nakonec se začli zajímat o GRASS,
+přestože mu původně nedávali moc šancí, ale viděli, že se to používat dá.
+}
+\note<4>{
+    I okolo GRASSu je aktivní komunita vývojářů a uživatelů. Kdysi jsem měl tu
+    čest, počítat se mezi členy GRASS development teamu a teď už jenom z
+    povzdálí sleduju, jakým směrem se GRASS vyvíjí. GRASS je sice dinosaurus,
+    ale dohání současnost, běží v cloudech, na velkým mainframech, můžete do něj
+    dopisovat věci v pythonu apod.
 }
 \end{center}\end{frame}
 
@@ -515,16 +601,25 @@ UI, ze kterého se dá udělat screenshot.}
 
 
 \begin{frame}\begin{center}
-\includegraphics[width=0.5\textwidth]{images/mapserver.png}\\
+\includegraphics<1-2>[width=0.5\textwidth]{images/mapserver.png}
+\includegraphics<3>[width=0.5\textwidth]{images/mapserver-sprint.jpg}
+\\
 \url{http://mapserver.org}
 \note<1>{
 MapServer je opět velice starý projekt, který dělá to, jak se jmenuje: vydává
 klientům požadovaná geodata podle požadovanvaných parametrů. MapServer obsahuje
 rozhraní MapScript, takže jej lze dost modifikovat pomocí různých skriptovacích
-jazyků.~\\
-~\\
+jazyků.}
+\note<2>{
 Na MapServeru běží nebo běžela řada veřejných institucí, kdysi to býva
-nejrozšířenější open source mapovací software ve veřejné správě.
+nejrozšířenější open source mapovací software ve české veřejné správě.
+}
+\note<3>{Také mapserver si za ty roky vybudoval silnou a věrnou komunitu
+    vývojářů a uživatelů. Osobně se mi na mapserveru nejvíce líbí právě možnost
+    využít ho jako knihovnu do svých projektů. Co uživatele od mapserveru
+    odrazuje je absence rozumného GUI. Vzniklo sice více projektů které se o
+    nějaké GUI pokoušely, většího rozšíření se ale nedočkali. Nakonfigurovat
+    mapserver ale není nic těžkého.
 }
 \end{center}\end{frame}
 
@@ -536,6 +631,17 @@ GeoServer je v Javě napsaný mapový server, striktně dodržující standardy.
 rozdíl od MapServeru disponuje webovým grafickým rozhraním. Lze jej do jisté
 míry také programátorsky přizpůsobit, děje se tak ale pomocí REST API, a ne na
 úrovni programátorských knihoven.
+}
+\note<2>{
+    Geoserver má grafické uživatelské rozhranní (webové), a existují i zásuvné
+    moduly do QGISu, díky kterým můžete vypublikovat projekt z desktopového GISu
+    rovnou na web.
+}
+\note<3>{
+    Geoserver nasazuju osobně všude tam, kde hrozí, že to bude spravovat někdo
+    jiný než já - čistě kvůli uživatelskému rozhranní.  Jinak mám radši
+    MapServer, který i v různých srovnávacích testech prokázal větší výkonnost,
+    ale je prostě trochu více hardcore.
 }
 \end{center}\end{frame}
 
@@ -556,16 +662,20 @@ míry také programátorsky přizpůsobit, děje se tak ale pomocí REST API, a 
 \begin{frame}\begin{center}
 \includegraphics[width=0.7\textwidth]{images/web.jpg}
 \note<1>{
-Můžete znát například Mapnik nebo jste slyšeli o qgis mapserveru, představený
-mapserver a geoserver jsou asi nejdůležitější zástupci tohoto typu software.\\
-~\\
-Dále bychom se podívaly  na web}
+    Můžete znát například serverový renderer Mapnik nebo jste slyšeli o qgis
+    mapserveru, představený mapserver a geoserver jsou asi nejdůležitější zástupci
+    tohoto typu software.\\ ~\\ Dále bychom se podívaly  na web
+}
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
-\includegraphics<1>[width=0.3\textwidth]{images/ol3.png}
+\includegraphics<1>[width=0.2\textwidth]{images/ol3.png}
 \includegraphics<2>[width=0.4\textwidth]{images/leaflet.png}
 \includegraphics<3>[width=0.4\textwidth]{images/d3js.jpg}
+\\
+\includegraphics<1>[width=0.6\textwidth]{images/ol-spy.png}
+\includegraphics<2>[width=0.6\textwidth]{images/leaflet-js.jpg}
+\includegraphics<3>[width=\textwidth]{images/d3js-about.png}
 \\
 \only<1>{\url{http://ol3js.org}}
 \only<2>{\url{http://leafletjs.org}}
@@ -575,14 +685,24 @@ Dále bychom se podívaly  na web}
 OpenLayers je javascriptová knihovna pro tvorbu mapových aplikací. Je to opravdu
 švýcarský nůž, který obsahuje podporu pro všechny myslitelné datové formáty. V
 tuto chvíli probíhá přepisování této knihovny na novou verzi pomocí nových
-technologií, jako je Google Closure.
+technologií, jako je Google Closure.\\
+~\\
+OpenLayers používám nejčastěji ja svoje projekty, protože jsem s nimi tak trochu
+javascriptově vyrostl. Ten projekt má poměrně vysoké standardy co do čistoty
+kódu, vše je pokryto testy. Pohybuje se na hraně současných technologií, jako je
+kdysi canvas, dnes webgl.
 }
 \note<2>{
     Leaflet stojí technologicky mezi OpenLayer 2 a 3, je to ve srovnání s
     OpenLayers malá knihovna, která umí perfektně zobrazovat mapy a některá
     vektorová data. Leaflet je skvělá volba pro někoho, kdo od aplikace
     nepotřebuje nic moc víc, než data zobrazit a smíří se s některými omezeními
-    (jako je např. použ. souř. systém).
+    (jako je např. použ. souř. systém).\\
+    ~\\
+    Leaflet je sice Open Source, ale není to OSGeo projekt - je to v podstatě
+    one man show Vladimira Agafonkina. Knihovna je však momentálně velice
+    populární, díky zásuvným modulům toho umí celkem hodně používá ji např.
+    MapBox jako své javascript api.
 }
 \note<3>{
     O D3.js toho moc nevím, protože ve své denní práci používám knihovny, které
@@ -591,7 +711,11 @@ technologií, jako je Google Closure.
     ~\\
     D3.js je knihovna v jazyce javascript, sloužící k manipulaci dokumentů,
     založených na datech. Používá standardní HTML, SVG a CSS techniky a nad nim
-    staví celkem slušně schopnou vizualizační platformu.
+    staví celkem slušně schopnou vizualizační platformu. Právě použití SVG vidím
+    jako problém, protože to je technologie, která je hodně drahá na vykreslení.
+    Díky tomu se také mapové knihovny přiklonily ke canvasu. U většího množstí
+    dat by to mohl být problém. Jinak ale vždy žasnu nad vizualizačními
+    schopnostmi D3js.
 }
 \end{center}\end{frame}
 
@@ -614,15 +738,26 @@ technologií, jako je Google Closure.
 \note<1>{
 GDAL/OGR je knihovna schopná převézt nepřeberné množství rastrových na
 vektorových formátů mezi sebou. Je používána i v proprietárním software ArcGIS.
+GDAL slouží k převádění mezi rastrovými a OGR mezi vektorovými formáty.
+Distribuovány jsou společně a pracuje na nich jeden vývojový team. Dohromady umí
+konvertovat mezi asi 200 formáty (v mé běžné praxi používám asi 10 různých
+rastrových a vektorových formátů). Ne všechny formáty jsou otevřené.
 }
 \note<2>{
 Knihovna PROJ.4 zase umí pracovat s různými mapovými projekcemi a souř.
 systémy. Existuje i verze této knihovny pro jazyk JavaScript, což nám umožuje
 tranformovat data mezi souř. systémy přímo na klientovi - v prostředí webového
-prohlížeče.
+prohlížeče. ~\\
+S knihovnou PROJ.4 býval problém se souř. systémem S-JTSK a tak zvaným
+Křovákovým zobrazením, což je zobrazení navržené pro co nejlepší zobrazení česka,
+slovenska a zakarpatské ukrajiny. Nebudu zabýhat do detailů ale věřte, že
+všechny standardy a softwary začali toto zobrazení podporovat  správně až
+průběhu posledních dvou let. 
 }
 \note<3>{
-GeoTools dělá to samé pro programovací jazyk Java.
+GeoTools dělá to samé pro programovací jazyk Java, tzn. stará se o převody
+mezi formáty a souř. systémy. Osobně je svět Jávy trochu mimo mě, ale asi
+chápete víc než já, že je v určitých kruzích populární.
 }
 \end{center}\end{frame}
 
@@ -630,39 +765,37 @@ GeoTools dělá to samé pro programovací jazyk Java.
 \includegraphics[width=0.4\textwidth]{images/osgeo.png}\\
 \emph{OSGeo Projekt}
 \note{
-Existuje i řada projektů mimo OSGeo. Mají svou vývojářkou a uživatelskou
-komunitu. Asi jste slyšeli o projektu Leaflet, gvSig (ten je v OSGeo
+    Už jsem zmínil, že něco je a něco není OSGeo projekt. 
+Projekty mimo OSGeo mají svou vývojářkou a uživatelskou
+komunitu, jsou open source podle všech pravidel, ale neprošli inkubací vrámci
+OSGeo a tudíž není ze strany OSGeo garantována čistota a kvalita kódu, bez
+problému se soft. patenty a to, že komunita okolo projektu je dostatečně veliká,
+aby projekt nepadnul. Mluvil jsem zde o projektu Leaflet, jiným zástupcem může
+být ve španělsky mluvících zemích gvSig (ten je v OSGeo
 inkubárotru), knihovně D3js pro vykreslování dat na webu.\\
 ~\\
-Řekněte, jaká problematika vás zajímá a já vám řeknu, co bych na to použil. A
-nebo ne.
+Zmínil jsem zde pouze několik zástupců open source programů pro Geo oblast,
+záleží vždy na oblasti nasazení a vlastníc preferencích. Pokročilé open sourcery
+bych asi odkázal do mailinlistů osgeo, kde vám lidé poradí, jaký program by bl
+pro vaši oblast nejlepší.
 }
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
-\includegraphics[width=\textwidth]{images/missing.jpg}
-\note{
+\includegraphics<1>[width=\textwidth]{images/missing.jpg}
+\includegraphics<2>[width=0.6\textwidth]{images/proprietary_software.png}
+\note<1>{
 Může se stát, že na váš úkol neexistuje Open Source odpověď. V tom případě máte
 dvě možnosti: zvažte, jestli je ve vašich silách jakkoliv přispět do
 existujícího projektu nebo vytvořit nový - je to tak snadné. Nebo jděte do
-proprietárního software. Buďte si ale vždy vědomi, proč to děláte a co tím
+proprietárního software.}
+\note<2>{Buďte si ale vždy vědomi, proč to děláte a co tím
 ztrácíte.
 }
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
-\includegraphics[width=0.7\textwidth]{images/proprietary_software.png}
-\note{
-Může se stát, že na váš úkol neexistuje Open Source odpověď. V tom případě máte
-dvě možnosti: zvažte, jestli je ve vašich silách jakkoliv přispět do
-existujícího projektu nebo vytvořit nový - je to tak snadné. Nebo jděte do
-proprietárního software. Buďte si ale vždy vědomi, proč to děláte a co tím
-ztrácíte.
-}
-\end{center}\end{frame}
-
-\begin{frame}\begin{center}
-\includegraphics[width=0.7\textwidth]{images/confused.jpg}
+\includegraphics[width=0.5\textwidth]{images/short_answers_headscratch.png}
 \note{
 Z toho všeho co říkám si možná říkáte: proč to tedy nikdo nepoužívá, když je to
 tak skvělý produkt? Proč není open source software dávno rozšířenější, než jak
@@ -676,7 +809,7 @@ pocit -- jsou samozřejmě mnohé a jak už to bývá, mají povahu vnitřní i 
 \begin{frame}\begin{center}
 \includegraphics<1>[width=0.5\textwidth]{images/archim.jpg}
 \includegraphics<2>[width=0.7\textwidth]{images/ponorka.png}
-\note{
+\note<1>{
 Jako jeden z prvních důvodů (bez nároku na prvenství z hlediska významnosti)
 uvedu to, že člověk používá to, co zná. Věřím, že obsahem výuky na
 školách ve všech oborech a stupních by měly být především obecně platné
@@ -688,6 +821,10 @@ musí mít především v součtu menší objemovou hustotu, než voda. Proč se
 princip uplatňuje při výuce software jen velice zřídka? Proč výuka počítačí
 obecně a GIS konkrétně se téměř bez výjimky provádí na konkrétním jednom
 software?
+}
+\note<3>{
+    Jsme zde na půdě univerzity, na konferenci OSSConf, která se právě o toto
+    evidetně snaží. Začít musíme ale dříve - na základních a středních školách.
 }
 \end{center}\end{frame}
 
@@ -726,7 +863,7 @@ problém najít někoho kdo by to věděl. Nebo snad ne?
 \note{
 Dalším důvodem je nejednotný systém návazného vzdělávání. Existují spíše
 jednotlivci, nabízející školení. Školení jsou ale nejednotná, různá obsahem i
-kvalitou. To se snažíme odbourat naším projektem GISMentors
+kvalitou. To se snažíme odbourat naším projektem GISMentors, ale jsou i jiné.
 }
 \end{center}\end{frame}
 
@@ -760,10 +897,11 @@ abstraktní?
 }
 \end{center}\end{frame}
 
+
 \begin{frame}\begin{center}
 \includegraphics[width=0.4\textwidth]{images/inspire-logo.jpg}
 \includegraphics[width=0.4\textwidth]{images/open_services.jpg}
-\note{
+\note<1>{
 V roce 2007 byla evropskou komisí schválena směrnice INSPIRE, která (velice
 zjednodušeně řečeno) popisuje způsob, jakým má veřejná správa umožnit přístup k
 datům (nejen, ale zejména) o životním prostředí. Směrnice neříká nic o tom za
@@ -771,15 +909,31 @@ jakých právních a finančních podmínek mají být data zveřejněna - nejed
 Open Data. Řeší ale technickou a obsahovou stránku věci a ve svých pravidelch
 pro implementaci se důrazně opírá právě o standardy OGC.
 }
+\note<2>{
+    Právě díky standardům OGC má Geo- komunita náskok před obecně open-data
+    hnutím, protože, jak už jsem říkal, ty standardy tu jsou a používají se.
+    Každý geo-software je má do nějaké míry naimplementovány, takže není nic
+    snazšího, než si (v česku) stáhnout letecké snímky celé republiky. Data by
+    díky INSPIRE měla být opatřena metadaty a díky OGC existuje standard, jak se
+    k těmto metadatům dostat. Po obědě bude mít Martin Tuchyňa přednášku o
+    národní prostorové infrastruktuře, která určitě s OGC a směrnicí INSPIRE
+    úzce souvisí.
+}
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
     \note{Takže: ve své přednášce jsem mluvil o Open Source, Open Data, Open Standards pro
-doménu Geo. Proč jsou skvělé a snad i proč nefungují. Už i u nás a u vás na
-Slovensku existují firmy, které nabízejí profesionální služby v této doméně.
+doménu Geo. Proč jsou skvělé a trochu i o tom,  proč mezi některými uživateli
+nefungují. Už i u nás a zde na Slovensku existují firmy, které nabízejí
+profesionální služby v této doméně, jenom se o nich buď neví nebo se jim nevěří.
 Také díky velké finančních krizi posledních let se daří stále častěji firmám z
-open soure světa prorážet na komerčním poli.
+open soure světa prorážet na komerčním poli.~\\
+~\\
+Proč ale nejsou open source softare plné výlohy obchodů je více filosofická
+otázka a každý na ni má svůj názor, koneckonců i já. Certifikace je určitě další
+z nich.
 }
+
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
@@ -792,22 +946,27 @@ Martin Dobiáš (QGIS) \hfill Helena Mitášová (GRASS)\\
 \includegraphics[width=0.3\textwidth]{images/ivan.png}\\
 Jaroslav Hofierka (GRASS) \hfill Ivan Mikčík (GIS.lab)
 \note{
-Myslím, že i vzhledem k tomu kolik Slovenských vývojářů se pohybuje na open
-source GIS scéně, má Slovensko a snad i Česko světlou geo-budoucnost.
+    Dovolil bych si zde zmínit některé 
+    mě známých vývojářů na Slovensku. Nejblíže je mi Jaroslav
+    Hofierka s paní Mitášovou, kteří výrazně přispěli do GRASSu. Martin Dobiáš
+    je momentálně celebrita mezi vývojáři QGISu, jeden z jeho posledních zářezů
+    je přepracovaný rendering, se kterým se můžete setkat v poslední verzi QGISu
+    2.4.
 }
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
 \includegraphics[width=0.8\textwidth]{images/soit.png}
 \note{Když se dívám na aktivity Společnosti pro otevřené informační technologie
-na Slovensku, nezbývá mi než závidět. U nás v Česku se podobná akční iniciativa
-teprve dává dohromady. Doufám za sdružení Otevřená GeoInfrastruktura, že se
-podaří téma otevřené společnosti uchopit podobným způsobem.}
+na Slovensku a sponzory konference OSSConf, nezbývá mi než závidět. U nás v
+Česku se podobná akční iniciativa teprve dává dohromady. Doufám za sdružení
+Otevřená GeoInfrastruktura, že se podaří téma otevřené společnosti uchopit
+podobným způsobem.}
 \end{center}\end{frame}
 
 \begin{frame}\begin{center}
     ?
-\note{dotazy?}
+\note{Děkuji za vaši pozornost}
 \end{center}\end{frame}
 
 \end{document}
