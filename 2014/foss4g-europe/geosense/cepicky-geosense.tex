@@ -1,0 +1,60 @@
+\documentclass[xcolor=dvipsnames,notes=hide]{beamer}
+\usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{xcolor,colortbl}
+\usepackage{pgfpages}
+
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+\definecolor{Gray}{gray}{0.85}
+\definecolor{LightGreen}{rgb}{1,0.88,1}
+
+\newcolumntype{a}{>{\columncolor{Gray}} X }
+\newcolumntype{b}{>{\columncolor{white}} X }
+
+\usepackage{default}
+\usepackage{pgfpages} %This is needed for notes presentation!
+\setbeameroption{show notes on second screen=left}
+\usepackage{soul}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=NavyBlue,urlcolor=NavyBlue}
+\usepackage{times}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pgfdeclareimage[height=1.cm]{conference-logo}{imgs/event-logo.png}
+\logo{\pgfuseimage{conference-logo}}
+
+\title{Geosense Mapping Portal}
+\subtitle {OpenLayers 3 in daily work}
+\author[J. Čepický, V. Dubrovský, R. Otruba]
+                     {Jáchym~Čepický\inst{1},
+                     Vojtech Dubrovsky\inst{1},
+                     Radovan Otruba\inst{1}}
+
+\institute 
+{
+  \inst{1}
+  Geosense s.r.o.\\
+  \url{http://geosense.cz}\\
+}
+  
+\date[FOSS4G-Europe]{Free and Open Source Software for Geospatial}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+
+\note{Hi all\\
+my name is Jachym Čepický, but you can call me Jack Hack if you like.\\
+~\\
+It is great pleasure to me, being here at FOSS4G Europe, and have possibility to
+see you all in here and have possibility to talk to you, as members of open
+geospatial community.}
+\end{frame}
+
+\input{content}
+
+\end{document}

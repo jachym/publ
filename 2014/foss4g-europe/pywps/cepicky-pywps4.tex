@@ -1,0 +1,268 @@
+\documentclass[xcolor=dvipsnames,notes=hide]{beamer}
+%\documentclass[notes=only]{beamer}
+%\documentclass[xcolor=dvipsnames, notes=hide]{beamer} 
+\usepackage{ulem}
+\usepackage{tabularx}
+\usepackage{xcolor,colortbl}
+\usepackage{pgfpages}
+
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+\definecolor{Gray}{gray}{0.85}
+\definecolor{LightGreen}{rgb}{1,0.88,1}
+
+\newcolumntype{a}{>{\columncolor{Gray}} X }
+\newcolumntype{b}{>{\columncolor{white}} X }
+
+\usepackage{default}
+\usepackage{pgfpages} %This is needed for notes presentation!
+\setbeameroption{show notes on second screen=left}
+\usepackage{soul}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=NavyBlue,urlcolor=NavyBlue}
+\usepackage{times}
+
+
+
+\pgfdeclareimage[height=1.cm]{conference-logo}{images/event-logo.png}
+\logo{\pgfuseimage{conference-logo}}
+
+\title{PyWPS}
+
+\subtitle {Status report}
+
+\author[J. Čepický] % (optional, use only with lots of authors)
+{Jáchym~Čepický\inst{1}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute % (optional, but mostly needed)
+{
+  \inst{1}%
+  \url{http://les-ejk.cz}, \url{http://geosense.cz}\\
+}
+  
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[FOSS4G-E 2014] % (optional, should be abbreviation of conference name)
+{FOSS4G-Europe 2014}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+
+
+\begin{document}
+
+%\begin{abstract}
+%\end{abstract}
+
+\begin{frame}
+\titlepage
+
+\note{Hallo\\
+my name is Jáchym Čepický}
+\end{frame}
+
+\begin{frame}\begin{center}
+\includegraphics[width=0.4\textwidth]{images/pywps_logo.png}
+
+\note<1>{today, I'm talking here on behalf of the PyWPS development team}
+\note<2>{
+    PyWPS development started in 2006, just early enough, to be first time
+    presented at first FOSS4G in Lausanne. It is implementation of OGC WPS
+    standard on the server side and it's written in Python programming language.
+    Curent version is distributed under the GNU/GPL license. New PyWPS (we call
+    it 4) is developed under MIT license.
+}
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+\includegraphics[width=1\textwidth]<1>{images/python.jpg}
+
+\note<1>{I already metioned, PyWPS is written in Python.
+   Among other implementations of the standard, PyWPS is known for it's
+   simplicity, regarding installation and setup. Instalation is matter of
+   several minutes. After that, user must write her own scripts, which are then
+   interpreted as processes.
+}
+
+\includegraphics[width=1\textwidth]<2>{images/grass.jpg}
+\note<2>{Since beginning, PyWPS contained support for GRASS GIS modules.}
+
+\includegraphics[width=0.4\textwidth]<3>{images/gdal.png}
+\note<3>{GDAL/OGR or}
+
+\includegraphics[width=0.4\textwidth]<4>{images/r.png}
+\note<4>{R}
+
+\end{center}\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+    PyWPS-4
+\note{
+    So, why did we start to rewrite PyWPS from scratch?
+}
+\end{center}\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}\begin{center}
+    \includegraphics<2>[height=7cm]{images/desert.jpg}
+\note<1>{In 2006, the world of GeoPython was different}
+
+\note<2>{
+    \begin{itemize}
+        \item There was no GRASS Python API
+        \item Python was in 2.2 version
+        \item For working with xmls, you had to do everything manually
+        \item There were no libraries, which would help you to deal with OGC
+            Services
+        \item Most used format was ESRI Shapefile and we started to talk about
+            GML.
+    \end{itemize}
+}
+
+\includegraphics<3>[height=7cm]{images/prales.jpg}
+\note<3>{
+    Today, we have
+    \begin{itemize}
+        \item Python 3
+        \item Native GRASS Python API
+        \item new projects, like lxml, owslib, werkzeug
+        \item new formats - GeoJSON, TopoJSON (anybody heard about KML, recently? \dots)
+    \end{itemize}
+}
+\end{center}\end{frame}
+
+
+\begin{frame}\begin{center}
+    \url{https://github.com/jachym/pywps-4/issues/milestones}
+    \note{
+On this URL, we started to creat roadmap. Currently, we are distinguishing
+between PyWPS 4.0 and 4.1.
+}
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+    PyWPS 4.0: What do we have
+    \begin{itemize}
+        \item Validators
+        \item Server implementation based on werkzeug
+        \item IOHandler
+        \item File Storage
+    \end{itemize}
+    \note{
+        \begin{itemize}
+            \item Validators - gml, shp, 4 stupně
+            \item Server implementation based on werkzeug - popular library for
+                server-side apps creation
+            \item IOHandler is universal objekt for transparent transformation
+                of data, beteween data stream, file object, in memory object
+                nad other representations.
+            \item File Storage -- output files hanlder
+        \end{itemize}
+    }
+\end{center}\end{frame}
+
+\begin{frame}\begin{center}
+
+   Plans for PyWPS 4.1:
+
+\begin{itemize}
+    \item Data outputs via GeoServer, MapServer and/or QGIS MapServer
+    \item Administrative REST API
+\end{itemize}
+    \note{
+        PyWPS 4.1 should contain
+\begin{itemize}
+    \item Outpu via GeoServer, MapServer, QGIS Server
+    \item Administrative REST API
+    \item Database storage, external service storage (FTP, Dropbox, ...)
+\end{itemize}
+    }
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics<1>[width=0.8\textwidth]{images/break.jpg}
+\includegraphics<2>[width=0.8\textwidth]{images/time_monay.jpg}
+
+\note<1>{what does break us}
+
+\note<2>{
+    The team is curently of of time and there are no external resources
+    currently, to move faster forward.\\
+    ~\\
+    We have to confess, that for open source project about this size, lack of
+    resources is critical. We are able to maitain current version of PyWPS
+    fixing, but heavy works on PyWPS 4 are impossible.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics<1>[width=0.8\textwidth]{images/gsoc.png}
+
+\note{
+    This year, we had luck and we got 4 interesting proposals for Google Summer
+    of code. As result, we have now one student working on process chaining on
+    current version of PyWPS and we are looking forward to port her work into
+    PyWPS 4.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics<1>[width=0.8\textwidth]{images/tudor.jpg}
+
+\note{
+    Yearlier this year, thanks to COST framework, PyWPS had change to meet at
+    code sprint at Henri Tudor research center in Luxembourg. It was join event
+    with 52North WPS and we
+    hope, next year the WPS comming together will be even bigger, and our
+    collegues from Zoo or Geoserver or other projects will join us as well.
+}
+\end{center}\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\begin{center}
+    \begin{itemize}
+\item Intevation GmbH
+\item Help Service - Remote Sensing
+\item Deutsche Bundesstiftung Umwelt
+\item Netmar project
+\item COST Framework
+    \end{itemize}
+
+\note{I would like to thank to existing and past sponsors of PyWPS and encourage
+    new comming sponsors, to help with the development. The companies and
+    projects supported the project with either hardware or man-power, so PyWPS
+    could be at the spot, where it is now.
+}
+\end{center}\end{frame}
+
+\section*{Conclusion}
+\begin{frame}\begin{center}
+    Questions?\\
+
+    \vfill
+
+    \url{http://pywps.intevation.org}
+
+    \vfill
+    \includegraphics[width=0.15\textwidth]{images/cc.png}
+
+\note{
+    Thank you
+}
+\end{center}\end{frame}
+
+
+\end{document}

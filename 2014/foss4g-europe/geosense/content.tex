@@ -1,0 +1,267 @@
+\begin{frame}\begin{center}
+
+\includegraphics[width=0.4\textwidth]<1>{../../../common/imgs/OSGeo_logo.png}
+\hfill
+\includegraphics[width=0.4\textwidth]<1>{../../../common/imgs/osgeo-cz.png}
+
+\includegraphics[width=0.6\textwidth]<2>{../../../common/imgs/map-coding.png}
+
+\note<1>{I'm the member of OSGeo's board of directors
+Foundation and chair of czech local chapter, we call ourselves "Open
+GeoInfrastracture"}
+
+\note<2>{
+More then ten years, I'm involved in the development of open source software for
+geospatial, some of you may remember me as member of GRASS development team and
+founder of PyWPS project. But since 2007, so about 7 years, I'm focused mostly
+on development of geo applications for web.}
+
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics[width=\textwidth]<1>{imgs/grass-openlayers.png}
+
+\note<1>{I switched from desktop to web developemnt during 2007, and it was
+OpenLayers library, which tought me, how to write clean and nice looking code
+(at least compared to GRASS GIS) in JavaScript. I, unlike some of you, never
+feard OpenLayers complexity, since it always was so clean and simple, yet
+powerfull, at least compared to what I was used to in the C-world from 80's - I
+mean GRASS again. 
+}
+
+\includegraphics[width=\textwidth]<2>{imgs/distros-browsers.png}
+
+\note<2>{In other words, I replaced issues with various libraries verions and
+    linux distributions, byt issues caused by various browsers and their
+    versions}
+
+\includegraphics[width=\textwidth]<3>{imgs/swissarmyknife-ol.jpg}
+
+\note<3>{
+OpenLayers 2 was and still is very inspiring to me also regarding it's features.
+It is true geospatial library, with capabilities to display all data you needed,
+parse all formats you came across and to mock any type of functionality within
+day, your boss required.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics[width=0.8\textwidth]<1>{imgs/ol-vectors.png}
+
+\note<1>{
+OpenLayers is great in displaying vector data too. But howmany times did this
+happen to you, as to me?
+}
+
+\includegraphics[width=0.8\textwidth]<2>{imgs/ol-vectors-stuck.png}
+\note<2>{
+We've crached the limits of the web around the first decate
+of year 2000. SVG was supported on most browsers, except for IE. Even IE 8 was
+already around, we still needed to support IE 6 for some gov. institutsions.
+Combinatiton of SVG and VML was working well, but it was so terribly slow, and
+displaying larger datasets (speaking about size of several MBs) was like
+impossible.
+}
+
+\includegraphics[width=0.6\textwidth]<3>{imgs/leaflet-ol-ol3.png}
+
+\note<3>{
+Last years, I had a chance to visit FOSS4G in Nottingham and I wanted to make
+research, wether we stick with OpenLayers 2, go to Leaflet or move on to
+OpenLayers 3. My personal feeling around that time was, we stick with OpenLayers
+2 and will observe, how the situation will develop.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics[width=\textwidth]<1->{imgs/ol2tool3.png}
+
+\note<1>{But after great session, full of OpenLayers 3 presentations, given by
+Tim Schaub, Eric Lemoine, Tom Payne and others, I was keen on trying OpenLayers
+3 on real project, it was time to move on.}
+
+\note<2>{When I came back home, we started to rewrite old, OpenLayers 2-based
+geoportal from scratch}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics[width=\textwidth]<1->{imgs/geoportal.png}
+
+\note<1>{The old geoportal, how we call it nowadays, is still OpenLayers 2-based
+beast, with all good and bad, what belongs to the passed era:}
+
+\note<2>{
+\begin{itemize}
+    \item It's big, speaking about size of javascript files, you need to
+    transfare from server to client
+    \item It's almost impossible to render larger amount of data (even with
+    canvas renderer it's much easier)
+    \item It's hard to maintain, because of  not so well structured code
+    \item We simply dislkied to continue in this way
+\end{itemize}
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics[width=\textwidth]<1>{imgs/complicated.jpg}
+
+\note<1>{
+We started with OpenLayers 3. It took us two weeks to setup and think about the
+whole dev environemnt, since OpenLayers 3 is relaying strongly on Google Closure
+library. We experimented with Plovr - Java building tool for closure - for
+couple of months, till we got rid of it during last month, we are using
+bootstrap for UI desing, but withou JQuery -- where ever we should refer to
+JQuery, we stick with standard closure elements.
+}
+
+\only<2>{
+\begin{itemize}
+    \item old portal re-implemented
+    \item vector-data focused
+    \item tests (CasperJS)
+    \item 250kB
+    \item strong type control
+\end{itemize}
+}
+
+\note<2>{
+Nowadays we have 
+\begin{itemize}
+    \item 90\% of functionality of the old portal reimplemented
+    \item all vector data are rendered as vector data, which will enable us more
+    closer user integration
+    \item test driven development using casprejs
+    \item small compiled library
+    \item system, which is hammering us over figter tips, once we do something nasty
+    during the development
+\end{itemize}
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\only<1>{
+    map vs. data
+}
+
+\note<1>{
+The portal itself has two modes - map-centrique and data-centrique.}
+
+\note<2>{
+In the
+map-centrique mode, user can browse the map, switching layers and so on. But
+after the user opens data table
+}
+
+\includegraphics[width=\textwidth]<2>{imgs/geoportal2.png}
+
+\note<3>{
+The map becames just supporting overview map to the database application, where
+user can filter, search and sort all features, available in the dataset.
+}
+
+\includegraphics[width=\textwidth]<3>{imgs/geoportal2-table.png}
+
+\note<3>{
+Other functions, such as feature detail, measuring or filtering are available as
+well.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\includegraphics[width=\textwidth]<1>{imgs/burn-fat.jpg}
+
+\note<1>{
+The whole application is now able to handle 10~000 (ten thounsends) of features,
+with just 300KB of javascript code. It loads faster, scales nicely, we like to
+work with it.
+}
+
+\includegraphics[width=\textwidth]<2>{imgs/dirty-tablet.jpg}
+
+\note<2>{Since we are using boostrap, we are focusing ourselves on tablet
+version as well. The whole portal is wokring wihout mouse or keaboard, using
+only biggger touch device}
+
+\only<3>{
+    API
+}
+
+\note<3>{
+The portal is intended to work with proprietary server information system API,
+but it's written in a way, that it should be possible to use it in separate way.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+\note<1>{
+    Problems we had to face:
+    \begin{itemize}
+        \item It is very complicated for non-javascript programmers, to setup
+            and think over development environemnt. The whole world of
+            JavaScript is moving forward too fast, to catch it up. There is
+            completely new world with magical words, like PhantomJS, NodeJS,
+            CaspreJS, closure.
+        \item The environment is not settelt yet, new JavaScript build system
+            are creatd every day. Yesterday everybody used Grunt, nowadays, Gulp
+            is the big hype. What you really need? IMHO python-based build
+            script will do.
+        \item We tryed to use Gulp for building, but result was, that NodeJS was
+            not able to handle all 500 files, we use for our geoportal.
+        \item Also gui libraries are changing fast. Jquery is no longer
+            must-use library, not even for mobile. Bootstrap seems to be one of
+            the most promissing. But using bootstrap without jquery means, you
+            have to deal with some fancy gui elements. We are now implementing
+            everything using standard closure elements.
+        \item And not to forget templating systems. Closure has one, but it's
+            not so nice. Now, when react is around, we would like to switch to
+            it
+    \end{itemize}
+}
+\note<2>{
+    What do I want to say: the javascript world is chaning fast, there is
+    plently of building systems (even you can scratch new one for your project),
+    there are number of libraries, which can be used for your not-only-mapping
+    applications, there are several gui libraries and templating systems. All
+    together it's somehow very complicated for originaly server-side coders. But
+    we all enjoy this new world of JavaScript, it gives us some time to play
+    again.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+
+\note<1>{
+Conclusion to us: if you are waiting with openlayers 3, go for it. It was hard
+at the beginning to keep our steps synchronized with OpenLayers team, but it was
+possible. Today's changes are relatively small and we did not break
+compatibility for long time already.
+}
+
+\note<2>{
+OpenLayer 3 is nice library, which I personally think is one step ahead of
+Leaflet. Do not get me wrong, Leaflet is very nice and powerful tool, but we
+need the complexity of OpenLayers and so, we consider OpenLayers 3 as good
+choice.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+?
+\end{center}\end{frame}
