@@ -90,11 +90,52 @@ zároveň návrat ke kořenům FOSS4G byl, alespoň za mě, naplněn.
 Uvidíme, jak bude vypadat globální FOSS4G v americkém Portlandu. A příští rok
 snad opět v Evropě.
 
-Název: FOSS4G-Europe
-URL: http://foss4g-e.org
-Počet přednášek: 72
-Počet workshopů: 9
-Počet účastníků: 150
-Trvání: 15 - 17.7.2014 + 1 den workshopy a 1 den code sprint
-Místo konání: Jacobsova Univerzita, Brémy, Německo
-Za Geosense: Eva, Jáchym, Radek, Vojta
+
+Nový soft, který nás zaujal
+---------------------------
+
+Cashing
+    MapProxy vypadá slibně, protože to umí ne "jenom" dobrou cache, ale umí to být
+    klient ke kde čemu a tvářit se jako hodně dobrá proxy ke kde čemu. Eva s tím
+    už nějakou dobu dělala v Geodis a tuší.
+Převody existujících projektů v ArcGIS
+    GeoCat je firma, která dělá katalogovou službu, na které jede půlka INSPIRE
+    Evropy. Vyrobili plugin pro ArcGIS, který umožňuje projekt vyexportovat jako
+    GeoServer nebo MapServer. 
+
+Status reporty
+--------------
+
+PostGIS
+    Nové indexy ...
+MapServer
+    ...
+OpenLayers 3
+    ...
+
+Co mi chybělo
+-------------
+
+QGIS
+    Chyběla prakticky jakákoliv přednáška o QGIS. Asi to bylo tím, že většina
+    vývojářů je německy-mluvících a vyčerpali se na německé FOSSGIS.
+    
+Souhrn
+------
+
+Název:
+    FOSS4G-Europe
+URL:
+    http://foss4g-e.org
+Počet přednášek:
+    72
+Počet workshopů:
+    9
+Počet účastníků:
+    150
+Trvání:
+    15 - 17.7.2014 + 1 den workshopy a 1 den code sprint
+Místo konání:
+    Jacobsova Univerzita, Brémy, Německo
+Za Geosense:
+    Eva, Jáchym, Radek, Vojta

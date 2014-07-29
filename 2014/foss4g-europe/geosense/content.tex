@@ -20,10 +20,31 @@ on development of geo applications for web.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}\begin{center}
+    \includegraphics<1>[width=0.4\textwidth]{imgs/logoGEOSENSE_rgb2.png}
+    \includegraphics<2>[width=0.7\textwidth]{imgs/unnamed4.jpg}
+\note<1>{
+    I'm here talking as member of the development team at Geosense company.
+    Geosense is czech company with international ambitions, which was founded in
+    2009. We used to say, that we are doing information systems with strong
+    spatial informations. 
+}
+\note<2>{
+    It was founded by Vlada Čapek and Jan Zvonik - as you can see, they are nice
+    guys - and the development team, which was formed about year ago, has
+    started to work on something, we call the new geoportal. Why new: because
+    it's supposed to replace the old product. It has of course server and client
+    components and today, I'm going to present the way, how we came to the
+client - javascript - part
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
 
 \includegraphics[width=\textwidth]<1>{imgs/grass-openlayers.png}
 
-\note<1>{I switched from desktop to web developemnt during 2007, and it was
+\note<1>{Back to my self or to my jurney:
+    I switched from desktop to web developemnt during 2007, and it was
 OpenLayers library, which tought me, how to write clean and nice looking code
 (at least compared to GRASS GIS) in JavaScript. I, unlike some of you, never
 feard OpenLayers complexity, since it always was so clean and simple, yet
@@ -174,8 +195,13 @@ user can filter, search and sort all features, available in the dataset.
 \includegraphics[width=\textwidth]<3>{imgs/geoportal2-table.png}
 
 \note<3>{
+    This is the key concept of the application: user can make a choice between
+    data-centrick and map-centrick view on the data. Either he or she focuses on
+    the table, applies filters, search in the table. Then he switches to map,
+    can filter the or search the data again...
+
 Other functions, such as feature detail, measuring or filtering are available as
-well.
+well. 
 }
 \end{center}\end{frame}
 
@@ -197,6 +223,7 @@ version as well. The whole portal is wokring wihout mouse or keaboard, using
 only biggger touch device}
 
 \only<3>{
+\includegraphics[width=0.7\textwidth]{imgs/Power_connector_Legrand_32A.jpg}\\
     API
 }
 
@@ -208,6 +235,15 @@ but it's written in a way, that it should be possible to use it in separate way.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}\begin{center}
+    \only<1-2>{
+        \begin{itemize}
+            \item Setup dev environment
+            \item Moving dev environment
+            \item Node.js builder
+            \item Jquery
+            \item Templating system
+        \end{itemize}
+    }
 \note<1>{
     Problems we had to face:
     \begin{itemize}
@@ -220,6 +256,10 @@ but it's written in a way, that it should be possible to use it in separate way.
             are creatd every day. Yesterday everybody used Grunt, nowadays, Gulp
             is the big hype. What you really need? IMHO python-based build
             script will do.
+    \end{itemize}
+}
+\note<2>{
+    \begin{itemize}
         \item We tryed to use Gulp for building, but result was, that NodeJS was
             not able to handle all 500 files, we use for our geoportal.
         \item Also gui libraries are changing fast. Jquery is no longer
@@ -232,7 +272,8 @@ but it's written in a way, that it should be possible to use it in separate way.
             it
     \end{itemize}
 }
-\note<2>{
+\includegraphics[width=0.7\textwidth]<3>{imgs/LogoMess_vectorized_72dpi.jpg}
+\note<3>{
     What do I want to say: the javascript world is chaning fast, there is
     plently of building systems (even you can scratch new one for your project),
     there are number of libraries, which can be used for your not-only-mapping
@@ -245,6 +286,11 @@ but it's written in a way, that it should be possible to use it in separate way.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}\begin{center}
+
+ OL3 usable, even some api changes during time\\
+ \uncover<2>{
+ we like it!
+ }
 
 \note<1>{
 Conclusion to us: if you are waiting with openlayers 3, go for it. It was hard
@@ -263,5 +309,33 @@ choice.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}\begin{center}
-?
+    \begin{itemize}
+        \item Google Closure library
+        \item OpenLayers 3
+        \item Bootstrap (NO JQuery)
+        \item Python build script
+        \item Bower
+        \item CasperJS
+        \item Jenkins
+    \end{itemize}
+
+\note<1>{
+    this is briefly to our dev stack, we use obviously openlayers3 on top of 
+    google closure library, we are using boostrap for some gui parts but without
+    jquery components, casperjs for unit testing and integration testing and
+    jenkins for automatic building process. For solving automatic dependencies,
+    we use bower.
+}
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+    \url{http://geosense.cz}\\
+    \url{http://dev.geosense.cz/gp2p/master/examples/gp2.html}\\
+    \url{http://dev.geosense.cz/gp2p/rc/examples/gp2.html}\\
+\end{center}\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\begin{center}
+    ?
 \end{center}\end{frame}
