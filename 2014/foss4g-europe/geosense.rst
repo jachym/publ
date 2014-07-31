@@ -91,6 +91,19 @@ Uvidíme, jak bude vypadat globální FOSS4G v americkém Portlandu. A příšt�
 snad opět v Evropě.
 
 
+Volně dostupná data - V průběhu konference se náš tým snažil během komunikace 
+s dalšími zahraničními účastníky konference vyzvídat dostupnost dat v jejich státech. 
+Skutečnost, že dostupnost dat v našem státě je na velice vysoké úrovni je sice potěšující,
+ale ostatní státy Evropy již takový vysoký standart nemají. V Řecku katastr pomalu 
+vzniká, vzniklá data přesto nejsou veřejně dostupná a musí se kupovat. V Rumunsku 
+je situace obdobná, nebyli schopni nám sdělit zda jejich stát poskytuje nějaká volná data.
+
+Mobilní aplikace - Zaujala mne přednáška společnosti Glob3d mobile, která se stará o vývoj 
+vývojového prostředí pro tvorbu mobilních aplikací. Výhoda frameworku je možnost vyvýjet pro 
+iPhone a Android. Ukázky byly velice svižné a to i ve 3D. (http://www.glob3mobile.com/)
+
+
+
 Nový soft, který nás zaujal
 ---------------------------
 
@@ -111,7 +124,20 @@ PostGIS
 MapServer
     ...
 OpenLayers 3
-    ...
+    - nakonec se přdnáška ukázala jako představení produktu + historie
+    - byla prezentována ukázka výkonu s tisíci vektorových prvků v mapě
+    - WebGL a 3D jsou technologie na které se myslí, ale teď čekají dokud nebude jádro OL3 stabilní
+    - potvrdila se nám správnost myšlenky vydat se již téměř před rokem po cestě vývoje v OL3,
+      máme náskok ve vývoji a zkušenostech
+    
+GeoServer
+    - vývoj stále pokračuje na plných obrátkách
+    - Stylování PostGIS -> WMS pomocí SLD v žádném případě nezpomaluje poblikaci WMS
+        - zvážit používání GeoServeru
+    - GeoServer obsahuje pokročilý modul na správu uživatelů, dají se přidělovat práva na správu, dotazování, editaci
+    - Bylo zmíněno kešování rastrů (v prezentaci)
+    - prezentace k dispozici (dole): http://www.geo-solutions.it/blog/geoserver-at-the-foss4g-europe-2014/
+    
 
 Co mi chybělo
 -------------
