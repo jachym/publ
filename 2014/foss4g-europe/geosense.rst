@@ -111,24 +111,27 @@ Cashing
     MapProxy vypadá slibně, protože to umí ne "jenom" dobrou cache, ale umí to být
     klient ke kde čemu a tvářit se jako hodně dobrá proxy ke kde čemu. Eva s tím
     už nějakou dobu dělala v Geodis a tuší.
+
 Převody existujících projektů v ArcGIS
     GeoCat je firma, která dělá katalogovou službu, na které jede půlka INSPIRE
     Evropy. Vyrobili plugin pro ArcGIS, který umožňuje projekt vyexportovat jako
     GeoServer nebo MapServer. 
+    https://www.geocat.net/bridge/
 
 Status reporty
 --------------
 
 PostGIS
-    Nové indexy ...
+    - https://github.com/Oslandia/presentations/blob/master/foss4g_eu_2014/postgis_latest_news_vincent_picavet.pdf?raw=true
 MapServer
-    ...
+    - http://schpidi.github.io/foss4g-e_2014_mapserver_project_status_report/#/
 OpenLayers 3
     - nakonec se přdnáška ukázala jako představení produktu + historie
     - byla prezentována ukázka výkonu s tisíci vektorových prvků v mapě
     - WebGL a 3D jsou technologie na které se myslí, ale teď čekají dokud nebude jádro OL3 stabilní
     - potvrdila se nám správnost myšlenky vydat se již téměř před rokem po cestě vývoje v OL3,
       máme náskok ve vývoji a zkušenostech
+    - http://terrestris.github.io/foss4g-e-2014/openlayers3/#/welcome
     
 GeoServer
     - vývoj stále pokračuje na plných obrátkách
@@ -136,7 +139,7 @@ GeoServer
         - zvážit používání GeoServeru
     - GeoServer obsahuje pokročilý modul na správu uživatelů, dají se přidělovat práva na správu, dotazování, editaci
     - Bylo zmíněno kešování rastrů (v prezentaci)
-    - prezentace k dispozici (dole): http://www.geo-solutions.it/blog/geoserver-at-the-foss4g-europe-2014/
+    - http://www.slideshare.net/geosolutions/processing-data-in-geoserver-with-wps-and-sql-views
     
 
 Co mi chybělo
@@ -145,6 +148,11 @@ Co mi chybělo
 QGIS
     Chyběla prakticky jakákoliv přednáška o QGIS. Asi to bylo tím, že většina
     vývojářů je německy-mluvících a vyčerpali se na německé FOSSGIS.
+
+Z kuloárů
+---------
+Práce s daty ze slovenského katastru je dost velkej problém vzhledem k jejich
+legislativě. Nemáš jak legálně na ty data šáhnout nebo se do nich podívat.
     
 Souhrn
 ------
