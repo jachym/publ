@@ -102,6 +102,8 @@ Mobilní aplikace - Zaujala mne přednáška společnosti Glob3d mobile, která 
 vývojového prostředí pro tvorbu mobilních aplikací. Výhoda frameworku je možnost vyvýjet pro 
 iPhone a Android. Ukázky byly velice svižné a to i ve 3D. (http://www.glob3mobile.com/)
 
+Caching velkých rastrů - Po konzultaci s vývojářem MapServeru byla upravena naše konfigurace MapCache, aby správně zobrazovala vrstvy jak ve formě WMS, tak i jako WMTS. GeoServer neumí dlažice ukládat do databázového souboru, ani pracovat s mixed formátem, což je škoda. MapProxy naopak umí všecko co MapCache, plus spoustu věcí navíc - např. výběr cacheovaného území polygonem (nejen bounding box), má security API, kde se dá nastavit omezení přístupu k různým službám, atd.
+
 
 
 Nový soft, který nás zaujal
@@ -111,6 +113,7 @@ Cashing
     MapProxy vypadá slibně, protože to umí ne "jenom" dobrou cache, ale umí to být
     klient ke kde čemu a tvářit se jako hodně dobrá proxy ke kde čemu. Eva s tím
     už nějakou dobu dělala v Geodis a tuší.
+    http://mapproxy.org/
 
 Převody existujících projektů v ArcGIS
     GeoCat je firma, která dělá katalogovou službu, na které jede půlka INSPIRE
